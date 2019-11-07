@@ -28,7 +28,21 @@ public class LightTheme: Theme {
         return super.color(id)
     }
     
-    private lazy var colorRepository: [ColorIdentifier : UIColor] = [:]
+    private lazy var colorRepository: [ColorIdentifier : UIColor] = [
+        .themeColor: Colors.blue,
+        .backgroundColor: Colors.lightGrey,
+        .shadowColor: Colors.transparentDarkBlue,
+        .titleColor: Colors.white,
+        .currentHourColor: Colors.orange,
+        .lineTextColor: Colors.darkBlue,
+        .dayIndicatorColor: Colors.tansparentBlue,
+        .dayTextColor: Colors.white,
+        .scheduleTextColor: Colors.darkBlue,
+        .numberBackgroundColor: Colors.blue,
+        .numberTextColor: Colors.white,
+        .addButtonBackgroundColor: Colors.blue,
+        .addButtonTextColor: Colors.white,
+    ]
     
     private lazy var fontRepository: [FontIdentifier : UIFont] = [:]
 }

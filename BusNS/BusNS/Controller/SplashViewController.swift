@@ -16,10 +16,29 @@ class SplashViewController: ASViewController<ASDisplayNode> {
         self.contentNode = ASDisplayNode()
         super.init(node: contentNode)
         self.contentNode.backgroundColor = Theme.current.color(.splashBackgroundColor)
+        self.contentNode.automaticallyManagesSubnodes = true
+        layout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: Appearance
+    private func layout() {
+         contentNode.layoutSpecBlock = { node, constrainedSize in
+            let imageNode = ASImageNode()
+            imageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width / 2), ASDimensionMake((constrainedSize.max.width) * (1/1)))
+            imageNode.image = UIImage(named: "logo-white")
+            imageNode.contentMode = .scaleAspectFit
+            
+            let stack = ASStackLayoutSpec.vertical()
+            stack.child = imageNode
+            stack.verticalAlignment = .center
+            stack.horizontalAlignment = .middle
+            
+            return stack
+        }
     }
 }
 

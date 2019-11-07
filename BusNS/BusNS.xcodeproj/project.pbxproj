@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51EC26E237453E600298B09 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2672374528000298B09 /* Muli-ExtraLight.ttf */; };
+		A51EC271237453F000298B09 /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2622374527F00298B09 /* Muli-Black.ttf */; };
+		A51EC272237453F300298B09 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2642374527F00298B09 /* Muli-ExtraBold.ttf */; };
+		A51EC273237453F500298B09 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26D2374528100298B09 /* Muli-Bold.ttf */; };
+		A51EC276237453FE00298B09 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */; };
+		A51EC2792374540600298B09 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26C2374528100298B09 /* Muli-Light.ttf */; };
+		A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26A2374528000298B09 /* Muli-Regular.ttf */; };
 		AD81A26F237448C60097812D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A26E237448C60097812D /* AppDelegate.swift */; };
 		AD81A271237448C60097812D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A270237448C60097812D /* SceneDelegate.swift */; };
 		AD81A273237448C60097812D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A272237448C60097812D /* ViewController.swift */; };
@@ -33,6 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
+		A51EC2622374527F00298B09 /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
+		A51EC2642374527F00298B09 /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A51EC2672374528000298B09 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
+		A51EC26A2374528000298B09 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
+		A51EC26C2374528100298B09 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
+		A51EC26D2374528100298B09 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
 		AD81A26B237448C60097812D /* BusNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD81A26E237448C60097812D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD81A270237448C60097812D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +84,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A51EC2412374524000298B09 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A51EC2672374528000298B09 /* Muli-ExtraLight.ttf */,
+				A51EC2622374527F00298B09 /* Muli-Black.ttf */,
+				A51EC2642374527F00298B09 /* Muli-ExtraBold.ttf */,
+				A51EC26D2374528100298B09 /* Muli-Bold.ttf */,
+				A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */,
+				A51EC26C2374528100298B09 /* Muli-Light.ttf */,
+				A51EC26A2374528000298B09 /* Muli-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A51EC2422374525C00298B09 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A51EC2412374524000298B09 /* Fonts */,
+				AD81A277237448CA0097812D /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		AD81A262237448C60097812D = {
 			isa = PBXGroup;
 			children = (
@@ -91,12 +128,12 @@
 		AD81A26D237448C60097812D /* BusNS */ = {
 			isa = PBXGroup;
 			children = (
+				A51EC2422374525C00298B09 /* Assets */,
 				AD81A29E237450620097812D /* Delegate */,
 				AD81A29023744D750097812D /* Theme */,
 				AD81A29923744FE30097812D /* Manager */,
 				AD81A272237448C60097812D /* ViewController.swift */,
 				AD81A274237448C60097812D /* Main.storyboard */,
-				AD81A277237448CA0097812D /* Assets.xcassets */,
 				AD81A279237448CA0097812D /* LaunchScreen.storyboard */,
 				AD81A27C237448CA0097812D /* Info.plist */,
 			);
@@ -223,9 +260,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51EC276237453FE00298B09 /* Muli-SemiBold.ttf in Resources */,
+				A51EC2792374540600298B09 /* Muli-Light.ttf in Resources */,
+				A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */,
+				A51EC273237453F500298B09 /* Muli-Bold.ttf in Resources */,
+				A51EC271237453F000298B09 /* Muli-Black.ttf in Resources */,
 				AD81A27B237448CA0097812D /* LaunchScreen.storyboard in Resources */,
 				AD81A278237448CA0097812D /* Assets.xcassets in Resources */,
 				AD81A276237448C60097812D /* Main.storyboard in Resources */,
+				A51EC26E237453E600298B09 /* Muli-ExtraLight.ttf in Resources */,
+				A51EC272237453F300298B09 /* Muli-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NUQ8N6J93F;
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -430,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NUQ8N6J93F;
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

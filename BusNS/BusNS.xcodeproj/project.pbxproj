@@ -18,6 +18,8 @@
 		AD81A29423744DB00097812D /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29323744DB00097812D /* ThemeMode.swift */; };
 		AD81A29623744E1C0097812D /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29523744E1C0097812D /* LightTheme.swift */; };
 		AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29723744EFD0097812D /* DarkTheme.swift */; };
+		AD81A29B2374501A0097812D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29A2374501A0097812D /* StorageManager.swift */; };
+		AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29C2374503C0097812D /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		AD81A29323744DB00097812D /* ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMode.swift; sourceTree = "<group>"; };
 		AD81A29523744E1C0097812D /* LightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		AD81A29723744EFD0097812D /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
+		AD81A29A2374501A0097812D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		AD81A29C2374503C0097812D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +91,9 @@
 		AD81A26D237448C60097812D /* BusNS */ = {
 			isa = PBXGroup;
 			children = (
+				AD81A29E237450620097812D /* Delegate */,
 				AD81A29023744D750097812D /* Theme */,
-				AD81A26E237448C60097812D /* AppDelegate.swift */,
-				AD81A270237448C60097812D /* SceneDelegate.swift */,
+				AD81A29923744FE30097812D /* Manager */,
 				AD81A272237448C60097812D /* ViewController.swift */,
 				AD81A274237448C60097812D /* Main.storyboard */,
 				AD81A277237448CA0097812D /* Assets.xcassets */,
@@ -117,6 +121,24 @@
 				AD81A29723744EFD0097812D /* DarkTheme.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		AD81A29923744FE30097812D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AD81A29A2374501A0097812D /* StorageManager.swift */,
+				AD81A29C2374503C0097812D /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		AD81A29E237450620097812D /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				AD81A26E237448C60097812D /* AppDelegate.swift */,
+				AD81A270237448C60097812D /* SceneDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD81A29423744DB00097812D /* ThemeMode.swift in Sources */,
 				AD81A273237448C60097812D /* ViewController.swift in Sources */,
 				AD81A29223744D8B0097812D /* Theme.swift in Sources */,
@@ -228,6 +251,7 @@
 				AD81A29623744E1C0097812D /* LightTheme.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,
+				AD81A29B2374501A0097812D /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,8 +16,7 @@
 		A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26A2374528000298B09 /* Muli-Regular.ttf */; };
 		AD81A26F237448C60097812D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A26E237448C60097812D /* AppDelegate.swift */; };
 		AD81A271237448C60097812D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A270237448C60097812D /* SceneDelegate.swift */; };
-		AD81A273237448C60097812D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A272237448C60097812D /* ViewController.swift */; };
-		AD81A276237448C60097812D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD81A274237448C60097812D /* Main.storyboard */; };
+		AD81A273237448C60097812D /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A272237448C60097812D /* SplashViewController.swift */; };
 		AD81A278237448CA0097812D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD81A277237448CA0097812D /* Assets.xcassets */; };
 		AD81A27B237448CA0097812D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD81A279237448CA0097812D /* LaunchScreen.storyboard */; };
 		AD81A286237448CA0097812D /* BusNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A285237448CA0097812D /* BusNSTests.swift */; };
@@ -30,6 +29,16 @@
 		AD81A2A2237451360097812D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A1237451360097812D /* Environment.swift */; };
 		AD81A2A4237453010097812D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A3237453010097812D /* Endpoint.swift */; };
 		AD81A2A8237455040097812D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A7237455040097812D /* Colors.swift */; };
+		AD81A2AF23745DF10097812D /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; };
+		AD81A2B023745DF10097812D /* PINOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD81A2B123745DF10097812D /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; };
+		AD81A2B223745DF10097812D /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD81A2B323745DF10097812D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; };
+		AD81A2B423745DF10097812D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD81A2B523745DF10097812D /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; };
+		AD81A2B623745DF10097812D /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
+		AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +51,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AD81A2B923745DF10097812D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AD81A2B223745DF10097812D /* PINRemoteImage.framework in Embed Frameworks */,
+				AD81A2B623745DF10097812D /* PINCache.framework in Embed Frameworks */,
+				AD81A2B423745DF10097812D /* Alamofire.framework in Embed Frameworks */,
+				AD81A2B023745DF10097812D /* PINOperation.framework in Embed Frameworks */,
+				AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		A51EC2622374527F00298B09 /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
@@ -53,8 +80,7 @@
 		AD81A26B237448C60097812D /* BusNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD81A26E237448C60097812D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD81A270237448C60097812D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AD81A272237448C60097812D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AD81A275237448C60097812D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AD81A272237448C60097812D /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AD81A277237448CA0097812D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD81A27A237448CA0097812D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD81A27C237448CA0097812D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +96,11 @@
 		AD81A2A1237451360097812D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		AD81A2A3237453010097812D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AD81A2A7237455040097812D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		AD81A2AA23745DF10097812D /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		AD81A2AB23745DF10097812D /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
+		AD81A2AC23745DF10097812D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		AD81A2AD23745DF10097812D /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +108,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD81A2B123745DF10097812D /* PINRemoteImage.framework in Frameworks */,
+				AD81A2B523745DF10097812D /* PINCache.framework in Frameworks */,
+				AD81A2B323745DF10097812D /* Alamofire.framework in Frameworks */,
+				AD81A2AF23745DF10097812D /* PINOperation.framework in Frameworks */,
+				AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +145,7 @@
 			children = (
 				A51EC2412374524000298B09 /* Fonts */,
 				AD81A277237448CA0097812D /* Assets.xcassets */,
+				AD81A279237448CA0097812D /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -119,6 +156,7 @@
 				AD81A26D237448C60097812D /* BusNS */,
 				AD81A284237448CA0097812D /* BusNSTests */,
 				AD81A26C237448C60097812D /* Products */,
+				AD81A2A923745DF10097812D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,14 +172,12 @@
 		AD81A26D237448C60097812D /* BusNS */ = {
 			isa = PBXGroup;
 			children = (
-				A51EC2422374525C00298B09 /* Assets */,
 				AD81A29E237450620097812D /* Delegate */,
 				AD81A29F237450F10097812D /* Util */,
 				AD81A29023744D750097812D /* Theme */,
 				AD81A29923744FE30097812D /* Manager */,
-				AD81A272237448C60097812D /* ViewController.swift */,
-				AD81A274237448C60097812D /* Main.storyboard */,
-				AD81A279237448CA0097812D /* LaunchScreen.storyboard */,
+				AD81A2BB237461AE0097812D /* Controller */,
+				A51EC2422374525C00298B09 /* Assets */,
 				AD81A27C237448CA0097812D /* Info.plist */,
 			);
 			path = BusNS;
@@ -211,6 +247,26 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		AD81A2A923745DF10097812D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD81A2AC23745DF10097812D /* Alamofire.framework */,
+				AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */,
+				AD81A2AD23745DF10097812D /* PINCache.framework */,
+				AD81A2AA23745DF10097812D /* PINOperation.framework */,
+				AD81A2AB23745DF10097812D /* PINRemoteImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD81A2BB237461AE0097812D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AD81A272237448C60097812D /* SplashViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -221,6 +277,8 @@
 				AD81A267237448C60097812D /* Sources */,
 				AD81A268237448C60097812D /* Frameworks */,
 				AD81A269237448C60097812D /* Resources */,
+				AD81A2B923745DF10097812D /* Embed Frameworks */,
+				AD81A2BA23745E010097812D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -300,7 +358,6 @@
 				A51EC271237453F000298B09 /* Muli-Black.ttf in Resources */,
 				AD81A27B237448CA0097812D /* LaunchScreen.storyboard in Resources */,
 				AD81A278237448CA0097812D /* Assets.xcassets in Resources */,
-				AD81A276237448C60097812D /* Main.storyboard in Resources */,
 				A51EC26E237453E600298B09 /* Muli-ExtraLight.ttf in Resources */,
 				A51EC272237453F300298B09 /* Muli-ExtraBold.ttf in Resources */,
 			);
@@ -315,6 +372,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AD81A2BA23745E010097812D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINCache.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINOperation.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINRemoteImage.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AsyncDisplayKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINCache.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINOperation.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINRemoteImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AD81A267237448C60097812D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -323,7 +410,7 @@
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD81A2A8237455040097812D /* Colors.swift in Sources */,
 				AD81A29423744DB00097812D /* ThemeMode.swift in Sources */,
-				AD81A273237448C60097812D /* ViewController.swift in Sources */,
+				AD81A273237448C60097812D /* SplashViewController.swift in Sources */,
 				AD81A29223744D8B0097812D /* Theme.swift in Sources */,
 				AD81A26F237448C60097812D /* AppDelegate.swift in Sources */,
 				AD81A29623744E1C0097812D /* LightTheme.swift in Sources */,
@@ -354,14 +441,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AD81A274237448C60097812D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD81A275237448C60097812D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AD81A279237448CA0097812D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -493,6 +572,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NUQ8N6J93F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -512,6 +595,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NUQ8N6J93F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

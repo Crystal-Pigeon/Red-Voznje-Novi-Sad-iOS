@@ -31,6 +31,7 @@ public class LightTheme: Theme {
     private lazy var colorRepository: [ColorIdentifier : UIColor] = [
         .themeColor: Colors.blue,
         .backgroundColor: Colors.lightGrey,
+        .splashBackgroundColor: Colors.blue,
         .shadowColor: Colors.transparentDarkBlue,
         .titleColor: Colors.white,
         .currentHourColor: Colors.orange,

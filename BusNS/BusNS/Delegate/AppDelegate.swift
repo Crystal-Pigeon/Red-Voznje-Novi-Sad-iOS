@@ -14,15 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        self.setupNavigationAppearance()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
-        let navigationController = ASNavigationController(rootViewController: AddLinesViewController())
-        navigationController.navigationBar.isTranslucent = false
-        window.rootViewController = navigationController
-        self.setupNavigationAppearance()
-        
+        if #available(iOS 13.0, *) { } else {
+            let navigationController = ASNavigationController(rootViewController: AddLinesViewController())
+            navigationController.navigationBar.isTranslucent = false
+            window.rootViewController = navigationController
+        }
         self.window = window
         return true
     }

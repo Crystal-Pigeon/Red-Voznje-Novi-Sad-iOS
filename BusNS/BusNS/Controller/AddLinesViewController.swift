@@ -16,13 +16,15 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     private let urbanBusesButton = ASButtonNode()
     private let suburbanBusesButton = ASButtonNode()
     private let separatorNode = ASDisplayNode()
-    private let buses: [String] = []
+    private var linesViewModel = AddLinesViewModel()
     
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
+        linesViewModel.observer = self
+        linesViewModel.fetchLines()
         tableNode.delegate = self
         tableNode.dataSource = self
         layout()
@@ -34,13 +36,12 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
     
     @objc private func lineTypeButtonTapped(sender: ASButtonNode) {
-        if sender == urbanBusesButton {
-            UIView.animate(withDuration: 0.3) {
+        self.linesViewModel.changeLineType(isTypeUrban: sender == self.urbanBusesButton)
+        self.tableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        UIView.animate(withDuration: 0.3) {
+            if sender == self.urbanBusesButton {
                 self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 4)
-            }
-        }
-        else if sender == suburbanBusesButton {
-            UIView.animate(withDuration: 0.3) {
+            } else if sender == self.suburbanBusesButton {
                 self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
             }
         }
@@ -96,6 +97,7 @@ extension AddLinesViewController {
     }
 }
 
+//MARK: Table delegate & data source
 extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
@@ -103,7 +105,7 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return buses.count
+        return linesViewModel.lines.count
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
@@ -113,8 +115,19 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.font: Fonts.muliRegular15,
             NSAttributedString.Key.foregroundColor: Theme.current.color(.lineTextColor)
         ]
-        cellNode.text = buses[indexPath.row]
+        cellNode.selectionStyle = .none
+        cellNode.text = linesViewModel.lines[indexPath.row].number + "  " + linesViewModel.lines[indexPath.row].name
         
         return cellNode
+    }
+}
+
+extension AddLinesViewController: AddLinesObserver {
+    func refreshUI() {
+        self.tableNode.reloadData()
+    }
+    
+    func showError(message: String) {
+        self.showAlert(title: "", message: message, duration: 2)
     }
 }

@@ -12,29 +12,25 @@ struct Endpoint {
     private static let environment: Environment = .development
     private static let baseUrl = environment.baseURL
     
-    private static func add(day: String) -> String {
-        return "dan=\(day)"
-    }
-    
     private static func add(type: String) -> String {
         return "rv=\(type)"
     }
     
     struct Line {
-        private static let lineEndpoint = "lanes"
+        private static let lineEndpoint = "all-lanes"
         
         //MARK: Product public endpoints
-        public static func getFor(day: String, type: String) -> URL {
-            return URL(string: baseUrl + lineEndpoint + "?" + add(day: day) + "&" + add(type: type))!
+        public static func getFor(type: String) -> URL {
+            return URL(string: baseUrl + lineEndpoint + "?" + add(type: type))!
         }
     }
     
     struct Bus {
-        private static let busEndpoint = "buses"
+        private static let busEndpoint = "all-buses"
         
         //MARK: Product public endpoints
         public static func getBy(id: String, day: String, type: String) -> URL {
-            return URL(string: baseUrl + busEndpoint + "/" + id + "?" + add(day: day) + "&" + add(type: type))!
+            return URL(string: baseUrl + busEndpoint + "/" + id + "?" + add(type: type))!
         }
     }
 }

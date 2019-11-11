@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
-        let navigationController = ASNavigationController(rootViewController: SplashViewController())
+        let navigationController = ASNavigationController(rootViewController: AddLinesViewController())
+        navigationController.navigationBar.isTranslucent = false
         window.rootViewController = navigationController
         self.setupNavigationAppearance()
         
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = Theme.current.color(.navigationTintColor)
         navigationBarAppearace.barTintColor = Theme.current.color(.navigationBackgroundColor)
+        navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.titleTextAttributes = [
             .foregroundColor: Theme.current.color(.navigationTintColor),
             .font: Fonts.muliSemiBold20

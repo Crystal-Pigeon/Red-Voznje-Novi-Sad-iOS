@@ -29,7 +29,7 @@ public class LightTheme: Theme {
         .titleColor: Colors.white,
         .currentHourColor: Colors.orange,
         .lineTextColor: Colors.darkBlue,
-        .dayIndicatorColor: Colors.tansparentBlue,
+        .dayIndicatorColor: Colors.transparentWhite,
         .dayTextColor: Colors.white,
         .scheduleTextColor: Colors.darkBlue,
         .numberBackgroundColor: Colors.blue,

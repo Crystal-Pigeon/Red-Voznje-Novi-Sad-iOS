@@ -70,8 +70,8 @@ extension AddLinesViewController {
         self.suburbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
         self.urbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
         
-        self.suburbanBusesButton.setAttributedTitle(self.node.attributedText(with: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), uiFont: Fonts.muliRegular15), for: .normal)
-        self.urbanBusesButton.setAttributedTitle(self.node.attributedText(with: "Urban".localized(), color: Theme.current.color(.navigationTintColor), uiFont: Fonts.muliRegular15), for: .normal)
+        self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
     }
     
     private func initLinesTypeButtonsLayout(width: CGFloat, height: CGFloat) -> ASDisplayNode {

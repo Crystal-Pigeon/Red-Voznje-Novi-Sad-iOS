@@ -16,6 +16,8 @@
 		A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26A2374528000298B09 /* Muli-Regular.ttf */; };
 		A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532826E23798BCD009D240B /* AddLinesViewController.swift */; };
 		A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53282702379B751009D240B /* ASDisplayNode+Extension.swift */; };
+		AD05621C2379D8C100010D78 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621B2379D8C100010D78 /* Line.swift */; };
+		AD05621E2379DB1600010D78 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621D2379DB1600010D78 /* LineTests.swift */; };
 		AD4C69BC23746D0300DC5D7B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4C69BE23746D0300DC5D7B /* Localizable.strings */; };
 		AD4C69C3237471A600DC5D7B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C2237471A600DC5D7B /* String+Extension.swift */; };
 		AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C4237471EE00DC5D7B /* Bundle+Extension.swift */; };
@@ -24,7 +26,6 @@
 		AD81A271237448C60097812D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A270237448C60097812D /* SceneDelegate.swift */; };
 		AD81A278237448CA0097812D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD81A277237448CA0097812D /* Assets.xcassets */; };
 		AD81A27B237448CA0097812D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD81A279237448CA0097812D /* LaunchScreen.storyboard */; };
-		AD81A286237448CA0097812D /* BusNSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A285237448CA0097812D /* BusNSTests.swift */; };
 		AD81A29223744D8B0097812D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29123744D8B0097812D /* Theme.swift */; };
 		AD81A29423744DB00097812D /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29323744DB00097812D /* ThemeMode.swift */; };
 		AD81A29623744E1C0097812D /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A29523744E1C0097812D /* LightTheme.swift */; };
@@ -84,6 +85,8 @@
 		A51EC26D2374528100298B09 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
 		A532826E23798BCD009D240B /* AddLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewController.swift; sourceTree = "<group>"; };
 		A53282702379B751009D240B /* ASDisplayNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASDisplayNode+Extension.swift"; sourceTree = "<group>"; };
+		AD05621B2379D8C100010D78 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		AD05621D2379DB1600010D78 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
 		AD4C69BF23746D0800DC5D7B /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4C69C023746D1300DC5D7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4C69C2237471A600DC5D7B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -96,7 +99,6 @@
 		AD81A27A237448CA0097812D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD81A27C237448CA0097812D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD81A281237448CA0097812D /* BusNSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusNSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD81A285237448CA0097812D /* BusNSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusNSTests.swift; sourceTree = "<group>"; };
 		AD81A287237448CA0097812D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD81A29123744D8B0097812D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AD81A29323744DB00097812D /* ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMode.swift; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		AD05621A2379D8AB00010D78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AD05621B2379D8C100010D78 /* Line.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AD4C69B923746CC000DC5D7B /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +216,7 @@
 				AD81A29F237450F10097812D /* Util */,
 				AD81A29023744D750097812D /* Theme */,
 				AD81A29923744FE30097812D /* Manager */,
+				AD05621A2379D8AB00010D78 /* Model */,
 				AD81A2BB237461AE0097812D /* Controller */,
 				A51EC2422374525C00298B09 /* Assets */,
 				AD81A27C237448CA0097812D /* Info.plist */,
@@ -216,7 +227,7 @@
 		AD81A284237448CA0097812D /* BusNSTests */ = {
 			isa = PBXGroup;
 			children = (
-				AD81A285237448CA0097812D /* BusNSTests.swift */,
+				AD05621D2379DB1600010D78 /* LineTests.swift */,
 				AD81A287237448CA0097812D /* Info.plist */,
 			);
 			path = BusNSTests;
@@ -443,6 +454,7 @@
 			files = (
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,
+				AD05621C2379D8C100010D78 /* Line.swift in Sources */,
 				AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */,
 				AD81A2A8237455040097812D /* Colors.swift in Sources */,
 				AD81A29423744DB00097812D /* ThemeMode.swift in Sources */,
@@ -464,7 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD81A286237448CA0097812D /* BusNSTests.swift in Sources */,
+				AD05621E2379DB1600010D78 /* LineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

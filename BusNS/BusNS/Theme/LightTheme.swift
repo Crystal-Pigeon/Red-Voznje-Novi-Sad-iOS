@@ -14,13 +14,6 @@ public class LightTheme: Theme {
         return .light
     }
     
-    public override func font(_ id: FontIdentifier) -> UIFont {
-        if let font = fontRepository[id] {
-            return font
-        }
-        return super.font(id)
-    }
-    
     public override func color(_ id: ColorIdentifier) -> UIColor {
         if let color = colorRepository[id] {
             return color
@@ -43,7 +36,7 @@ public class LightTheme: Theme {
         .numberTextColor: Colors.white,
         .addButtonBackgroundColor: Colors.blue,
         .addButtonTextColor: Colors.white,
+        .navigationBackgroundColor: Colors.blue,
+        .navigationTintColor: Colors.white
     ]
-    
-    private lazy var fontRepository: [FontIdentifier : UIFont] = [:]
 }

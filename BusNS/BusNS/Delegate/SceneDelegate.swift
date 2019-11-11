@@ -6,7 +6,7 @@
 //  Copyright © 2019 Crystal Pigeon. All rights reserved.
 //
 
-import UIKit
+import AsyncDisplayKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,9 +22,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
-        window.rootViewController = SplashViewController()
+        let navigationController = ASNavigationController(rootViewController: SplashViewController())
+        window.rootViewController = navigationController
+        self.setupNavigationAppearance()
         
         self.window = window
+    }
+    
+    func setupNavigationAppearance() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = Theme.current.color(.navigationTintColor)
+        navigationBarAppearace.barTintColor = Theme.current.color(.navigationBackgroundColor)
+        navigationBarAppearace.titleTextAttributes = [
+            .foregroundColor: Theme.current.color(.navigationTintColor),
+            .font: Fonts.muliSemiBold20
+        ]
     }
 
     @available(iOS 13.0, *)

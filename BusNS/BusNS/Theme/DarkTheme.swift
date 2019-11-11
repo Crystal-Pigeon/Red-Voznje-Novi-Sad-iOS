@@ -14,13 +14,6 @@ public class DarkTheme: Theme {
         return .dark
     }
     
-    public override func font(_ id: FontIdentifier) -> UIFont {
-        if let font = fontRepository[id] {
-            return font
-        }
-        return super.font(id)
-    }
-    
     public override func color(_ id: ColorIdentifier) -> UIColor {
         if let color = colorRepository[id] {
             return color
@@ -29,6 +22,4 @@ public class DarkTheme: Theme {
     }
     
     private lazy var colorRepository: [ColorIdentifier : UIColor] = [:]
-    
-    private lazy var fontRepository: [FontIdentifier : UIFont] = [:]
 }

@@ -24,13 +24,6 @@ public class Theme {
         return .light
     }
     
-    public func font(_ id: FontIdentifier) -> UIFont {
-        if let font = fontRepository[id] {
-            return font
-        }
-        return fontRepository[.defaultFont]!
-    }
-    
     public func color(_ id: ColorIdentifier) -> UIColor {
         if let color = colorRepository[id] {
             return color
@@ -40,9 +33,5 @@ public class Theme {
     
     private lazy var colorRepository: [ColorIdentifier : UIColor] = [
         .defaultColor : blackColor
-    ]
-    
-    private lazy var fontRepository: [FontIdentifier : UIFont] = [
-        .defaultFont : defaultFont
     ]
 }

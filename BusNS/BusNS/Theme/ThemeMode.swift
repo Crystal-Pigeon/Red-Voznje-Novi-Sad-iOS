@@ -23,11 +23,7 @@ public enum ThemeMode: Int {
 
 public enum ColorIdentifier: Int {
     case defaultColor
-    case themeColor, splashBackgroundColor, backgroundColor, shadowColor, titleColor
+    case themeColor, splashBackgroundColor, backgroundColor, shadowColor, titleColor, navigationBackgroundColor, navigationTintColor
     case dayIndicatorColor, currentHourColor, dayTextColor, lineTextColor, scheduleTextColor, numberBackgroundColor, numberTextColor
     case addButtonBackgroundColor, addButtonTextColor
-}
-
-public enum FontIdentifier: Int {
-    case defaultFont
 }

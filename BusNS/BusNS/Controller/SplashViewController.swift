@@ -15,9 +15,10 @@ class SplashViewController: ASViewController<ASDisplayNode> {
     init() {
         self.contentNode = ASDisplayNode()
         super.init(node: contentNode)
-        self.contentNode.backgroundColor = Theme.current.color(.splashBackgroundColor)
+        self.contentNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.contentNode.automaticallyManagesSubnodes = true
-        layout()
+        self.title = "Bus NS"
+//        layout()
     }
     
     required init?(coder: NSCoder) {

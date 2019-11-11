@@ -113,9 +113,8 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.font: Fonts.muliRegular15,
             NSAttributedString.Key.foregroundColor: Theme.current.color(.lineTextColor)
         ]
-        for bus in buses {
-            cellNode.text = bus
-        }
+        cellNode.text = buses[indexPath.row]
+        
         return cellNode
     }
 }

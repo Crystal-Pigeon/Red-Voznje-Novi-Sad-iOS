@@ -16,6 +16,7 @@
 		A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26A2374528000298B09 /* Muli-Regular.ttf */; };
 		A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532826E23798BCD009D240B /* AddLinesViewController.swift */; };
 		A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53282702379B751009D240B /* ASDisplayNode+Extension.swift */; };
+		A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C3D88237AB3470098FA13 /* MainViewController.swift */; };
 		AD05621C2379D8C100010D78 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621B2379D8C100010D78 /* Line.swift */; };
 		AD05621E2379DB1600010D78 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621D2379DB1600010D78 /* LineTests.swift */; };
 		AD056221237A11F300010D78 /* LineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD056220237A11F300010D78 /* LineService.swift */; };
@@ -92,6 +93,7 @@
 		A51EC26D2374528100298B09 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
 		A532826E23798BCD009D240B /* AddLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewController.swift; sourceTree = "<group>"; };
 		A53282702379B751009D240B /* ASDisplayNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASDisplayNode+Extension.swift"; sourceTree = "<group>"; };
+		A55C3D88237AB3470098FA13 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AD05621B2379D8C100010D78 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		AD05621D2379DB1600010D78 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
 		AD056220237A11F300010D78 /* LineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineService.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				A532826E23798BCD009D240B /* AddLinesViewController.swift */,
+				A55C3D88237AB3470098FA13 /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				AD056223237A140F00010D78 /* Service.swift in Sources */,
 				AD81A29623744E1C0097812D /* LightTheme.swift in Sources */,
 				AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */,
+				A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */,
 				A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,

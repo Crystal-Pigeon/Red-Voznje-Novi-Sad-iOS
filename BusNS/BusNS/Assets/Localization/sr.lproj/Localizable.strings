@@ -12,3 +12,8 @@
 "Urban" = "Gradski";
 "Suburban" = "Prigradski";
 "Problem with server" = "Greška na serveru";
+"Bus NS" = "Bus NS";
+"Work day" = "Radni dan";
+"Saturday" = "Subota";
+"Sunday" = "Nedelja";
+"Click the \"+\" button to add buses" = "Pritisnite \"+\" kako biste dodali autobuse";

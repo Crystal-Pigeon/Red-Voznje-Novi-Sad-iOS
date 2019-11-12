@@ -9,8 +9,10 @@
 import Foundation
 
 struct Endpoint {
-    private static let environment: Environment = .development
-    private static let baseUrl = environment.baseURL
+    private static let environmentHeroku: Environment = .heroku
+    private static let environmentGspns: Environment = .gspns
+    private static let herokuBaseUrl = environmentHeroku.baseURL
+    private static let gspnsBaseUrl = environmentGspns.baseURL
     
     private static func add(type: String) -> String {
         return "rv=\(type)"
@@ -21,7 +23,7 @@ struct Endpoint {
         
         //MARK: Product public endpoints
         public static func getFor(type: String) -> URL {
-            return URL(string: baseUrl + lineEndpoint + "?" + add(type: type))!
+            return URL(string: herokuBaseUrl + lineEndpoint + "?" + add(type: type))!
         }
     }
     
@@ -30,7 +32,16 @@ struct Endpoint {
         
         //MARK: Product public endpoints
         public static func getBy(id: String, day: String, type: String) -> URL {
-            return URL(string: baseUrl + busEndpoint + "/" + id + "?" + add(type: type))!
+            return URL(string: herokuBaseUrl + busEndpoint + "/" + id + "?" + add(type: type))!
+        }
+    }
+    
+    struct Season {
+        private static let seasonEndpoint = "red-voznje"
+        
+        //MARK: Product public endpoints
+        public static func get() -> URL {
+            return URL(string: gspnsBaseUrl + seasonEndpoint)!
         }
     }
 }

@@ -10,8 +10,8 @@ import Foundation
 
 enum Environment {
     
-    case development
-    case production
+    case gspns
+    case heroku
     
     public var baseURL: String {
         return "\(urlProtocol)\(stagging)\(domain)\(route)"
@@ -19,37 +19,37 @@ enum Environment {
     
     private var urlProtocol: String {
         switch self {
-        case .production:
+        case .heroku:
             return "https://"
-        default:
-            return "https://"
+        case .gspns:
+            return "http://"
         }
     }
     
     private var stagging: String {
         switch self {
-        case .production:
+        case .heroku:
             return "busnsapi.herokuapp"
-        default:
-            return "busnsapi.herokuapp"
+        case .gspns:
+            return "www.gspns"
         }
     }
     
     private var domain: String {
         switch self {
-        case .production:
+        case .heroku:
             return ".com"
-        default:
-            return ".com"
+        case .gspns:
+            return ".rs"
         }
     }
     
     private var route: String {
         switch self {
-        case .production:
+        case .heroku:
             return "/"
-        default:
-            return "/"
+        case .gspns:
+            return "/feeds/"
         }
     }
 }

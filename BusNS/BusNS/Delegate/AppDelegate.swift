@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
         if #available(iOS 13.0, *) { } else {
-            let navigationController = ASNavigationController(rootViewController: AddLinesViewController())
+            let navigationController = ASNavigationController(rootViewController: MainViewController())
             navigationController.navigationBar.isTranslucent = false
             window.rootViewController = navigationController
         }

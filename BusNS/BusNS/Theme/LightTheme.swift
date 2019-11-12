@@ -34,8 +34,7 @@ public class LightTheme: Theme {
         .scheduleTextColor: Colors.darkBlue,
         .numberBackgroundColor: Colors.blue,
         .numberTextColor: Colors.white,
-        .addButtonBackgroundColor: Colors.blue,
-        .addButtonTextColor: Colors.white,
+        .addButtonBackgroundColor: Colors.white,
         .navigationBackgroundColor: Colors.blue,
         .navigationTintColor: Colors.white
     ]

@@ -113,7 +113,7 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
         let cellNode = ASTextCellNode()
         cellNode.textAttributes = [
             NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.lineTextColor)
+            NSAttributedString.Key.foregroundColor: Theme.current.color(.busCell_lineTextColor)
         ]
         cellNode.selectionStyle = .none
         cellNode.text = linesViewModel.lines[indexPath.row].number + "  " + linesViewModel.lines[indexPath.row].name

@@ -27,15 +27,18 @@ public class LightTheme: Theme {
         .splashBackgroundColor: Colors.blue,
         .shadowColor: Colors.transparentDarkBlue,
         .titleColor: Colors.white,
-        .currentHourColor: Colors.orange,
-        .lineTextColor: Colors.darkBlue,
+        .busCell_currentHourColor: Colors.orange,
+        .busCell_lineTextColor: Colors.darkBlue,
         .dayIndicatorColor: Colors.transparentWhite,
         .dayTextColor: Colors.white,
-        .scheduleTextColor: Colors.darkBlue,
-        .numberBackgroundColor: Colors.blue,
-        .numberTextColor: Colors.white,
+        .busCell_scheduleTextColor: Colors.darkBlue,
+        .busCell_numberBackgroundColor: Colors.blue,
+        .busCell_numberTextColor: Colors.white,
         .addButtonBackgroundColor: Colors.white,
         .navigationBackgroundColor: Colors.blue,
-        .navigationTintColor: Colors.white
+        .navigationTintColor: Colors.white,
+        .busCell_separatorColor: Colors.transparentDarkBlueLighter,
+        .busCell_backgroundColor: Colors.white,
+        .busCell_extrasColor: Colors.transparentDarkBlue
     ]
 }

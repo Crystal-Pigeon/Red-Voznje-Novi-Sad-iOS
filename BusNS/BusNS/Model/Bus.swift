@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 struct Bus: Codable {
     let id: String
     let number: String
@@ -35,6 +33,64 @@ struct Bus: Codable {
         case scheduleB = "rasporedB"
         case schedule = "raspored"
         case extras = "dodaci"
+    }
+    
+    private func getScheduleBy3Hours(schedule: [String:[String]]) -> [String] {
+        let allHours = self.getScheduleByHour(schedule: schedule)
+        var threeHours = [String]()
+        let flag = Int(DateManager.instance.getHour()) ?? 0
+        for hour in allHours {
+            let hourInt = Int(hour.split(separator: ":")[0])
+            if hourInt == flag  || hourInt == flag - 1 || hourInt == flag + 1 {
+                threeHours.append(hour)
+            }
+        }
+        return threeHours
+    }
+    
+    private func getScheduleByHour(schedule: [String:[String]]) -> [String] {
+        var hours = [String]()
+        for hour in schedule {
+            var wholeHour = hour.key + ": "
+            for min in hour.value {
+                wholeHour += min + " "
+            }
+            hours.append(wholeHour)
+        }
+        hours.sort { (first, second) -> Bool in
+            return first < second
+        }
+        return hours
+    }
+    
+    public func getScheduleABy3Hours() -> [String] {
+        guard let scheduleA = self.scheduleA else { return []}
+        return getScheduleBy3Hours(schedule: scheduleA)
+    }
+    
+    public func getScheduleBBy3Hours() -> [String] {
+        guard let scheduleB = self.scheduleB else { return []}
+        return getScheduleBy3Hours(schedule: scheduleB)
+    }
+    
+    public func getOneWayScheduleBy3Hours() -> [String] {
+        guard let schedule = self.schedule else { return []}
+        return getScheduleBy3Hours(schedule: schedule)
+    }
+    
+    public func getScheduleAByHour() -> [String] {
+        guard let scheduleA = self.scheduleA else { return []}
+        return getScheduleByHour(schedule: scheduleA)
+    }
+    
+    public func getScheduleBByHour() -> [String] {
+        guard let scheduleB = self.scheduleB else { return []}
+        return getScheduleByHour(schedule: scheduleB)
+    }
+    
+    public func getOneWayScheduleAByHour() -> [String] {
+        guard let schedule = self.schedule else { return []}
+        return getScheduleByHour(schedule: schedule)
     }
 }
 

@@ -20,12 +20,22 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let logoImageNode = ASImageNode()
     public var currentLines: [Line] = []
     private var busesCollectionNode: ASCollectionNode!
+    public let bus: Bus
     
     init() {
+        self.bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "R", scheduleA: ["15":["15", "35"], "16":["15", "35LIR"], "17":["15", "35"], "18":["15SP", "35"], "19":["15", "35"], "20":["15LI", "35SP"]], scheduleB: ["15":["15", "35"], "16":["15IL", "35"], "17":["15", "35"], "18":["15", "35SP"], "19":["15", "35"], "20":["15", "35"]], schedule: nil, extras: "IL=IZ LIRA, LIR=ZA LIR, SP=SAOBRACA SAMO PETKOM")
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        self.busesCollectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
+        
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Bus NS".localized()
+        self.busesCollectionNode.delegate = self
+        self.busesCollectionNode.dataSource = self
         layout()
         appearance()
     }
@@ -66,10 +76,12 @@ extension MainViewController {
             
             self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.7), ASDimensionAuto)
             
+            self.busesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height - buttonsStack.style.preferredSize.height - constrainedSize.max.height * 0.07))
+            
             self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.5), ASDimensionAuto)
             
             let stack = ASStackLayoutSpec.vertical()
-            stack.children = self.currentLines.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.busesCollectionNode]
+            stack.children = !self.currentLines.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.busesCollectionNode]
             
             let addButton = self.addButtonAppereance()
             let addButtonStack = ASStackLayoutSpec.vertical()
@@ -151,5 +163,29 @@ extension MainViewController {
         button.addTarget(self, action: #selector(addButtonTapped(sender:)), forControlEvents: .touchUpInside)
         
         return button
+    }
+}
+
+//MARK: CollectionNode delegate & data source
+
+extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
+    func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
+        return 1
+    }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
+        let cell = BusCellNode(bus: self.bus)
+        cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
+        return cell
+    }
+    
+    func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCellNode {
+            cell.isOpened = !cell.isOpened
+        }
     }
 }

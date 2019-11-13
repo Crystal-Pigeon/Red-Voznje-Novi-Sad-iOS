@@ -14,6 +14,8 @@
 		A51EC276237453FE00298B09 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */; };
 		A51EC2792374540600298B09 /* Muli-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26C2374528100298B09 /* Muli-Light.ttf */; };
 		A51EC27A2374540800298B09 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC26A2374528000298B09 /* Muli-Regular.ttf */; };
+		A52361B2237C3458006857CA /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52361B1237C3458006857CA /* DateManager.swift */; };
+		A52361B5237C3977006857CA /* BusCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52361B4237C3977006857CA /* BusCellNode.swift */; };
 		A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532826E23798BCD009D240B /* AddLinesViewController.swift */; };
 		A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53282702379B751009D240B /* ASDisplayNode+Extension.swift */; };
 		A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C3D88237AB3470098FA13 /* MainViewController.swift */; };
@@ -96,6 +98,8 @@
 		A51EC26A2374528000298B09 /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
 		A51EC26C2374528100298B09 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
 		A51EC26D2374528100298B09 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
+		A52361B1237C3458006857CA /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		A52361B4237C3977006857CA /* BusCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCellNode.swift; sourceTree = "<group>"; };
 		A532826E23798BCD009D240B /* AddLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewController.swift; sourceTree = "<group>"; };
 		A53282702379B751009D240B /* ASDisplayNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASDisplayNode+Extension.swift"; sourceTree = "<group>"; };
 		A55C3D88237AB3470098FA13 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +192,14 @@
 				AD81A279237448CA0097812D /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		A52361B3237C395E006857CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A52361B4237C3977006857CA /* BusCellNode.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AD05621A2379D8AB00010D78 /* Model */ = {
@@ -285,6 +297,7 @@
 				AD05621F237A117F00010D78 /* Service */,
 				AD05621A2379D8AB00010D78 /* Model */,
 				AD056226237A188100010D78 /* ViewModel */,
+				A52361B3237C395E006857CA /* View */,
 				AD81A2BB237461AE0097812D /* Controller */,
 				A51EC2422374525C00298B09 /* Assets */,
 				AD81A27C237448CA0097812D /* Info.plist */,
@@ -318,6 +331,7 @@
 			children = (
 				AD81A29A2374501A0097812D /* StorageManager.swift */,
 				AD81A29C2374503C0097812D /* NetworkManager.swift */,
+				A52361B1237C3458006857CA /* DateManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -533,6 +547,7 @@
 				AD81A29423744DB00097812D /* ThemeMode.swift in Sources */,
 				A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */,
 				AD81A29223744D8B0097812D /* Theme.swift in Sources */,
+				A52361B5237C3977006857CA /* BusCellNode.swift in Sources */,
 				DF520E7C237C2273004DAE75 /* Bus.swift in Sources */,
 				AD81A26F237448C60097812D /* AppDelegate.swift in Sources */,
 				AD4C69C3237471A600DC5D7B /* String+Extension.swift in Sources */,
@@ -544,6 +559,7 @@
 				DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */,
 				DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
+				A52361B2237C3458006857CA /* DateManager.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,
 				AD81A29B2374501A0097812D /* StorageManager.swift in Sources */,
 				AD056221237A11F300010D78 /* LineService.swift in Sources */,

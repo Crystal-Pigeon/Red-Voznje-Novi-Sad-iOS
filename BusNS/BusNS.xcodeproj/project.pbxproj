@@ -53,6 +53,9 @@
 		AD81A2B623745DF10097812D /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
 		AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
+		DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */; };
+		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +133,9 @@
 		AD81A2AC23745DF10097812D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		AD81A2AD23745DF10097812D /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
 		AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
+		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
+		DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
+		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +191,7 @@
 			children = (
 				AD05621B2379D8C100010D78 /* Line.swift */,
 				AD056224237A155000010D78 /* ServiceError.swift */,
+				DF520E6B237BFE4D004DAE75 /* Season.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			children = (
 				AD056222237A140F00010D78 /* Service.swift */,
 				AD056220237A11F300010D78 /* LineService.swift */,
+				DF520E6F237C05A8004DAE75 /* SeasonService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				AD05621D2379DB1600010D78 /* LineTests.swift */,
+				DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -525,6 +534,8 @@
 				AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */,
 				A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */,
 				A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */,
+				DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */,
+				DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,
 				AD81A29B2374501A0097812D /* StorageManager.swift in Sources */,
@@ -539,6 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */,
 				AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */,
 				AD05621E2379DB1600010D78 /* LineTests.swift in Sources */,
 			);

@@ -34,6 +34,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Bus NS".localized()
+        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.busesCollectionNode.delegate = self
         self.busesCollectionNode.dataSource = self
         layout()

@@ -56,6 +56,7 @@
 		AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
 		AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
+		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
 		DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */; };
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
@@ -141,6 +142,7 @@
 		AD81A2AD23745DF10097812D /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
 		AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
+		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				AD056227237A18A700010D78 /* AddLinesViewModel.swift */,
+				DF1AAB05237D6A2300045773 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				AD81A2A4237453010097812D /* Endpoint.swift in Sources */,
 				AD05622C237A24D200010D78 /* StorageKeys.swift in Sources */,
 				AD81A2A2237451360097812D /* Environment.swift in Sources */,
+				DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

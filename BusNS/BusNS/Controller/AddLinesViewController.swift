@@ -24,7 +24,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
         linesViewModel.observer = self
-        linesViewModel.fetchLines()
+        linesViewModel.getLines()
         tableNode.delegate = self
         tableNode.dataSource = self
         layout()
@@ -126,8 +126,7 @@ extension AddLinesViewController: AddLinesObserver {
     func refreshUI() {
         self.tableNode.reloadData()
     }
-    
-    func showError(message: String) {
-        self.showAlert(title: "", message: message, duration: 2)
+    func showLoader() {
+        print("LOADER")
     }
 }

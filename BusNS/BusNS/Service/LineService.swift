@@ -34,8 +34,6 @@ class LineService: Service {
             return
         }
         
-        print(Endpoint.Line.getFor(type: type).absoluteString)
-        
         AF.request(Endpoint.Line.getFor(type: type), method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
             guard let statusCode = response.response?.statusCode else { return }
             guard let data = response.data else { return }

@@ -21,6 +21,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     public var currentLines: [Line] = []
     private var busesCollectionNode: ASCollectionNode!
     public let bus: Bus
+    private var mainViewModel = MainViewModel()
     
     init() {
         self.bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "R", scheduleA: ["15":["15", "35"], "16":["15", "35LIR"], "17":["15", "35"], "18":["15SP", "35"], "19":["15", "35"], "20":["15LI", "35SP"]], scheduleB: ["15":["15", "35"], "16":["15IL", "35"], "17":["15", "35"], "18":["15", "35SP"], "19":["15", "35"], "20":["15", "35"]], schedule: nil, extras: "IL=IZ LIRA, LIR=ZA LIR, SP=SAOBRACA SAMO PETKOM")
@@ -37,6 +38,8 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.busesCollectionNode.delegate = self
         self.busesCollectionNode.dataSource = self
+        mainViewModel.observer = self
+        mainViewModel.getData()
         layout()
         appearance()
     }
@@ -188,5 +191,14 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
         if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCellNode {
             cell.isOpened = !cell.isOpened
         }
+    }
+}
+
+extension MainViewController: MainObserver {
+    func refreshUI() {
+
+    }
+    func showError(message: String) {
+        self.showAlert(title: "", message: message, duration: 2)
     }
 }

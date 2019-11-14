@@ -10,7 +10,7 @@ import Foundation
 
 protocol AddLinesObserver {
     func refreshUI()
-    func showError(message: String)
+    func showLoader()
 }
 
 class AddLinesViewModel {
@@ -29,47 +29,14 @@ class AddLinesViewModel {
         delegate.refreshUI()
     }
     
-    public func fetchLines() {
-        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) {
+    public func getLines() {
+        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches){
             self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
             self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             self.lines = self.urbanLines
         } else {
-            self.fetchUrbanLines()
-            self.fetchSuburbanLines()
-        }
-    }
-    
-    private func fetchUrbanLines() {
-        LineService.shared.getUrbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
-            if let error = error {
-                delegate.showError(message: error.message)
-                return
-            }
-            if let lines = lines {
-                self.urbanLines = lines
-                StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
-                
-                self.lines = lines
-                delegate.refreshUI()
-            }
-        }
-    }
-    
-    private func fetchSuburbanLines() {
-        LineService.shared.getSuburbanLines { (lines, error) in
-            guard let delegate = self.observer else { return }
-            if let error = error {
-                delegate.showError(message: error.message)
-                return
-            }
-            if let lines = lines {
-                self.suburbanLines = lines
-                StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
-                
-                delegate.refreshUI()
-            }
+            delegate.showLoader()
         }
     }
 }

@@ -11,4 +11,5 @@ import Foundation
 struct StorageKeys {
     public static let urbanLines = "com.crystalpigeon.busns.urban_lines"
     public static let suburbanLines = "com.crystalpigeon.busns.suburban_lines"
+    public static let season = "com.crystalpigeon.season"
 }

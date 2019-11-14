@@ -31,7 +31,7 @@ struct Endpoint {
         private static let busEndpoint = "all-buses"
         
         //MARK: Product public endpoints
-        public static func getBy(id: String, day: String, type: String) -> URL {
+        public static func getBy(id: String, type: String) -> URL {
             return URL(string: herokuBaseUrl + busEndpoint + "/" + id + "?" + add(type: type))!
         }
     }

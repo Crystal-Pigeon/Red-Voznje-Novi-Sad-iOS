@@ -88,7 +88,7 @@ struct Bus: Codable {
         return getScheduleByHour(schedule: scheduleB)
     }
     
-    public func getOneWayScheduleAByHour() -> [String] {
+    public func getOneWayScheduleByHour() -> [String] {
         guard let schedule = self.schedule else { return []}
         return getScheduleByHour(schedule: schedule)
     }

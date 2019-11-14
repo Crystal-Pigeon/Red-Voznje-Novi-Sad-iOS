@@ -98,7 +98,7 @@ final class BusCellNode: ASCellNode {
             if !self.isOpened {
                 return createSchedule(bus.getOneWayScheduleBy3Hours(), width: separatorFullWidth)
             } else {
-                return createSchedule(bus.getOneWayScheduleAByHour(), width: separatorFullWidth)
+                return createSchedule(bus.getOneWayScheduleByHour(), width: separatorFullWidth)
             }
         } else if bus.scheduleA != nil,  bus.scheduleB != nil {
             let schedulesStack = ASStackLayoutSpec.horizontal()

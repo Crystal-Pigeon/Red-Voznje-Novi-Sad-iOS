@@ -21,6 +21,7 @@ class MainViewModel {
     public private(set) var suburbanLines = [Line]()
     public private(set) var suburbanBuses = [String:[Bus]]()
     public private(set) var urbanBuses = [String: [Bus]]()
+    public private(set) var favourites: [String] = []
     
     init(){}
     
@@ -28,6 +29,7 @@ class MainViewModel {
         if !NetworkManager.shared.isInternetAvailable() {
             if StorageManager.fileExists(StorageKeys.season, in: .caches) {
                 self.currentSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
+                self.getFavourites()
                 return
             }
             else {
@@ -37,6 +39,7 @@ class MainViewModel {
         }
         else {
             self.fetchSeason()
+            self.getFavourites()
         }
     }
     
@@ -62,16 +65,13 @@ class MainViewModel {
                 guard newSeason != oldSeason else { return }
                 
                 StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
-                self.fetchLines()
+                self.fetchUrbanLines()
+                self.fetchSuburbanLines()
                 
             }
         }
     }
     
-    private func fetchLines() {
-        self.fetchUrbanLines()
-        self.fetchSuburbanLines()
-    }
     
     private func fetchUrbanLines() {
         LineService.shared.getUrbanLines { (lines, error) in
@@ -137,5 +137,13 @@ class MainViewModel {
                 }
             }
         }
+    }
+    private func getFavourites() {
+        guard let delegate = self.observer else { return }
+        if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {
+            StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+        }
+        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
+        delegate.refreshUI()
     }
 }

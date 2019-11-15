@@ -15,12 +15,22 @@ protocol AddLinesObserver {
 
 class AddLinesViewModel {
     public var observer: AddLinesObserver?
-    private var urbanLines = [Line]()
-    private var suburbanLines = [Line]()
+    public private(set) var urbanLines = [Line]()
+    public private(set) var suburbanLines = [Line]()
+    public private(set) var favourites = [String]()
     public private(set) var isTypeUrban = true
     public private(set) var lines = [Line]()
     
     init() {}
+    
+    public func addToFavourites(id: String){
+        if let index = favourites.firstIndex(of: id) {
+            favourites.remove(at: index)
+        } else {
+            favourites.append(id)
+        }
+        StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+    }
     
     public func changeLineType(isTypeUrban: Bool) {
         self.isTypeUrban = isTypeUrban

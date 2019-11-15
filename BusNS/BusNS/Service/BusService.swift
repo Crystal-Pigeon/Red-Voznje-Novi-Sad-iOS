@@ -15,7 +15,19 @@ class BusService: Service {
     
     public static var shared = BusService()
     
-    public func getBus(type: String, id: String , completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
+    public func getSuburbanBus(id: String, completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
+        getBus(type: "rvp", id: id) { (buses, error) in
+            completionHandler(buses, error)
+        }
+    }
+    
+    public func getUrbanBus(id: String, completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
+        getBus(type: "rvg", id: id) { (buses, error) in
+            completionHandler(buses, error)
+        }
+    }
+    
+    private func getBus(type: String, id: String , completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
         if !NetworkManager.shared.isInternetAvailable() {
             completionHandler(nil, ServiceError.internetError)
             return

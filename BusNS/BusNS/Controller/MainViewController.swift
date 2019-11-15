@@ -19,47 +19,56 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let messageLabelNode = ASTextNode()
     private let logoImageNode = ASImageNode()
     public var currentLines: [Line] = []
-    private var busesCollectionNode: ASCollectionNode!
+    private var workDayBusesCollectionNode: ASCollectionNode!
+    private var saturdayBusesCollectionNode: ASCollectionNode!
+    private var sundayBusesCollectionNode: ASCollectionNode!
     public let bus: Bus
     private var mainViewModel = MainViewModel()
+    private let scrollNode = ASScrollNode()
     
     init() {
         self.bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "R", scheduleA: ["15":["15", "35"], "16":["15", "35LIR"], "17":["15", "35"], "18":["15SP", "35"], "19":["15", "35"], "20":["15LI", "35SP"]], scheduleB: ["15":["15", "35"], "16":["15IL", "35"], "17":["15", "35"], "18":["15", "35SP"], "19":["15", "35"], "20":["15", "35"]], schedule: nil, extras: "IL=IZ LIRA, LIR=ZA LIR, SP=SAOBRACA SAMO PETKOM")
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
-        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        self.busesCollectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
-        
+
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Bus NS".localized()
         self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
-        self.busesCollectionNode.delegate = self
-        self.busesCollectionNode.dataSource = self
+        self.scrollNode.automaticallyManagesSubnodes = true
+        self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
+
         mainViewModel.observer = self
         mainViewModel.getData()
         layout()
         appearance()
+        scrollLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        self.scrollNode.view.isPagingEnabled = true
+        self.scrollNode.view.showsHorizontalScrollIndicator = false
+        self.scrollNode.view.delegate = self
+    }
+    
     @objc private func dayButtonTapped(sender: ASButtonNode) {
         if sender == workdayButton {
             UIView.animate(withDuration: 0.3) {
                 self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 6)
+                self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             }
         } else if sender == saturdayButton {
             UIView.animate(withDuration: 0.3) {
                 self.separatorNode.position.x = UIScreen.main.bounds.width / 3 + (UIScreen.main.bounds.width / 6)
+                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 3, y: 0), animated: true)
             }
         } else if sender == sundayButton {
             UIView.animate(withDuration: 0.3) {
                 self.separatorNode.position.x = UIScreen.main.bounds.width / 3 * 2 + (UIScreen.main.bounds.width / 6)
+                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: true)
             }
         }
     }
@@ -68,6 +77,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(AddLinesViewController(), animated: true)
     }
+    
 }
 
 //MARK: Layout
@@ -80,12 +90,14 @@ extension MainViewController {
             
             self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.7), ASDimensionAuto)
             
-            self.busesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height - buttonsStack.style.preferredSize.height - constrainedSize.max.height * 0.07))
+            self.workDayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.saturdayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.sundayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
             
             self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.5), ASDimensionAuto)
             
             let stack = ASStackLayoutSpec.vertical()
-            stack.children = !self.currentLines.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.busesCollectionNode]
+            stack.children = !self.currentLines.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.scrollNode]
             
             let addButton = self.addButtonAppereance()
             let addButtonStack = ASStackLayoutSpec.vertical()
@@ -97,6 +109,30 @@ extension MainViewController {
             
             return ASBackgroundLayoutSpec(child: insetSpec, background: stack)
         }
+    }
+    
+    private func scrollLayout() {
+        self.scrollNode.layoutSpecBlock = { node, size in
+            self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
+            let stack = ASStackLayoutSpec.horizontal()
+            stack.children = [self.workDayBusesCollectionNode, self.saturdayBusesCollectionNode, self.sundayBusesCollectionNode]
+            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
+        }
+     }
+    
+    private func initCollectionNode(width: CGFloat, height: CGFloat) -> ASCollectionNode {
+        let flowLayout = UICollectionViewFlowLayout()
+         flowLayout.scrollDirection = .vertical
+         flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
+        
+        let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
+        collectionNode.delegate = self
+        collectionNode.dataSource = self
+        collectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width), ASDimensionMake(height))
+        collectionNode.backgroundColor = Theme.current.color(.backgroundColor)
+        collectionNode.showsVerticalScrollIndicator = false
+        return collectionNode
     }
     
     private func appearance() {
@@ -178,7 +214,7 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
@@ -200,5 +236,28 @@ extension MainViewController: MainObserver {
     }
     func showError(message: String) {
         self.showAlert(title: "", message: message, duration: 2)
+    }
+}
+
+//MARK: Scrolling between scrollView pages
+extension MainViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView != self.scrollNode.view { return }
+        let width = scrollView.frame.width
+        let page = Int(round(scrollView.contentOffset.x/width))
+        if page == 0 {
+            UIView.animate(withDuration: 0.3) {
+                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 6)
+            }
+        } else if page == 1 {
+            UIView.animate(withDuration: 0.3) {
+                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 + (UIScreen.main.bounds.width / 6)
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 * 2 + (UIScreen.main.bounds.width / 6)
+            }
+            
+        }
     }
 }

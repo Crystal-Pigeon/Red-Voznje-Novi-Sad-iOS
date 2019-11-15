@@ -38,11 +38,11 @@ struct Bus: Codable {
     private func getScheduleBy3Hours(schedule: [String:[String]]) -> [String] {
         let allHours = self.getScheduleByHour(schedule: schedule)
         var threeHours = [String]()
-        let flag = Int(DateManager.instance.getHour()) ?? 0
-        for hour in allHours {
-            let hourInt = Int(hour.split(separator: ":")[0])
-            if hourInt == flag  || hourInt == flag - 1 || hourInt == flag + 1 {
-                threeHours.append(hour)
+        let hour = Int(DateManager.instance.getHour()) ?? 0
+        for oneHour in allHours {
+            let hourInt = Int(oneHour.split(separator: ":")[0])
+            if hourInt == hour  || hourInt == hour - 1 || hourInt == hour + 1 {
+                threeHours.append(oneHour)
             }
         }
         return threeHours

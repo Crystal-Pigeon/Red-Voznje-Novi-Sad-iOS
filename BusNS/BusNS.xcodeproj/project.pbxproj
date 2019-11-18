@@ -28,6 +28,11 @@
 		AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD056229237A213300010D78 /* ASViewController+Extension.swift */; };
 		AD05622C237A24D200010D78 /* StorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622B237A24D200010D78 /* StorageKeys.swift */; };
 		AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622D237A26B300010D78 /* AddLinesViewModelTest.swift */; };
+		AD2D8FC323827DF0005B4F9E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; };
+		AD2D8FC423827DF0005B4F9E /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
+		AD2D8FC523827DF0005B4F9E /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; };
+		AD2D8FC623827DF0005B4F9E /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; };
+		AD2D8FC723827DF0005B4F9E /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; };
 		AD4C69BC23746D0300DC5D7B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4C69BE23746D0300DC5D7B /* Localizable.strings */; };
 		AD4C69C3237471A600DC5D7B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C2237471A600DC5D7B /* String+Extension.swift */; };
 		AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C4237471EE00DC5D7B /* Bundle+Extension.swift */; };
@@ -45,16 +50,6 @@
 		AD81A2A2237451360097812D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A1237451360097812D /* Environment.swift */; };
 		AD81A2A4237453010097812D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A3237453010097812D /* Endpoint.swift */; };
 		AD81A2A8237455040097812D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A7237455040097812D /* Colors.swift */; };
-		AD81A2AF23745DF10097812D /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; };
-		AD81A2B023745DF10097812D /* PINOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AD81A2B123745DF10097812D /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; };
-		AD81A2B223745DF10097812D /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AD81A2B323745DF10097812D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; };
-		AD81A2B423745DF10097812D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AD81A2B523745DF10097812D /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; };
-		AD81A2B623745DF10097812D /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
-		AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
 		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
@@ -73,24 +68,6 @@
 			remoteInfo = BusNS;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		AD81A2B923745DF10097812D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				AD81A2B223745DF10097812D /* PINRemoteImage.framework in Embed Frameworks */,
-				AD81A2B623745DF10097812D /* PINCache.framework in Embed Frameworks */,
-				AD81A2B423745DF10097812D /* Alamofire.framework in Embed Frameworks */,
-				AD81A2B023745DF10097812D /* PINOperation.framework in Embed Frameworks */,
-				AD81A2B823745DF10097812D /* AsyncDisplayKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -155,11 +132,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD81A2B123745DF10097812D /* PINRemoteImage.framework in Frameworks */,
-				AD81A2B523745DF10097812D /* PINCache.framework in Frameworks */,
-				AD81A2B323745DF10097812D /* Alamofire.framework in Frameworks */,
-				AD81A2AF23745DF10097812D /* PINOperation.framework in Frameworks */,
-				AD81A2B723745DF10097812D /* AsyncDisplayKit.framework in Frameworks */,
+				AD2D8FC323827DF0005B4F9E /* Alamofire.framework in Frameworks */,
+				AD2D8FC423827DF0005B4F9E /* AsyncDisplayKit.framework in Frameworks */,
+				AD2D8FC523827DF0005B4F9E /* PINCache.framework in Frameworks */,
+				AD2D8FC623827DF0005B4F9E /* PINOperation.framework in Frameworks */,
+				AD2D8FC723827DF0005B4F9E /* PINRemoteImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +388,6 @@
 				AD81A267237448C60097812D /* Sources */,
 				AD81A268237448C60097812D /* Frameworks */,
 				AD81A269237448C60097812D /* Resources */,
-				AD81A2B923745DF10097812D /* Embed Frameworks */,
 				AD81A2BA23745E010097812D /* ShellScript */,
 			);
 			buildRules = (
@@ -511,7 +487,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		AD81A2BA23745E010097812D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -532,7 +508,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINOperation.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINRemoteImage.framework",
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
 		};

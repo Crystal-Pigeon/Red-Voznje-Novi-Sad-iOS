@@ -24,11 +24,15 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
         linesViewModel.observer = self
-        linesViewModel.getLines()
+//        linesViewModel.getLines()
         tableNode.delegate = self
         tableNode.dataSource = self
         layout()
         appearance()
+    }
+    
+    override func viewDidLoad() {
+        linesViewModel.getLines()
     }
     
     required init?(coder: NSCoder) {
@@ -99,7 +103,6 @@ extension AddLinesViewController {
 
 //MARK: Table delegate & data source
 extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
-    
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
     }
@@ -122,6 +125,7 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     }
 }
 
+//MARK: Observer
 extension AddLinesViewController: AddLinesObserver {
     func refreshUI() {
         self.tableNode.reloadData()

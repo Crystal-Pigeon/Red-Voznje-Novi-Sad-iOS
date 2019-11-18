@@ -40,12 +40,13 @@ class AddLinesViewModel {
     }
     
     public func getLines() {
+        guard let delegate = self.observer else { return }
         if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches){
             self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
             self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             self.lines = self.urbanLines
+            delegate.refreshUI()
         } else {
-            guard let delegate = self.observer else { return }
             delegate.showLoader()
         }
     }

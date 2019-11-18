@@ -72,7 +72,6 @@ class MainViewModel {
         }
     }
     
-    
     private func fetchUrbanLines() {
         LineService.shared.getUrbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
@@ -138,6 +137,7 @@ class MainViewModel {
             }
         }
     }
+    
     private func getFavourites() {
         guard let delegate = self.observer else { return }
         if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {

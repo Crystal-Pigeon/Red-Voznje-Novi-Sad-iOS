@@ -20,14 +20,4 @@ class AddLinesViewModelTest: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func test_changeType_urban() {
-        lineViewModel.changeLineType(isTypeUrban: true)
-        XCTAssertTrue(lineViewModel.isTypeUrban)
-    }
-    
-    func test_changeType_suburban() {
-        lineViewModel.changeLineType(isTypeUrban: false)
-        XCTAssertFalse(lineViewModel.isTypeUrban)
-    }
 }

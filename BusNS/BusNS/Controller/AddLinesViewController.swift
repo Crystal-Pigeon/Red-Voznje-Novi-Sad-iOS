@@ -44,7 +44,6 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
     
     @objc private func lineTypeButtonTapped(sender: ASButtonNode) {
-        self.linesViewModel.changeLineType(isTypeUrban: sender == self.urbanBusesButton)
         self.urbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         self.suburbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         UIView.animate(withDuration: 0.3) {
@@ -53,7 +52,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
                 self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             } else if sender == self.suburbanBusesButton {
                 self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
-                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 2, y: 0), animated: true)
+                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width, y: 0), animated: true)
             }
         }
     }
@@ -136,7 +135,11 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return linesViewModel.lines.count
+        if tableNode == self.urbanBusesTableNode {
+            return linesViewModel.urbanLines.count
+        } else {
+            return linesViewModel.suburbanLines.count
+        }
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
@@ -148,7 +151,11 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
         ]
         cellNode.selectionStyle = .none
         
-        cellNode.text = linesViewModel.lines[indexPath.row].number + "  " + linesViewModel.lines[indexPath.row].name
+        if tableNode == self.urbanBusesTableNode {
+            cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name
+        } else {
+            cellNode.text = linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name
+        }
 
         return cellNode
     }

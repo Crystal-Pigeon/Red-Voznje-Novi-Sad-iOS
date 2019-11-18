@@ -12,22 +12,24 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
-    private let tableNode = ASTableNode()
     private let urbanBusesButton = ASButtonNode()
     private let suburbanBusesButton = ASButtonNode()
     private let separatorNode = ASDisplayNode()
     private var linesViewModel = AddLinesViewModel()
+    private let scrollNode = ASScrollNode()
+    private var urbanBusesTableNode = ASTableNode()
+    private var suburbanBusesTableNode = ASTableNode()
     
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
+        self.scrollNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
         linesViewModel.observer = self
         linesViewModel.getLines()
-        tableNode.delegate = self
-        tableNode.dataSource = self
         layout()
+        scrollLayout()
         appearance()
     }
     
@@ -35,14 +37,23 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        self.scrollNode.view.isPagingEnabled = true
+        self.scrollNode.view.showsHorizontalScrollIndicator = false
+        self.scrollNode.view.delegate = self
+    }
+    
     @objc private func lineTypeButtonTapped(sender: ASButtonNode) {
         self.linesViewModel.changeLineType(isTypeUrban: sender == self.urbanBusesButton)
-        self.tableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.urbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.suburbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         UIView.animate(withDuration: 0.3) {
             if sender == self.urbanBusesButton {
                 self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 4)
+                self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             } else if sender == self.suburbanBusesButton {
                 self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
+                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 2, y: 0), animated: true)
             }
         }
     }
@@ -56,12 +67,25 @@ extension AddLinesViewController {
             let stack = ASStackLayoutSpec.vertical()
             let buttonStack = self.initLinesTypeButtonsLayout(width: constrainedSize.max.width, height: constrainedSize.max.height)
             
+            self.urbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.suburbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+
             self.suburbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
             self.urbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
             
-            stack.children = [buttonStack, self.tableNode]
-            self.tableNode.style.preferredSize = CGSize(width: constrainedSize.max.width, height: constrainedSize.max.height - (constrainedSize.max.height * 0.07 + 3))
-            return stack
+            
+            stack.children = [buttonStack, self.scrollNode]
+            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
+
+        }
+    }
+    
+    private func scrollLayout() {
+        self.scrollNode.layoutSpecBlock = { node, size in
+            self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 2)
+            let stack = ASStackLayoutSpec.horizontal()
+            stack.children = [self.urbanBusesTableNode, self.suburbanBusesTableNode]
+            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
         }
     }
     
@@ -73,6 +97,14 @@ extension AddLinesViewController {
         
         self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+    }
+    
+    private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
+        let tableNode = ASTableNode()
+        tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(width), height: ASDimensionMake(height - (height * 0.07 + 3)))
+        tableNode.delegate = self
+        tableNode.dataSource = self
+        return tableNode
     }
     
     private func initLinesTypeButtonsLayout(width: CGFloat, height: CGFloat) -> ASDisplayNode {
@@ -116,17 +148,37 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.foregroundColor: Theme.current.color(.busCell_lineTextColor)
         ]
         cellNode.selectionStyle = .none
-        cellNode.text = linesViewModel.lines[indexPath.row].number + "  " + linesViewModel.lines[indexPath.row].name
         
+        cellNode.text = linesViewModel.lines[indexPath.row].number + "  " + linesViewModel.lines[indexPath.row].name
+
         return cellNode
     }
 }
 
 extension AddLinesViewController: AddLinesObserver {
     func refreshUI() {
-        self.tableNode.reloadData()
+        self.urbanBusesTableNode.reloadData()
+        self.suburbanBusesTableNode.reloadData()
     }
     func showLoader() {
         print("LOADER")
+    }
+}
+
+//MARK: Scrolling between scrollView pages
+extension AddLinesViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView != self.scrollNode.view { return }
+        let width = scrollView.frame.width
+        let page = Int(round(scrollView.contentOffset.x/width))
+        if page == 0 {
+            UIView.animate(withDuration: 0.3) {
+                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 4)
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
+            }
+        }
     }
 }

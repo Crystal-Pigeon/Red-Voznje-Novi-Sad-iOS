@@ -15,8 +15,8 @@ protocol AddLinesObserver {
 
 class AddLinesViewModel {
     public var observer: AddLinesObserver?
-    private var urbanLines = [Line]()
-    private var suburbanLines = [Line]()
+    public  private(set) var urbanLines = [Line]()
+    public  private(set) var suburbanLines = [Line]()
     public private(set) var isTypeUrban = true
     public private(set) var lines = [Line]()
     

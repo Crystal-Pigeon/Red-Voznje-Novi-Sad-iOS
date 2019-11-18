@@ -27,7 +27,6 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
         self.scrollNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
         linesViewModel.observer = self
-        linesViewModel.getLines()
         layout()
         scrollLayout()
         appearance()
@@ -38,6 +37,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
+        linesViewModel.getLines()
         self.scrollNode.view.isPagingEnabled = true
         self.scrollNode.view.showsHorizontalScrollIndicator = false
         self.scrollNode.view.delegate = self
@@ -131,7 +131,6 @@ extension AddLinesViewController {
 
 //MARK: Table delegate & data source
 extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
-    
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
     }
@@ -155,6 +154,7 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     }
 }
 
+//MARK: Observer
 extension AddLinesViewController: AddLinesObserver {
     func refreshUI() {
         self.urbanBusesTableNode.reloadData()

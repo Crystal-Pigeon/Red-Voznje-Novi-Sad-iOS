@@ -15,12 +15,22 @@ protocol AddLinesObserver {
 
 class AddLinesViewModel {
     public var observer: AddLinesObserver?
-    public  private(set) var urbanLines = [Line]()
-    public  private(set) var suburbanLines = [Line]()
+    public private(set) var urbanLines = [Line]()
+    public private(set) var suburbanLines = [Line]()
+    public private(set) var favourites = [String]()
     public private(set) var isTypeUrban = true
     public private(set) var lines = [Line]()
     
     init() {}
+    
+    public func addToFavourites(id: String){
+        if let index = favourites.firstIndex(of: id) {
+            favourites.remove(at: index)
+        } else {
+            favourites.append(id)
+        }
+        StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+    }
     
     public func changeLineType(isTypeUrban: Bool) {
         self.isTypeUrban = isTypeUrban
@@ -30,12 +40,13 @@ class AddLinesViewModel {
     }
     
     public func getLines() {
+        guard let delegate = self.observer else { return }
         if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches){
             self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
             self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             self.lines = self.urbanLines
+            delegate.refreshUI()
         } else {
-            guard let delegate = self.observer else { return }
             delegate.showLoader()
         }
     }

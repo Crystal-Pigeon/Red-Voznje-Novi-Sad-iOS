@@ -19,6 +19,9 @@ class MainViewModel {
     public private(set) var currentSeason: Season?
     public private(set) var urbanLines = [Line]()
     public private(set) var suburbanLines = [Line]()
+    public private(set) var suburbanBuses = [String:[Bus]]()
+    public private(set) var urbanBuses = [String: [Bus]]()
+    public private(set) var favourites: [String] = []
     
     init(){}
     
@@ -26,6 +29,7 @@ class MainViewModel {
         if !NetworkManager.shared.isInternetAvailable() {
             if StorageManager.fileExists(StorageKeys.season, in: .caches) {
                 self.currentSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
+                self.getFavourites()
                 return
             }
             else {
@@ -35,6 +39,7 @@ class MainViewModel {
         }
         else {
             self.fetchSeason()
+            self.getFavourites()
         }
     }
     
@@ -60,19 +65,10 @@ class MainViewModel {
                 guard newSeason != oldSeason else { return }
                 
                 StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
-                self.fetchLines()
+                self.fetchUrbanLines()
+                self.fetchSuburbanLines()
                 
             }
-        }
-    }
-    
-    private func fetchLines() {
-        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) {
-            self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
-            self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
-        } else {
-            self.fetchUrbanLines()
-            self.fetchSuburbanLines()
         }
     }
     
@@ -86,6 +82,7 @@ class MainViewModel {
             if let lines = lines {
                 self.urbanLines = lines
                 StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
+                self.fetchUrbanBuses()
             }
         }
     }
@@ -100,7 +97,53 @@ class MainViewModel {
             if let lines = lines {
                 self.suburbanLines = lines
                 StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
+                self.fetchSuburbanBuses()
             }
         }
+    }
+    
+    private func fetchUrbanBuses() {
+        guard let delegate = self.observer else { return }
+        self.urbanLines.forEach { line in
+            let id = line.id
+            BusService.shared.getUrbanBus(id: id) { (buses, error) in
+                if let error = error {
+                    delegate.showError(message: error.message)
+                    return
+                }
+                if let buses = buses {
+                    let sk = StorageKeys.bus + "\(id)"
+                    StorageManager.store(buses, to: .caches, as: sk)
+                    self.urbanBuses[id] = buses
+                }
+            }
+        }
+    }
+    
+    private func fetchSuburbanBuses() {
+        guard let delegate = self.observer else { return }
+        self.suburbanLines.forEach { line in
+            let id = line.id
+            BusService.shared.getSuburbanBus(id: id) { (buses, error) in
+                if let error = error {
+                    delegate.showError(message: error.message)
+                    return
+                }
+                if let buses = buses {
+                    let sk = StorageKeys.bus + "\(id)"
+                    StorageManager.store(buses, to: .caches, as: sk)
+                    self.suburbanBuses[id] = buses
+                }
+            }
+        }
+    }
+    
+    private func getFavourites() {
+        guard let delegate = self.observer else { return }
+        if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {
+            StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+        }
+        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
+        delegate.refreshUI()
     }
 }

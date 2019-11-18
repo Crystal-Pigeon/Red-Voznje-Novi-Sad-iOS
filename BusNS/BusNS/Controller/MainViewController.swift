@@ -77,7 +77,6 @@ class MainViewController: ASViewController<ASDisplayNode> {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(AddLinesViewController(), animated: true)
     }
-    
 }
 
 //MARK: Layout
@@ -207,7 +206,6 @@ extension MainViewController {
 }
 
 //MARK: CollectionNode delegate & data source
-
 extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
         return 1
@@ -230,10 +228,11 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     }
 }
 
+//MARK: Observer
 extension MainViewController: MainObserver {
     func refreshUI() {
-
     }
+    
     func showError(message: String) {
         self.showAlert(title: "", message: message, duration: 2)
     }

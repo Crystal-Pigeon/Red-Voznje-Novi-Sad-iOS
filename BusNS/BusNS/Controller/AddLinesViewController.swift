@@ -174,7 +174,7 @@ extension AddLinesViewController: AddLinesObserver {
 
 //MARK: Scrolling between scrollView pages
 extension AddLinesViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView != self.scrollNode.view { return }
         let width = scrollView.frame.width
         let page = Int(round(scrollView.contentOffset.x/width))

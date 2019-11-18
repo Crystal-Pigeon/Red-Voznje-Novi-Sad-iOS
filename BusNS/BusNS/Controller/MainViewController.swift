@@ -240,7 +240,7 @@ extension MainViewController: MainObserver {
 
 //MARK: Scrolling between scrollView pages
 extension MainViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView != self.scrollNode.view { return }
         let width = scrollView.frame.width
         let page = Int(round(scrollView.contentOffset.x/width))

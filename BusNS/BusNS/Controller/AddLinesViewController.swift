@@ -101,6 +101,7 @@ extension AddLinesViewController {
     private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
         let tableNode = ASTableNode()
         tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(width), height: ASDimensionMake(height - (height * 0.07 + 3)))
+        tableNode.backgroundColor = Theme.current.color(.addLinesTable)
         tableNode.delegate = self
         tableNode.dataSource = self
         return tableNode
@@ -153,11 +154,27 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
         
         if tableNode == self.urbanBusesTableNode {
             cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name
+            if linesViewModel.favourites.contains(linesViewModel.urbanLines[indexPath.row].id) {
+                 cellNode.accessoryType = .checkmark
+            }
         } else {
             cellNode.text = linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name
+            if linesViewModel.favourites.contains(linesViewModel.suburbanLines[indexPath.row].id) {
+                 cellNode.accessoryType = .checkmark
+            }
         }
-
         return cellNode
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        if tableNode == self.urbanBusesTableNode {
+            let line = linesViewModel.urbanLines[indexPath.row]
+            linesViewModel.addToFavourites(id: line.id)
+        } else {
+            let line = linesViewModel.suburbanLines[indexPath.row]
+            linesViewModel.addToFavourites(id: line.id)
+        }
+        tableNode.reloadRows(at: [indexPath], with: .fade)
     }
 }
 

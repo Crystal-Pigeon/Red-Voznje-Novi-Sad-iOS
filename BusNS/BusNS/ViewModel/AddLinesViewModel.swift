@@ -19,7 +19,9 @@ class AddLinesViewModel {
     public private(set) var suburbanLines = [Line]()
     public private(set) var favourites = [String]()
     
-    init() {}
+    init() {
+        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
+    }
     
     public func addToFavourites(id: String){
         if let index = favourites.firstIndex(of: id) {

@@ -39,6 +39,7 @@ public class LightTheme: Theme {
         .navigationTintColor: Colors.white,
         .busCell_separatorColor: Colors.transparentDarkBlueLighter,
         .busCell_backgroundColor: Colors.white,
-        .busCell_extrasColor: Colors.transparentDarkBlue
+        .busCell_extrasColor: Colors.transparentDarkBlue,
+        .addLinesTable: Colors.white
     ]
 }

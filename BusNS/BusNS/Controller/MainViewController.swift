@@ -22,13 +22,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private var workDayBusesCollectionNode: ASCollectionNode!
     private var saturdayBusesCollectionNode: ASCollectionNode!
     private var sundayBusesCollectionNode: ASCollectionNode!
-    public let bus: Bus
-    private var mainViewModel = MainViewModel()
     private let scrollNode = ASScrollNode()
+    private var mainViewModel = MainViewModel()
+    private let tagsDict = [0:"R", 1: "S", 2: "N"]
     
     init() {
-        self.bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "R", scheduleA: ["15":["15", "35"], "16":["15", "35LIR"], "17":["15", "35"], "18":["15SP", "35"], "19":["15", "35"], "20":["15LI", "35SP"]], scheduleB: ["15":["15", "35"], "16":["15IL", "35"], "17":["15", "35"], "18":["15", "35SP"], "19":["15", "35"], "20":["15", "35"]], schedule: nil, extras: "IL=IZ LIRA, LIR=ZA LIR, SP=SAOBRACA SAMO PETKOM")
-
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
@@ -36,9 +34,6 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.scrollNode.automaticallyManagesSubnodes = true
         self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
-
-        mainViewModel.observer = self
-        mainViewModel.getData()
         layout()
         appearance()
         scrollLayout()
@@ -49,9 +44,15 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
+        mainViewModel.observer = self
+        self.mainViewModel.getData()
         self.scrollNode.view.isPagingEnabled = true
         self.scrollNode.view.showsHorizontalScrollIndicator = false
         self.scrollNode.view.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.mainViewModel.getFavourites()
     }
     
     @objc private func dayButtonTapped(sender: ASButtonNode) {
@@ -90,8 +91,11 @@ extension MainViewController {
             self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.7), ASDimensionAuto)
             
             self.workDayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.workDayBusesCollectionNode.view.tag = 0
             self.saturdayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.saturdayBusesCollectionNode.view.tag = 1
             self.sundayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.sundayBusesCollectionNode.view.tag = 2
             
             self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.5), ASDimensionAuto)
             
@@ -212,13 +216,31 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return mainViewModel.favourites.count
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        let cell = BusCellNode(bus: self.bus)
-        cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
-        return cell
+        let busId = mainViewModel.favourites[indexPath.row]
+        if StorageManager.fileExists(StorageKeys.bus + busId, in: .caches) {
+            let buses = StorageManager.retrieve(StorageKeys.bus+busId, from: .caches, as: [Bus].self)
+            
+            if let bus = buses.first(where: { $0.day == tagsDict[collectionNode.view.tag]} )  {
+                let cell = BusCellNode(bus: bus)
+                cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
+                return cell
+            }
+
+            else {
+                let bus = buses[0]
+                let newBus = Bus(id: bus.id, number: bus.number, name: bus.name, lineA: bus.lineA, lineB: bus.lineB, line: bus.line, day: tagsDict[collectionNode.view.tag]!, scheduleA: nil, scheduleB: nil, schedule: nil, extras: "")
+                let cell = BusCellNode(bus: newBus)
+                cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
+                return cell
+            }
+        }
+        else {
+            return ASCellNode()
+        }
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
@@ -231,10 +253,14 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
 //MARK: Observer
 extension MainViewController: MainObserver {
     func refreshUI() {
+        self.workDayBusesCollectionNode.reloadData()
+        self.saturdayBusesCollectionNode.reloadData()
+        self.sundayBusesCollectionNode.reloadData()
+
     }
     
     func showError(message: String) {
-        self.showAlert(title: "", message: message, duration: 2)
+        showAlert(title: "", message: message, duration: 2)
     }
 }
 

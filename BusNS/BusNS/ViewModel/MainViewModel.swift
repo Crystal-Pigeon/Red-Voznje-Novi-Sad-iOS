@@ -19,8 +19,6 @@ class MainViewModel {
     public private(set) var currentSeason: Season?
     public private(set) var urbanLines = [Line]()
     public private(set) var suburbanLines = [Line]()
-    public private(set) var suburbanBuses = [String:[Bus]]()
-    public private(set) var urbanBuses = [String: [Bus]]()
     public private(set) var favourites: [String] = []
     
     init(){}
@@ -29,7 +27,6 @@ class MainViewModel {
         if !NetworkManager.shared.isInternetAvailable() {
             if StorageManager.fileExists(StorageKeys.season, in: .caches) {
                 self.currentSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
-                self.getFavourites()
                 return
             }
             else {
@@ -39,7 +36,6 @@ class MainViewModel {
         }
         else {
             self.fetchSeason()
-            self.getFavourites()
         }
     }
     
@@ -53,23 +49,29 @@ class MainViewModel {
             if let seasons = seasons{
                 let newSeason = seasons[0]
                 let oldSeason: Season?
-                
                 if StorageManager.fileExists(StorageKeys.season, in: .caches) {
                     oldSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
                 } else {
                     oldSeason = nil
                 }
-                
                 self.currentSeason = newSeason
-                
                 guard newSeason != oldSeason else { return }
                 
                 StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
+                self.getFavourites()
                 self.fetchUrbanLines()
                 self.fetchSuburbanLines()
                 
             }
         }
+    }
+    public func getFavourites() {
+        guard let delegate = self.observer else { return }
+        if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {
+            StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+        }
+        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
+        delegate.refreshUI()
     }
     
     private func fetchUrbanLines() {
@@ -82,7 +84,16 @@ class MainViewModel {
             if let lines = lines {
                 self.urbanLines = lines
                 StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
-                self.fetchUrbanBuses()
+                
+                let favouriteUrban = self.urbanLines.filter { self.favourites.contains($0.id)}
+                favouriteUrban.forEach { line in
+                    self.fetchUrbanBus(line: line, isFavourite: true)
+                }
+                
+                let notFavouriteUrban = self.urbanLines.filter{ !self.favourites.contains($0.id)}
+                notFavouriteUrban.forEach { line in
+                    self.fetchUrbanBus(line: line, isFavourite: false)
+                }
             }
         }
     }
@@ -97,53 +108,54 @@ class MainViewModel {
             if let lines = lines {
                 self.suburbanLines = lines
                 StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
-                self.fetchSuburbanBuses()
-            }
-        }
-    }
-    
-    private func fetchUrbanBuses() {
-        guard let delegate = self.observer else { return }
-        self.urbanLines.forEach { line in
-            let id = line.id
-            BusService.shared.getUrbanBus(id: id) { (buses, error) in
-                if let error = error {
-                    delegate.showError(message: error.message)
-                    return
+                
+                let favouriteSuburban = self.suburbanLines.filter { self.favourites.contains($0.id)}
+                favouriteSuburban.forEach { line in
+                    self.fetchSuburbanBus(line: line, isFavourite: true)
                 }
-                if let buses = buses {
-                    let sk = StorageKeys.bus + "\(id)"
-                    StorageManager.store(buses, to: .caches, as: sk)
-                    self.urbanBuses[id] = buses
+                
+                let notFavouriteSuburban = self.suburbanLines.filter{ !self.favourites.contains($0.id)}
+                notFavouriteSuburban.forEach { line in
+                    self.fetchSuburbanBus(line: line, isFavourite: false)
                 }
             }
         }
     }
     
-    private func fetchSuburbanBuses() {
+    private func fetchUrbanBus(line: Line, isFavourite: Bool) {
         guard let delegate = self.observer else { return }
-        self.suburbanLines.forEach { line in
-            let id = line.id
-            BusService.shared.getSuburbanBus(id: id) { (buses, error) in
-                if let error = error {
-                    delegate.showError(message: error.message)
-                    return
-                }
-                if let buses = buses {
-                    let sk = StorageKeys.bus + "\(id)"
-                    StorageManager.store(buses, to: .caches, as: sk)
-                    self.suburbanBuses[id] = buses
+        let id = line.id
+        BusService.shared.getUrbanBus(id: id) { (buses, error) in
+            if let error = error {
+                delegate.showError(message: error.message)
+                return
+            }
+            if let buses = buses {
+                let sk = StorageKeys.bus + "\(id)"
+                StorageManager.store(buses, to: .caches, as: sk)
+                if isFavourite {
+                    delegate.refreshUI()
                 }
             }
         }
     }
     
-    private func getFavourites() {
+    
+    private func fetchSuburbanBus(line: Line, isFavourite: Bool) {
         guard let delegate = self.observer else { return }
-        if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {
-            StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+        let id = line.id
+        BusService.shared.getSuburbanBus(id: id) { (buses, error) in
+            if let error = error {
+                delegate.showError(message: error.message)
+                return
+            }
+            if let buses = buses {
+                let sk = StorageKeys.bus + "\(id)"
+                StorageManager.store(buses, to: .caches, as: sk)
+                if isFavourite {
+                    delegate.refreshUI()
+                }
+            }
         }
-        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
-        delegate.refreshUI()
     }
 }

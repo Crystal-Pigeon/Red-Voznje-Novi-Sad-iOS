@@ -79,7 +79,7 @@ final class BusCellNode: ASCellNode {
         let stack = ASStackLayoutSpec.vertical()
         
         let directionTextNode = ASTextNode()
-        directionTextNode.attributedText = self.attributed(text: text, color: Theme.current.color(.busCell_lineTextColor), font: Fonts.muliRegular11, alignment: .left)
+        directionTextNode.attributedText = self.attributed(text: text, color: Theme.current.color(.busCell_lineTextColor), font: Fonts.muliRegular12, alignment: .left)
         directionTextNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(separatorWidth), ASDimensionAuto)
         directionTextNode.pointSizeScaleFactors = [0.9,0.85,0.8,0.75,0.7,0.65,0.6,0.5]
         
@@ -130,13 +130,13 @@ final class BusCellNode: ASCellNode {
             let textNode = ASTextNode()
             if DateManager.instance.getHour() == hour.split(separator: ":")[0] {
                 let mut = NSMutableAttributedString()
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_currentHourColor), font: Fonts.muliSemiBold10))
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular10))
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_currentHourColor), font: Fonts.muliSemiBold12))
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12))
                 textNode.attributedText = mut
             } else {
                 let mut = NSMutableAttributedString()
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliSemiBold10))
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color:Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular10))
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliSemiBold12))
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color:Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12))
                 textNode.attributedText = mut
             }
             textNodes.append(textNode)

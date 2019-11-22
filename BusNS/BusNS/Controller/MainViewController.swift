@@ -191,8 +191,8 @@ extension MainViewController {
     
     private func addButtonAppereance() -> ASButtonNode {
         let button = ASButtonNode()
-        button.style.preferredSize = CGSize(width: 48, height: 48)
-        button.cornerRadius = 24
+        button.style.preferredSize = CGSize(width: 60, height: 60)
+        button.cornerRadius = 30
         button.layer.shadowOffset = CGSize(width: 6, height: 6)
         button.layer.shadowColor = Theme.current.color(.shadowColor).cgColor
         button.layer.shadowRadius = 24

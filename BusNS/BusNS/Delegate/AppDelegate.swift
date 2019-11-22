@@ -14,11 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         self.setupNavigationAppearance()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
         if #available(iOS 13.0, *) { } else {
+            BusManager.retriveFavorites()
             let navigationController = ASNavigationController(rootViewController: MainViewController())
             navigationController.navigationBar.isTranslucent = false
             window.rootViewController = navigationController

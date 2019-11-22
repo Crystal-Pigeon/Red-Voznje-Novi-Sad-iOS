@@ -18,13 +18,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let separatorNode = ASDisplayNode()
     private let messageLabelNode = ASTextNode()
     private let logoImageNode = ASImageNode()
-    public var currentLines: [Line] = []
     private var workDayBusesCollectionNode: ASCollectionNode!
     private var saturdayBusesCollectionNode: ASCollectionNode!
     private var sundayBusesCollectionNode: ASCollectionNode!
     private let scrollNode = ASScrollNode()
     private var mainViewModel = MainViewModel()
-    private let tagsDict = [0:"R", 1: "S", 2: "N"]
     
     init() {
         self.containerNode = ASDisplayNode()
@@ -34,9 +32,10 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.scrollNode.automaticallyManagesSubnodes = true
         self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
+        mainViewModel.observer = self
         layout()
-        appearance()
         scrollLayout()
+        appearance()
     }
     
     required init?(coder: NSCoder) {
@@ -44,7 +43,6 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
-        mainViewModel.observer = self
         self.mainViewModel.getData()
         self.scrollNode.view.isPagingEnabled = true
         self.scrollNode.view.showsHorizontalScrollIndicator = false
@@ -52,23 +50,28 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.mainViewModel.getFavourites()
+        if self.mainViewModel.shouldSetNeedsLayout() {
+            self.scrollNode.setNeedsLayout()
+            self.containerNode.setNeedsLayout()
+        }
+        self.refreshUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.mainViewModel.resetLastCount()
     }
     
     @objc private func dayButtonTapped(sender: ASButtonNode) {
         if sender == workdayButton {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 6)
+            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             }
         } else if sender == saturdayButton {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 + (UIScreen.main.bounds.width / 6)
+            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 3, y: 0), animated: true)
             }
         } else if sender == sundayButton {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 * 2 + (UIScreen.main.bounds.width / 6)
+            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: true)
             }
         }
@@ -82,14 +85,12 @@ class MainViewController: ASViewController<ASDisplayNode> {
 
 //MARK: Layout
 extension MainViewController {
-    
     private func layout() {
+        let emptyScreenStack = self.initEmptyScreenLayout()
+        let buttonsStack = self.initDaysButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        let addButton = self.addButtonAppereance()
+        
         containerNode.layoutSpecBlock = { node, constrainedSize in
-            let emptyScreenStack = self.initEmptyScreenLayout()
-            let buttonsStack = self.initDaysButtonsLayout(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            
-            self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.7), ASDimensionAuto)
-            
             self.workDayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
             self.workDayBusesCollectionNode.view.tag = 0
             self.saturdayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
@@ -97,12 +98,9 @@ extension MainViewController {
             self.sundayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
             self.sundayBusesCollectionNode.view.tag = 2
             
-            self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width * 0.5), ASDimensionAuto)
-            
             let stack = ASStackLayoutSpec.vertical()
-            stack.children = !self.currentLines.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.scrollNode]
-            
-            let addButton = self.addButtonAppereance()
+            stack.children = self.mainViewModel.favorites.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.scrollNode]
+
             let addButtonStack = ASStackLayoutSpec.vertical()
             addButtonStack.verticalAlignment = .bottom
             addButtonStack.horizontalAlignment = .right
@@ -116,17 +114,16 @@ extension MainViewController {
     
     private func scrollLayout() {
         self.scrollNode.layoutSpecBlock = { node, size in
-            self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
             let stack = ASStackLayoutSpec.horizontal()
-            stack.children = [self.workDayBusesCollectionNode, self.saturdayBusesCollectionNode, self.sundayBusesCollectionNode]
+            stack.children = self.workDayBusesCollectionNode != nil ? [self.workDayBusesCollectionNode, self.saturdayBusesCollectionNode,  self.sundayBusesCollectionNode] : []
             return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
         }
      }
     
     private func initCollectionNode(width: CGFloat, height: CGFloat) -> ASCollectionNode {
         let flowLayout = UICollectionViewFlowLayout()
-         flowLayout.scrollDirection = .vertical
-         flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
         
         let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
@@ -139,13 +136,18 @@ extension MainViewController {
     }
     
     private func appearance() {
+        self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
+        
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
+        
         self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.shadowColor), font: Fonts.muliRegular17)
         self.messageLabelNode.truncationMode = .byWordWrapping
         self.messageLabelNode.maximumNumberOfLines = 2
+        self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.7), ASDimensionAuto)
         
         self.logoImageNode.image = UIImage(named: "logo")
         self.logoImageNode.contentMode = .scaleAspectFit
+        self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.5), ASDimensionAuto)
         
         setupDayButtonAppearance(dayButton: workdayButton, title: "Work day".localized())
         setupDayButtonAppearance(dayButton: saturdayButton, title: "Saturday".localized())
@@ -162,16 +164,14 @@ extension MainViewController {
         let daysContainterNode = ASDisplayNode()
         daysContainterNode.automaticallyManagesSubnodes = true
         daysContainterNode.backgroundColor = Theme.current.color(.navigationBackgroundColor)
+        self.workdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.saturdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.sundayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(3))
         
         daysContainterNode.layoutSpecBlock = { node, constrainedSize in
-            self.workdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-            self.saturdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-            self.sundayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-            
             let horizontalStack = ASStackLayoutSpec.horizontal()
             horizontalStack.children = [self.workdayButton, self.saturdayButton, self.sundayButton]
-            
-            self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(3))
             
             let verticalStack = ASStackLayoutSpec.vertical()
             verticalStack.children = [horizontalStack, self.separatorNode]
@@ -216,31 +216,22 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, numberOfItemsInSection section: Int) -> Int {
-        return mainViewModel.favourites.count
+        return mainViewModel.favorites.count
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
-        let busId = mainViewModel.favourites[indexPath.row]
-        if StorageManager.fileExists(StorageKeys.bus + busId, in: .caches) {
-            let buses = StorageManager.retrieve(StorageKeys.bus+busId, from: .caches, as: [Bus].self)
-            
-            if let bus = buses.first(where: { $0.day == tagsDict[collectionNode.view.tag]} )  {
-                let cell = BusCellNode(bus: bus)
-                cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
-                return cell
+        let busId = mainViewModel.favorites[indexPath.row]
+        let path = StorageKeys.bus + busId
+        if StorageManager.fileExists(path, in: .caches) {
+            let buses = StorageManager.retrieve(path, from: .caches, as: [Bus].self)
+            if let bus = buses.first(where: { $0.day == self.mainViewModel.tagsDict[collectionNode.view.tag]} )  {
+                return BusCellNode(bus: bus)
             }
-
-            else {
-                let bus = buses[0]
-                let newBus = Bus(id: bus.id, number: bus.number, name: bus.name, lineA: bus.lineA, lineB: bus.lineB, line: bus.line, day: tagsDict[collectionNode.view.tag]!, scheduleA: nil, scheduleB: nil, schedule: nil, extras: "")
-                let cell = BusCellNode(bus: newBus)
-                cell.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.9), ASDimensionAuto)
-                return cell
-            }
+            let bus = buses[0]
+            let newBus = Bus(id: bus.id, number: bus.number, name: bus.name, lineA: nil, lineB: nil, line: "There is no schedule".localized(), day: self.mainViewModel.tagsDict[collectionNode.view.tag]!, scheduleA: nil, scheduleB: nil, schedule: nil, extras: "")
+            return BusCellNode(bus: newBus)
         }
-        else {
-            return ASCellNode()
-        }
+        return ASCellNode()
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
@@ -256,7 +247,6 @@ extension MainViewController: MainObserver {
         self.workDayBusesCollectionNode.reloadData()
         self.saturdayBusesCollectionNode.reloadData()
         self.sundayBusesCollectionNode.reloadData()
-
     }
     
     func showError(message: String) {
@@ -268,21 +258,6 @@ extension MainViewController: MainObserver {
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView != self.scrollNode.view { return }
-        let width = scrollView.frame.width
-        let page = Int(round(scrollView.contentOffset.x/width))
-        if page == 0 {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 6)
-            }
-        } else if page == 1 {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 + (UIScreen.main.bounds.width / 6)
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 3 * 2 + (UIScreen.main.bounds.width / 6)
-            }
-            
-        }
+        self.separatorNode.position.x = scrollView.contentOffset.x/3 + (self.separatorNode.calculatedSize.width / 2)
     }
 }

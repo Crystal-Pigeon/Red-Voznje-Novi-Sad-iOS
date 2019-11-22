@@ -19,9 +19,21 @@ class MainViewModel {
     public private(set) var currentSeason: Season?
     public private(set) var urbanLines = [Line]()
     public private(set) var suburbanLines = [Line]()
-    public private(set) var favourites: [String] = []
+    public var favorites: [String] {
+        return BusManager.favorites
+    }
+    public let tagsDict = [0:"R", 1: "S", 2: "N"]
+    private var lastCount = BusManager.favorites.count
     
     init(){}
+    
+    public func resetLastCount() {
+        lastCount = BusManager.favorites.count
+    }
+    
+    public func shouldSetNeedsLayout() -> Bool {
+        return (lastCount == 0 && favorites.count != 0) || (lastCount != 0 && favorites.count == 0)
+    }
     
     public func getData() {
         if !NetworkManager.shared.isInternetAvailable() {
@@ -58,20 +70,11 @@ class MainViewModel {
                 guard newSeason != oldSeason else { return }
                 
                 StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
-                self.getFavourites()
                 self.fetchUrbanLines()
                 self.fetchSuburbanLines()
                 
             }
         }
-    }
-    public func getFavourites() {
-        guard let delegate = self.observer else { return }
-        if !StorageManager.fileExists(StorageKeys.favouriteLines, in: .caches) {
-            StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
-        }
-        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
-        delegate.refreshUI()
     }
     
     private func fetchUrbanLines() {
@@ -85,12 +88,12 @@ class MainViewModel {
                 self.urbanLines = lines
                 StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
                 
-                let favouriteUrban = self.urbanLines.filter { self.favourites.contains($0.id)}
+                let favouriteUrban = self.urbanLines.filter { self.favorites.contains($0.id)}
                 favouriteUrban.forEach { line in
                     self.fetchUrbanBus(line: line, isFavourite: true)
                 }
                 
-                let notFavouriteUrban = self.urbanLines.filter{ !self.favourites.contains($0.id)}
+                let notFavouriteUrban = self.urbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteUrban.forEach { line in
                     self.fetchUrbanBus(line: line, isFavourite: false)
                 }
@@ -109,12 +112,12 @@ class MainViewModel {
                 self.suburbanLines = lines
                 StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
                 
-                let favouriteSuburban = self.suburbanLines.filter { self.favourites.contains($0.id)}
+                let favouriteSuburban = self.suburbanLines.filter { self.favorites.contains($0.id)}
                 favouriteSuburban.forEach { line in
                     self.fetchSuburbanBus(line: line, isFavourite: true)
                 }
                 
-                let notFavouriteSuburban = self.suburbanLines.filter{ !self.favourites.contains($0.id)}
+                let notFavouriteSuburban = self.suburbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteSuburban.forEach { line in
                     self.fetchSuburbanBus(line: line, isFavourite: false)
                 }
@@ -139,7 +142,6 @@ class MainViewModel {
             }
         }
     }
-    
     
     private func fetchSuburbanBus(line: Line, isFavourite: Bool) {
         guard let delegate = self.observer else { return }

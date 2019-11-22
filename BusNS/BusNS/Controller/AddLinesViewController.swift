@@ -44,38 +44,25 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
     
     @objc private func lineTypeButtonTapped(sender: ASButtonNode) {
-        self.urbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        self.suburbanBusesTableNode.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        UIView.animate(withDuration: 0.3) {
-            if sender == self.urbanBusesButton {
-                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 4)
-                self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            } else if sender == self.suburbanBusesButton {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
-                self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width, y: 0), animated: true)
-            }
+        if sender == self.urbanBusesButton {
+            self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        } else if sender == self.suburbanBusesButton {
+            self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width, y: 0), animated: true)
         }
     }
 }
 
 //MARK: Layout
 extension AddLinesViewController {
-    
     private func layout() {
-        containerNode.layoutSpecBlock = { node, constrainedSize in
+        let buttonStack = self.initLinesTypeButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.urbanBusesTableNode = self.initTableNode(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.suburbanBusesTableNode = self.initTableNode(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        self.containerNode.layoutSpecBlock = { node, constrainedSize in
             let stack = ASStackLayoutSpec.vertical()
-            let buttonStack = self.initLinesTypeButtonsLayout(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            
-            self.urbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            self.suburbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-
-            self.suburbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
-            self.urbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
-            
-            
             stack.children = [buttonStack, self.scrollNode]
-            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
-
+            return stack
         }
     }
     
@@ -84,7 +71,7 @@ extension AddLinesViewController {
             self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 2)
             let stack = ASStackLayoutSpec.horizontal()
             stack.children = [self.urbanBusesTableNode, self.suburbanBusesTableNode]
-            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: stack)
+            return stack
         }
     }
     
@@ -96,6 +83,9 @@ extension AddLinesViewController {
         
         self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        
+        self.suburbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
+        self.urbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
     }
     
     private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
@@ -154,12 +144,12 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
         
         if tableNode == self.urbanBusesTableNode {
             cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name
-            if linesViewModel.favourites.contains(linesViewModel.urbanLines[indexPath.row].id) {
+            if linesViewModel.favorites.contains(linesViewModel.urbanLines[indexPath.row].id) {
                  cellNode.accessoryType = .checkmark
             }
         } else {
             cellNode.text = linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name
-            if linesViewModel.favourites.contains(linesViewModel.suburbanLines[indexPath.row].id) {
+            if linesViewModel.favorites.contains(linesViewModel.suburbanLines[indexPath.row].id) {
                  cellNode.accessoryType = .checkmark
             }
         }
@@ -193,16 +183,6 @@ extension AddLinesViewController: AddLinesObserver {
 extension AddLinesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView != self.scrollNode.view { return }
-        let width = scrollView.frame.width
-        let page = Int(round(scrollView.contentOffset.x/width))
-        if page == 0 {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = 0 + (UIScreen.main.bounds.width / 4)
-            }
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                self.separatorNode.position.x = UIScreen.main.bounds.width / 2 + (UIScreen.main.bounds.width / 4)
-            }
-        }
+        self.separatorNode.position.x = scrollView.contentOffset.x/2 + (self.separatorNode.calculatedSize.width / 2)
     }
 }

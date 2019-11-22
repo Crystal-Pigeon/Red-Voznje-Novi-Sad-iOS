@@ -17,19 +17,26 @@ class AddLinesViewModel {
     public var observer: AddLinesObserver?
     public private(set) var urbanLines = [Line]()
     public private(set) var suburbanLines = [Line]()
-    public private(set) var favourites = [String]()
-    
-    init() {
-        self.favourites = StorageManager.retrieve(StorageKeys.favouriteLines, from: .caches, as: [String].self)
+    public private(set) var favorites: [String] {
+        get {
+            return BusManager.favorites
+        }
+        set {
+            BusManager.favorites = newValue
+        }
     }
     
+    init() {}
+    
     public func addToFavourites(id: String){
-        if let index = favourites.firstIndex(of: id) {
-            favourites.remove(at: index)
+        if favorites.contains(id) {
+            favorites.removeAll { (element) -> Bool in
+                return id == element
+            }
         } else {
-            favourites.append(id)
+            favorites.append(id)
         }
-        StorageManager.store(self.favourites, to: .caches, as: StorageKeys.favouriteLines)
+        BusManager.storeFavorites()
     }
     
     public func getLines() {

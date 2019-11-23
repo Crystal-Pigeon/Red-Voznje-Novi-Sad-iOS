@@ -60,6 +60,16 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.refreshUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if DateManager.instance.getDayOfWeek() == "N" {
+            self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: false)
+        } else if DateManager.instance.getDayOfWeek() == "S" {
+            self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 3, y: 0), animated: false)
+        } else {
+            self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.mainViewModel.resetLastCount()
     }

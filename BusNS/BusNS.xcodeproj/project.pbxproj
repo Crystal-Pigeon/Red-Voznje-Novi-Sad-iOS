@@ -53,6 +53,7 @@
 		AD81A2A8237455040097812D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD81A2A7237455040097812D /* Colors.swift */; };
 		AD9BD4F82388892300B1294B /* BusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BD4F72388892300B1294B /* BusManager.swift */; };
 		AD9BD4FA23889EB600B1294B /* ASNavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */; };
+		ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
 		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
@@ -124,6 +125,7 @@
 		AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
 		AD9BD4F72388892300B1294B /* BusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusManager.swift; sourceTree = "<group>"; };
 		AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASNavigationController+Extension.swift"; sourceTree = "<group>"; };
+		ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLoaderViewController.swift; sourceTree = "<group>"; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
 		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 		AD81A2BB237461AE0097812D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */,
 				A532826E23798BCD009D240B /* AddLinesViewController.swift */,
 				A55C3D88237AB3470098FA13 /* MainViewController.swift */,
 			);
@@ -529,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */,
+				ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */,
 				AD056225237A155000010D78 /* ServiceError.swift in Sources */,
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,

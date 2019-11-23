@@ -8,6 +8,8 @@
 
 import AsyncDisplayKit
 
+fileprivate var activityLoader = ActivityLoaderViewController()
+
 extension ASViewController {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -23,30 +25,12 @@ extension ASViewController {
     }
     
     @objc func showActivityIndicator() {
-        for view in self.view.subviews {
-            if view.tag == 47 { return }
-        }
-        let darkView = UIView(frame: self.view.bounds)
-        darkView.tag = 47
-        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-                
-        let imageLayer = CAShapeLayer()
-        imageLayer.backgroundColor = UIColor.clear.cgColor
-        imageLayer.bounds = CGRect(x: UIScreen.main.bounds.midX - 42, y: UIScreen.main.bounds.midY - 40, width: 84, height: 80)
-        imageLayer.position = CGPoint(x: UIScreen.main.bounds.midX ,y: UIScreen.main.bounds.midY)
-        imageLayer.contents = UIImage(named: "logo-white")?.cgImage
-        imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
-        
-        self.view.addSubview(darkView)
-        darkView.layer.addSublayer(imageLayer)
+        if activityLoader.isOnScreen { return }
+        activityLoader.modalPresentationStyle = .overFullScreen
+        self.present(activityLoader, animated: false, completion: nil)
     }
     
     @objc func removeActivityIndicator() {
-        for view in self.view.subviews {
-            if view.tag == 47 {
-                view.removeFromSuperview()
-                return
-            }
-        }
+        activityLoader.stop()
     }
 }

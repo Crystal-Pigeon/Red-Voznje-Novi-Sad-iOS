@@ -10,6 +10,7 @@ import Foundation
 
 protocol  MainObserver {
     func refreshUI()
+    func refreshCell(busID: String)
     func showError(message: String)
 }
 
@@ -87,6 +88,7 @@ class MainViewModel {
             if let lines = lines {
                 self.urbanLines = lines
                 StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
+                BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteUrban = self.urbanLines.filter { self.favorites.contains($0.id)}
                 favouriteUrban.forEach { line in
@@ -111,6 +113,7 @@ class MainViewModel {
             if let lines = lines {
                 self.suburbanLines = lines
                 StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
+                BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteSuburban = self.suburbanLines.filter { self.favorites.contains($0.id)}
                 favouriteSuburban.forEach { line in
@@ -134,10 +137,11 @@ class MainViewModel {
                 return
             }
             if let buses = buses {
+                BusManager.numberOfFetchedBuses += 1
                 let sk = StorageKeys.bus + "\(id)"
                 StorageManager.store(buses, to: .caches, as: sk)
                 if isFavourite {
-                    delegate.refreshUI()
+                    delegate.refreshCell(busID: id)
                 }
             }
         }
@@ -152,10 +156,11 @@ class MainViewModel {
                 return
             }
             if let buses = buses {
+                BusManager.numberOfFetchedBuses += 1
                 let sk = StorageKeys.bus + "\(id)"
                 StorageManager.store(buses, to: .caches, as: sk)
                 if isFavourite {
-                    delegate.refreshUI()
+                    delegate.refreshCell(busID: id)
                 }
             }
         }

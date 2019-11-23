@@ -23,12 +23,15 @@ extension ASViewController {
     }
     
     @objc func showActivityIndicator() {
+        for view in self.view.subviews {
+            if view.tag == 47 { return }
+        }
         let darkView = UIView(frame: self.view.bounds)
         darkView.tag = 47
-        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0)
         let indicator = UIActivityIndicatorView(style: .whiteLarge)
         indicator.frame = CGRect(x: self.view.bounds.midX - 30, y: self.view.bounds.midY - 30, width: 60, height: 60)
-        indicator.color = Colors.white
+        indicator.color = Colors.blue
         self.view.addSubview(darkView)
         darkView.addSubview(indicator)
         indicator.startAnimating()

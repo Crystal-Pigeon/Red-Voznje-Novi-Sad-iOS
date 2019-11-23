@@ -10,8 +10,27 @@ import Foundation
 
 class BusManager {
     
-    public static var favorites = [String]()
     private static let path = StorageKeys.favorites
+    public static var favorites = [String]()
+    public static var linesViewModel: AddLinesViewModel?
+    public static var numberOfFetchedLines = 0 {
+        didSet {
+            if numberOfFetchedLines == 0 { return }
+            guard let viewModel = self.linesViewModel else { return }
+            viewModel.refreshLines()
+        }
+    }
+    public static var numberOfFetchedBuses = 0 {
+        didSet {
+            if numberOfFetchedLines == numberOfFetchedBuses {
+                guard let viewModel = self.linesViewModel else { return }
+                viewModel.fetchedAll()
+            }
+        }
+    }
+    public static var didFetchAll: Bool {
+        return numberOfFetchedLines == numberOfFetchedBuses
+    }
     
     public static func storeFavorites() {
         StorageManager.store(self.favorites, to: .caches, as: path)

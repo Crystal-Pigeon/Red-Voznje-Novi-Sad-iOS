@@ -11,6 +11,7 @@ import Foundation
 protocol AddLinesObserver {
     func refreshUI()
     func showLoader()
+    func fetchedAll()
 }
 
 class AddLinesViewModel {
@@ -26,7 +27,9 @@ class AddLinesViewModel {
         }
     }
     
-    init() {}
+    init() {
+        BusManager.linesViewModel = self
+    }
     
     public func addToFavourites(id: String){
         if favorites.contains(id) {
@@ -41,12 +44,24 @@ class AddLinesViewModel {
     
     public func getLines() {
         guard let delegate = self.observer else { return }
-        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches){
+        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) {
+            if !BusManager.didFetchAll { delegate.showLoader() }
             self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
             self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             delegate.refreshUI()
         } else {
             delegate.showLoader()
         }
+    }
+    
+    public func fetchedAll() {
+        guard let delegate = self.observer else { return }
+        delegate.fetchedAll()
+    }
+    
+    public func refreshLines() {
+        self.getLines()
+        guard let delegate = self.observer else { return }
+        delegate.refreshUI()
     }
 }

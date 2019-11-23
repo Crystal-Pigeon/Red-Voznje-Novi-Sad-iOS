@@ -56,10 +56,11 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
 extension AddLinesViewController {
     private func layout() {
         let buttonStack = self.initLinesTypeButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.urbanBusesTableNode = self.initTableNode(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.suburbanBusesTableNode = self.initTableNode(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         self.containerNode.layoutSpecBlock = { node, constrainedSize in
+            self.urbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.suburbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            
             let stack = ASStackLayoutSpec.vertical()
             stack.children = [buttonStack, self.scrollNode]
             return stack
@@ -175,7 +176,11 @@ extension AddLinesViewController: AddLinesObserver {
         self.suburbanBusesTableNode.reloadData()
     }
     func showLoader() {
-        print("LOADER")
+        self.showActivityIndicator()
+    }
+    func fetchedAll() {
+        self.removeActivityIndicator()
+        self.refreshUI()
     }
 }
 

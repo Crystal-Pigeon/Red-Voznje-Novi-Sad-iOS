@@ -19,6 +19,7 @@
 		A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532826E23798BCD009D240B /* AddLinesViewController.swift */; };
 		A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53282702379B751009D240B /* ASDisplayNode+Extension.swift */; };
 		A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C3D88237AB3470098FA13 /* MainViewController.swift */; };
+		A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B7C2023896C410052CCD0 /* AnimationManager.swift */; };
 		AD05621C2379D8C100010D78 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621B2379D8C100010D78 /* Line.swift */; };
 		AD05621E2379DB1600010D78 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621D2379DB1600010D78 /* LineTests.swift */; };
 		AD056221237A11F300010D78 /* LineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD056220237A11F300010D78 /* LineService.swift */; };
@@ -84,6 +85,7 @@
 		A532826E23798BCD009D240B /* AddLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewController.swift; sourceTree = "<group>"; };
 		A53282702379B751009D240B /* ASDisplayNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASDisplayNode+Extension.swift"; sourceTree = "<group>"; };
 		A55C3D88237AB3470098FA13 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A57B7C2023896C410052CCD0 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		AD05621B2379D8C100010D78 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		AD05621D2379DB1600010D78 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
 		AD056220237A11F300010D78 /* LineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineService.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				AD81A29C2374503C0097812D /* NetworkManager.swift */,
 				A52361B1237C3458006857CA /* DateManager.swift */,
 				AD9BD4F72388892300B1294B /* BusManager.swift */,
+				A57B7C2023896C410052CCD0 /* AnimationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */,
 				AD056225237A155000010D78 /* ServiceError.swift in Sources */,
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,

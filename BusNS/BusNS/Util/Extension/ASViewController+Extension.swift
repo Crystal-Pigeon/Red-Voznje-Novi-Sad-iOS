@@ -28,13 +28,17 @@ extension ASViewController {
         }
         let darkView = UIView(frame: self.view.bounds)
         darkView.tag = 47
-        darkView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        let indicator = UIActivityIndicatorView(style: .whiteLarge)
-        indicator.frame = CGRect(x: self.view.bounds.midX - 30, y: self.view.bounds.midY - 30, width: 60, height: 60)
-        indicator.color = Colors.blue
+        darkView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+                
+        let imageLayer = CAShapeLayer()
+        imageLayer.backgroundColor = UIColor.clear.cgColor
+        imageLayer.bounds = CGRect(x: UIScreen.main.bounds.midX - 42, y: UIScreen.main.bounds.midY - 40, width: 84, height: 80)
+        imageLayer.position = CGPoint(x: UIScreen.main.bounds.midX ,y: UIScreen.main.bounds.midY)
+        imageLayer.contents = UIImage(named: "logo-white")?.cgImage
+        imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
+        
         self.view.addSubview(darkView)
-        darkView.addSubview(indicator)
-        indicator.startAnimating()
+        darkView.layer.addSublayer(imageLayer)
     }
     
     @objc func removeActivityIndicator() {

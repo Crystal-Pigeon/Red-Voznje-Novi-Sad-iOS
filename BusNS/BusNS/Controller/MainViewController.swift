@@ -47,6 +47,9 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.scrollNode.view.isPagingEnabled = true
         self.scrollNode.view.showsHorizontalScrollIndicator = false
         self.scrollNode.view.delegate = self
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 0.4
+        self.view.addGestureRecognizer(longPress)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +83,43 @@ class MainViewController: ASViewController<ASDisplayNode> {
     @objc private func addButtonTapped(sender: ASButtonNode) {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(AddLinesViewController(), animated: true)
+    }
+    
+    @objc private func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == .began {
+            let touchPointWD = sender.location(in: workDayBusesCollectionNode.view)
+            let touchPointSat = sender.location(in: saturdayBusesCollectionNode.view)
+            let touchPointSun = sender.location(in: sundayBusesCollectionNode.view)
+            var currentIndexPath: IndexPath?
+            if let indexPathWD = workDayBusesCollectionNode.view.indexPathForItem(at: touchPointWD) {
+                currentIndexPath = indexPathWD
+            } else if let indexPathSat = saturdayBusesCollectionNode.view.indexPathForItem(at: touchPointSat) {
+                currentIndexPath = indexPathSat
+            } else if let indexPathSun = sundayBusesCollectionNode.view.indexPathForItem(at: touchPointSun) {
+                currentIndexPath = indexPathSun
+            }
+            
+            guard let indexPath = currentIndexPath else { return }
+            let busID = self.mainViewModel.favorites[indexPath.row]
+            let busName = self.mainViewModel.getBusNameBy(id: busID)
+            
+            let actionSheet = UIAlertController(title: busName, message: "Are you sure you want remove the line?".localized(), preferredStyle: .actionSheet)
+            let actionDelete = UIAlertAction(title: "Remove".localized(), style: .destructive) { (action) in
+                self.mainViewModel.favorites.remove(at: indexPath.row)
+                self.workDayBusesCollectionNode.deleteItems(at: [indexPath])
+                self.saturdayBusesCollectionNode.deleteItems(at: [indexPath])
+                self.sundayBusesCollectionNode.deleteItems(at: [indexPath])
+                StorageManager.store(self.mainViewModel.favorites, to: .caches, as: StorageKeys.favorites)
+                if self.mainViewModel.favorites.isEmpty {
+                    self.containerNode.setNeedsLayout()
+                }
+                actionSheet.dismiss(animated: true, completion: nil)
+            }
+            let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
+            actionSheet.addAction(actionDelete)
+            actionSheet.addAction(actionCancel)
+            present(actionSheet, animated: true, completion: nil)
+        }
     }
 }
 

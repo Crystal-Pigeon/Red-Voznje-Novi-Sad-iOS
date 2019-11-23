@@ -21,7 +21,12 @@ class MainViewModel {
     public private(set) var urbanLines = [Line]()
     public private(set) var suburbanLines = [Line]()
     public var favorites: [String] {
-        return BusManager.favorites
+        get {
+            return BusManager.favorites
+        }
+        set {
+            BusManager.favorites = newValue
+        }
     }
     public let tagsDict = [0:"R", 1: "S", 2: "N"]
     private var lastCount = BusManager.favorites.count
@@ -34,6 +39,11 @@ class MainViewModel {
     
     public func shouldSetNeedsLayout() -> Bool {
         return (lastCount == 0 && favorites.count != 0) || (lastCount != 0 && favorites.count == 0)
+    }
+    
+    public func getBusNameBy(id: String) -> String {
+        guard let bus = BusManager.getBusBy(id: id)?.first else { return "" }
+        return bus.number + " " + bus.name
     }
     
     public func getData() {

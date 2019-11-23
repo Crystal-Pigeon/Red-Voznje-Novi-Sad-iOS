@@ -18,3 +18,6 @@
 "Sunday" = "Nedelja";
 "Click the \"+\" button to add buses" = "Pritisnite \"+\" kako biste dodali autobuse";
 "There is no schedule" = "Nema rasporeda";
+"Are you sure you want remove the line?" = "Da li ste sigurni da želite da uklonite liniju?";
+"Remove" = "Ukloni";
+"Cancel" = "Odustani";

@@ -41,4 +41,9 @@ class BusManager {
             self.favorites = StorageManager.retrieve(path, from: .caches, as: [String].self)
         }
     }
+    
+    public static func getBusBy(id: String) -> [Bus]? {
+        if !StorageManager.fileExists(StorageKeys.bus + id, in: .caches) { return nil }
+        return StorageManager.retrieve(StorageKeys.bus + id, from: .caches, as: [Bus].self)
+    }
 }

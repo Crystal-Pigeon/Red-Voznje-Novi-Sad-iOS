@@ -40,9 +40,22 @@ struct Bus: Codable {
         var threeHours = [String]()
         let hour = Int(DateManager.instance.getHour()) ?? 0
         for oneHour in allHours {
-            let hourInt = Int(oneHour.split(separator: ":")[0])
-            if hourInt == hour  || hourInt == hour - 1 || hourInt == hour + 1 {
-                threeHours.append(oneHour)
+            guard let hourInt = Int(oneHour.split(separator: ":")[0]) else { break }
+            if (hourInt == hour - 1 || hourInt >= hour) {
+                if threeHours.count < 3 {
+                    threeHours.append(oneHour)
+                    continue
+                }
+                break
+            }
+        }
+        if threeHours.count < 3 {
+            for oneHour in allHours {
+                if threeHours.count < 3 {
+                    threeHours.append(oneHour)
+                    continue
+                }
+                break
             }
         }
         return threeHours

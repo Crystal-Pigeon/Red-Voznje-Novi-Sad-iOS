@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-white" translatesAutoresizingMaskIntoConstraints="NO" id="zt8-Sk-qgs">
-                                <rect key="frame" x="103.5" y="351" width="207" height="194.5"/>
+                                <rect key="frame" x="155.5" y="399.5" width="103.5" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zt8-Sk-qgs" secondAttribute="height" multiplier="149:140" id="pJu-Nn-axi"/>
                                 </constraints>
@@ -25,7 +25,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0039215686274509803" green="0.41568627450980389" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zt8-Sk-qgs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="BHT-8f-AR0"/>
+                            <constraint firstItem="zt8-Sk-qgs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.25" id="BHT-8f-AR0"/>
                             <constraint firstItem="zt8-Sk-qgs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="OMR-PT-57F"/>
                             <constraint firstItem="zt8-Sk-qgs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="zJq-AK-gfl"/>
                         </constraints>

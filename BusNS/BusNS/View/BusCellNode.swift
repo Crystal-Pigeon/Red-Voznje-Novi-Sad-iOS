@@ -128,17 +128,14 @@ final class BusCellNode: ASCellNode {
         var textNodes = [ASTextNode]()
         for hour in text {
             let textNode = ASTextNode()
+            let mut = NSMutableAttributedString()
             if DateManager.instance.getHour() == hour.split(separator: ":")[0] {
-                let mut = NSMutableAttributedString()
                 mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_currentHourColor), font: Fonts.muliSemiBold12, alignment: .left))
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12, alignment: .left))
-                textNode.attributedText = mut
             } else {
-                let mut = NSMutableAttributedString()
                 mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliSemiBold12, alignment: .left))
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color:Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12, alignment: .left))
-                textNode.attributedText = mut
             }
+            mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12, alignment: .left))
+            textNode.attributedText = mut
             textNodes.append(textNode)
         }
         scheduleStack.children = textNodes
@@ -151,7 +148,7 @@ final class BusCellNode: ASCellNode {
     private func createCommentsStack() -> ASLayoutSpec {
         let commentsStack = ASStackLayoutSpec.vertical()
         let comment = ASTextNode()
-        comment.attributedText = self.attributed(text: bus.extras, color: Theme.current.color(.busCell_extrasColor), font: Fonts.muliRegular10, alignment: .left)
+        comment.attributedText = self.attributed(text: bus.formatedExtras(), color: Theme.current.color(.busCell_extrasColor), font: Fonts.muliRegular10, alignment: .left)
         comment.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(self.separatorFullWidth), ASDimensionAuto)
         commentsStack.child = comment
         return commentsStack

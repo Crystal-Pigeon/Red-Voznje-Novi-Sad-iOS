@@ -92,6 +92,28 @@ struct Bus: Codable {
         guard let schedule = self.schedule else { return []}
         return getScheduleByHour(schedule: schedule)
     }
+    
+    public func formatedExtras() -> String {
+        var returnValue = ""
+        let array = self.extras.split(separator: ",")
+        for element in array {
+            if !element.contains("-") {
+                let extra = element.split(separator: "=")
+                var extraString = ""
+                for var word in extra {
+                    if word.first == " " { word.removeFirst() }
+                    if extra.last == word {
+                        extraString += "\(word) "
+                    } else {
+                        extraString += "\(word) = "
+                    }
+                }
+                returnValue += "\(extraString)\n"
+            }
+        }
+        if returnValue.last == "\n" { returnValue.removeLast() }
+        return returnValue
+    }
 }
 
 extension Bus: Equatable {

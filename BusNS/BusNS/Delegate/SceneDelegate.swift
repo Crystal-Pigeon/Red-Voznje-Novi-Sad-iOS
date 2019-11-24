@@ -31,6 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setupNavigationAppearance() {
+        let barButtonItemAppearance = UIBarButtonItem.appearance()
+        barButtonItemAppearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = Theme.current.color(.navigationTintColor)
         navigationBarAppearace.barTintColor = Theme.current.color(.navigationBackgroundColor)

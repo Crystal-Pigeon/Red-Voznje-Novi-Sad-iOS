@@ -22,5 +22,7 @@ struct Colors {
     public static let heavyDark = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 1)
     public static let mediumDark = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
     public static let lightDark = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1)
-    public static var transparentWhiteDarker = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.75)
+    public static let transparentWhiteDarker = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.75)
+    public static let transparentWhiteLighter = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.25)
+    public static let clear = UIColor.clear
 }

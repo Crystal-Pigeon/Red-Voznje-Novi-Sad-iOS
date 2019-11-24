@@ -95,6 +95,9 @@ extension AddLinesViewController {
         tableNode.backgroundColor = Theme.current.color(.addLinesTable)
         tableNode.delegate = self
         tableNode.dataSource = self
+        if Theme.current.mode == .dark {
+            tableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
+        }
         return tableNode
     }
     

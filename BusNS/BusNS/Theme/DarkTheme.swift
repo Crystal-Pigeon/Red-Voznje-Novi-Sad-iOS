@@ -25,7 +25,7 @@ public class DarkTheme: Theme {
         .themeColor: Colors.heavyDark,
         .backgroundColor: Colors.mediumDark,
         .splashBackgroundColor: Colors.blue,
-        .shadowColor: Colors.transparentDarkBlue,
+        .shadowColor: Colors.clear,
         .titleColor: Colors.white,
         .busCell_currentHourColor: Colors.orange,
         .busCell_lineTextColor: Colors.transparentWhiteDarker,
@@ -41,6 +41,7 @@ public class DarkTheme: Theme {
         .busCell_backgroundColor: Colors.lightDark,
         .busCell_extrasColor: Colors.transparentWhiteDarker,
         .addLinesTable: Colors.mediumDark,
-        .mainScreenTextColor: Colors.transparentWhiteDarker
+        .mainScreenTextColor: Colors.transparentWhiteDarker,
+        .tableSeparatorColor: Colors.transparentWhiteLighter
     ]
 }

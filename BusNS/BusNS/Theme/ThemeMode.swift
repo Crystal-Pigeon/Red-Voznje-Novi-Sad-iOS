@@ -23,7 +23,7 @@ public enum ThemeMode: Int {
 
 public enum ColorIdentifier: Int {
     case defaultColor
-    case themeColor, splashBackgroundColor, backgroundColor, shadowColor, titleColor, navigationBackgroundColor, navigationTintColor
+    case themeColor, splashBackgroundColor, backgroundColor, shadowColor, titleColor, navigationBackgroundColor, navigationTintColor, mainScreenTextColor
     case dayIndicatorColor, dayTextColor
     case addButtonBackgroundColor, addButtonTextColor
     case busCell_backgroundColor, busCell_currentHourColor, busCell_extrasColor, busCell_scheduleTextColor, busCell_numberBackgroundColor, busCell_numberTextColor, busCell_lineTextColor, busCell_separatorColor

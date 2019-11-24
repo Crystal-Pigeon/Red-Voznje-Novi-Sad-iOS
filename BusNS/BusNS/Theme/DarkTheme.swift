@@ -21,5 +21,26 @@ public class DarkTheme: Theme {
         return super.color(id)
     }
     
-    private lazy var colorRepository: [ColorIdentifier : UIColor] = [:]
+    private lazy var colorRepository: [ColorIdentifier : UIColor] = [
+        .themeColor: Colors.heavyDark,
+        .backgroundColor: Colors.mediumDark,
+        .splashBackgroundColor: Colors.blue,
+        .shadowColor: Colors.transparentDarkBlue,
+        .titleColor: Colors.white,
+        .busCell_currentHourColor: Colors.orange,
+        .busCell_lineTextColor: Colors.transparentWhiteDarker,
+        .dayIndicatorColor: Colors.transparentWhiteDarker,
+        .dayTextColor: Colors.transparentWhiteDarker,
+        .busCell_scheduleTextColor: Colors.transparentWhiteDarker,
+        .busCell_numberBackgroundColor: Colors.blue,
+        .busCell_numberTextColor: Colors.white,
+        .addButtonBackgroundColor: Colors.blue,
+        .navigationBackgroundColor: Colors.heavyDark,
+        .navigationTintColor: Colors.white,
+        .busCell_separatorColor: Colors.transparentWhiteDarker,
+        .busCell_backgroundColor: Colors.lightDark,
+        .busCell_extrasColor: Colors.transparentWhiteDarker,
+        .addLinesTable: Colors.mediumDark,
+        .mainScreenTextColor: Colors.transparentWhiteDarker
+    ]
 }

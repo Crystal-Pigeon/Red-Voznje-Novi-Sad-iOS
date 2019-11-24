@@ -40,6 +40,7 @@ public class LightTheme: Theme {
         .busCell_separatorColor: Colors.transparentDarkBlueLighter,
         .busCell_backgroundColor: Colors.white,
         .busCell_extrasColor: Colors.transparentDarkBlue,
-        .addLinesTable: Colors.white
+        .addLinesTable: Colors.white,
+        .mainScreenTextColor: Colors.transparentDarkBlue
     ]
 }

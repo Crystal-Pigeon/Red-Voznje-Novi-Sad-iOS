@@ -190,12 +190,17 @@ extension MainViewController {
         
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
         
-        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.shadowColor), font: Fonts.muliRegular17)
+        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: Fonts.muliRegular17)
         self.messageLabelNode.truncationMode = .byWordWrapping
         self.messageLabelNode.maximumNumberOfLines = 2
         self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.7), ASDimensionAuto)
         
-        self.logoImageNode.image = UIImage(named: "logo")
+        if Theme.current.mode == .dark {
+            self.logoImageNode.image = UIImage(named: "logo-white")
+            self.logoImageNode.alpha = 0.75
+        } else {
+            self.logoImageNode.image = UIImage(named: "logo")
+        }
         self.logoImageNode.contentMode = .scaleAspectFit
         self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.5), ASDimensionAuto)
         
@@ -249,7 +254,12 @@ extension MainViewController {
         button.layer.shadowOpacity = 1
         button.layer.masksToBounds = false
         button.backgroundColor = Theme.current.color(.addButtonBackgroundColor)
-        button.setImage(UIImage(named: "plus"), for: .normal)
+        if Theme.current.mode == .dark {
+            button.setImage(UIImage(named: "plus-white"), for: .normal)
+            button.alpha = 0.75
+        } else {
+            button.setImage(UIImage(named: "plus"), for: .normal)
+        }
         button.contentHorizontalAlignment = .middle
         button.contentVerticalAlignment = .center
         

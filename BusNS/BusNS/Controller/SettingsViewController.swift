@@ -13,15 +13,27 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
     private let containerNode: ASDisplayNode
     
     private let languageTextNode = ASTextNode()
-    private let languageButton = ASButtonNode()
     private let themeTextNode = ASTextNode()
-    private let themeButton = ASButtonNode()
     private let supportTextNode = ASTextNode()
+    
+    private let currentThemeNode = ASTextNode()
+    private let currentLanguageTextNode = ASTextNode()
     private let supportImage = ASImageNode()
+    
     private let languageExplenation = ASTextNode()
     private let themeExplenation = ASTextNode()
     private let supportExplenation = ASTextNode()
+    
+    private let languageButton = ASButtonNode()
+    private let themeButton = ASButtonNode()
     private let supportButton = ASButtonNode()
+    
+    private let languages = ["English".localized(), "Serbian".localized()]
+    private let themes = ["Dark".localized(), "Light".localized()]
+    private var currentLanguage = "English".localized()
+    private var currentTheme = "Dark".localized()
+    private var isLanguagesSelected = true
+    private var isSelected = false
     
     init() {
         self.containerNode = ASDisplayNode()
@@ -31,7 +43,7 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
         self.title = "Settings".localized()
         appearance()
         layout()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(didClickDone), name: NSNotification.Name(rawValue: "didClickDone"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -44,15 +56,13 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
 extension SettingsViewController {
     
     private func layout() {
-        let languageBackgroundSpec = self.createMainHorizontalStack(textNode: self.languageTextNode, button: self.languageButton,explenationNode:  self.languageExplenation)
-        let themeBackgroundSpec = self.createMainHorizontalStack(textNode: self.themeTextNode, button: self.themeButton, explenationNode:  self.themeExplenation)
-        
-        let supportBackgroundSpec = self.createMainHorizontalStack(textNode: self.supportTextNode, button: self.supportImage, explenationNode: self.supportExplenation)
-        let overlaySpec = ASOverlayLayoutSpec(child: supportBackgroundSpec, overlay: self.supportButton)
+        let languageOverlay = createOverlaySpec(textNode: languageTextNode, rightDisplayNode: currentLanguageTextNode, explenationNode: languageExplenation, button: languageButton)
+        let themeOverlay = createOverlaySpec(textNode: themeTextNode, rightDisplayNode: currentThemeNode, explenationNode: themeExplenation, button: themeButton)
+        let supportOverlay = createOverlaySpec(textNode: supportTextNode, rightDisplayNode: supportImage, explenationNode: supportExplenation, button: supportButton)
         
         containerNode.layoutSpecBlock = { node, constrainedSize in
             let mainStack = ASStackLayoutSpec.vertical()
-            mainStack.children = [languageBackgroundSpec, themeBackgroundSpec, overlaySpec]
+            mainStack.children = [languageOverlay, themeOverlay, supportOverlay]
             mainStack.spacing = 13
             
             return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0), child: mainStack)
@@ -61,21 +71,22 @@ extension SettingsViewController {
     
     private func appearance() {
         self.languageTextNode.attributedText = self.node.attributed(text: "Language".localized(), color: Theme.current.color(.settingsMainColor), font: Fonts.muliRegular15)
-        self.languageButton.setAttributedTitle(NSAttributedString(string: "English".localized(), attributes: [NSAttributedString.Key.font: Fonts.muliRegular15, NSAttributedString.Key.foregroundColor: Theme.current.color(.settingsExplenationColor)]), for: .normal)
-        
         self.themeTextNode.attributedText = self.node.attributed(text: "Theme".localized(), color: Theme.current.color(.settingsMainColor), font: Fonts.muliRegular15)
-        self.themeButton.setAttributedTitle(NSAttributedString(string: "Dark Theme".localized(), attributes: [NSAttributedString.Key.font: Fonts.muliRegular15, NSAttributedString.Key.foregroundColor: Theme.current.color(.settingsExplenationColor)]), for: .normal)
-        
         self.supportTextNode.attributedText = self.node.attributed(text: "Support".localized(), color: Theme.current.color(.settingsMainColor), font: Fonts.muliRegular15)
-        self.supportImage.style.preferredSize = CGSize(width: 8, height: 14)
-        self.supportImage.image = UIImage(named: "right_arrow_light")
-        self.supportImage.contentMode = .scaleAspectFit
-        self.supportButton.addTarget(self, action: #selector(openSupportPage), forControlEvents: .touchUpInside)
-        
+        self.currentLanguageTextNode.attributedText = self.node.attributed(text: "English".localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+        self.currentThemeNode.attributedText = self.node.attributed(text: "Dark".localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
         self.languageExplenation.attributedText = self.node.attributed(text: "Change the language in the application".localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular10, alignment: .left)
         self.themeExplenation.attributedText = self.node.attributed(text: "Change the theme in the application".localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular10, alignment: .left)
         self.supportExplenation.attributedText = self.node.attributed(text: "Open the support window".localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular10, alignment: .left)
         
+        self.languageButton.addTarget(self, action: #selector(openLanguagePicker), forControlEvents: .touchUpInside)
+        self.themeButton.addTarget(self, action: #selector(openThemePicker), forControlEvents: .touchUpInside)
+        self.supportButton.addTarget(self, action: #selector(openSupportPage), forControlEvents: .touchUpInside)
+        
+        
+        self.supportImage.style.preferredSize = CGSize(width: 8, height: 14)
+        self.supportImage.image = UIImage(named: "right_arrow_light")
+        self.supportImage.contentMode = .scaleAspectFit
         
     }
     
@@ -83,10 +94,37 @@ extension SettingsViewController {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(SupportViewController(), animated: true)
     }
+    @objc private func openLanguagePicker() {
+        self.isLanguagesSelected = true
+        self.isSelected = false
+        self.showPicker(with: "Choose language".localized(), delegate: self, dataSource: self)
+    }
+    @objc private func openThemePicker() {
+        self.isLanguagesSelected = false
+        self.isSelected = false
+        self.showPicker(with: "Choose theme".localized(), delegate: self, dataSource: self)
+    }
+    @objc private func didClickDone() {
+        if isLanguagesSelected {
+            if isSelected {
+                self.currentLanguageTextNode.attributedText = self.node.attributed(text: currentLanguage, color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+            }
+            else {
+                self.currentLanguageTextNode.attributedText = self.node.attributed(text: languages[0], color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+            }
+        } else {
+            if isSelected{
+                self.currentThemeNode.attributedText = self.node.attributed(text: currentTheme, color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+            } else {
+                self.currentThemeNode.attributedText = self.node.attributed(text: themes[0], color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+            }
+        }
+    }
     
-    private func createMainHorizontalStack(textNode: ASTextNode, button: ASDisplayNode, explenationNode: ASTextNode) -> ASStackLayoutSpec {
+    
+    private func createOverlaySpec(textNode: ASTextNode, rightDisplayNode: ASDisplayNode, explenationNode: ASTextNode, button: ASButtonNode) -> ASOverlayLayoutSpec {
         let stack = ASStackLayoutSpec.horizontal()
-        stack.children = [textNode, button]
+        stack.children = [textNode, rightDisplayNode]
         stack.justifyContent = .spaceBetween
         stack.alignItems = .center
         let insets = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 8, left: 15, bottom: 9, right: 15), child: stack)
@@ -99,8 +137,36 @@ extension SettingsViewController {
         let explenationInsets = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0), child: explenationNode)
         verticalStack.children = [horizontalStack, explenationInsets]
         verticalStack.spacing = 5
-        return verticalStack
+        return ASOverlayLayoutSpec(child: verticalStack, overlay: button)
     }
     
 }
+
+extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if isLanguagesSelected {
+            return languages[row]
+        } else {
+            return themes[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.isSelected = true
+        if isLanguagesSelected {
+            currentLanguage = languages[row]
+        } else {
+            currentTheme = themes[row]
+        }
+    }
+}
+
 

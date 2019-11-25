@@ -39,8 +39,12 @@
 "Settings" = "Settings";
 "English" = "English";
 "Dark Theme" = "Dark Theme";
+"Dark" = "Dark";
+"Light" = "Light";
 "Change the language in the application" = "Change the language in the application";
 "Change the theme in the application" = "Change the theme in the application";
 "Open the support window" = "Open the support window";
-
-
+"Serbian" = "Serbian";
+"Light Theme" = "Light Theme";
+"Choose language" = "Choose language";
+"Choose theme" = "Choose theme";

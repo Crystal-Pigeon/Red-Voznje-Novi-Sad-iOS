@@ -22,10 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
+        
         let navigationController = ASNavigationController(rootViewController: MainViewController())
         navigationController.navigationBar.isTranslucent = false
         window.rootViewController = navigationController
         self.setupNavigationAppearance()
+//        window.rootViewController = SettingsViewController()
         
         self.window = window
     }

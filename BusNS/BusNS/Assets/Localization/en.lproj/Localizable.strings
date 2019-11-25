@@ -36,4 +36,11 @@
 "Turning this option on and off allows you to choose whether the application will be displayed with a dark or light theme." = "Turning this option on and off allows you to choose whether the application will be displayed with a dark or light theme.";
 "Application update" = "Application update";
 "The app is updated every time the driving season changes." = "The app is updated every time the driving season changes.";
+"Settings" = "Settings";
+"English" = "English";
+"Dark Theme" = "Dark Theme";
+"Change the language in the application" = "Change the language in the application";
+"Change the theme in the application" = "Change the theme in the application";
+"Open the support window" = "Open the support window";
+
 

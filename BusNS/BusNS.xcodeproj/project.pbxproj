@@ -62,6 +62,7 @@
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
 		DF520E74237C134C004DAE75 /* BusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E73237C134C004DAE75 /* BusTests.swift */; };
 		DF520E7C237C2273004DAE75 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E7B237C2273004DAE75 /* Bus.swift */; };
+		DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
 		DF520E73237C134C004DAE75 /* BusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTests.swift; sourceTree = "<group>"; };
 		DF520E7B237C2273004DAE75 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
+		DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +391,7 @@
 				A532826E23798BCD009D240B /* AddLinesViewController.swift */,
 				A55C3D88237AB3470098FA13 /* MainViewController.swift */,
 				A5E75E90238BE5270080F920 /* SupportViewController.swift */,
+				DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */,
 				DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */,
 				DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */,
+				DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
 				A52361B2237C3458006857CA /* DateManager.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,

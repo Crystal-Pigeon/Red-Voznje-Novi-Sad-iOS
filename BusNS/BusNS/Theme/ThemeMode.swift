@@ -29,4 +29,5 @@ public enum ColorIdentifier: Int {
     case busCell_backgroundColor, busCell_currentHourColor, busCell_extrasColor, busCell_scheduleTextColor, busCell_numberBackgroundColor, busCell_numberTextColor, busCell_lineTextColor, busCell_separatorColor
     case addLinesTable, tableSeparatorColor
     case supportBackgroundColor, supportTitleColor, supportTextColor, supportContactMailColor, supportCopyrightsColor
+    case settingsBackgroundColor, settingsMainColor, settingsExplenationColor, settingsLineColor
 }

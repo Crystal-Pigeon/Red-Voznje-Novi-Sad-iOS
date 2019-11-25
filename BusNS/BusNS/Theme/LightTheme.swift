@@ -46,6 +46,10 @@ public class LightTheme: Theme {
         .supportTitleColor: Colors.darkBlue,
         .supportTextColor: Colors.darkBlue,
         .supportContactMailColor: Colors.blue,
-        .supportCopyrightsColor: Colors.transparentDarkBlue
+        .supportCopyrightsColor: Colors.transparentDarkBlue,
+        .settingsBackgroundColor: Colors.lightGrey,
+        .settingsMainColor: Colors.darkBlue,
+        .settingsExplenationColor: Colors.transparentDarkBlue,
+        .settingsLineColor: Colors.transparentDarkBlueLighter
     ]
 }

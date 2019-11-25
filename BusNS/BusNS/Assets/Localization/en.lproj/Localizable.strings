@@ -21,3 +21,19 @@
 "Are you sure you want remove the line?" = "Are you sure you want remove the line?";
 "Remove" = "Remove";
 "Cancel" = "Cancel";
+"Support" = "Support";
+"Help" = "Help";
+"Contact" = "Contact";
+"Home screen" = "Home screen";
+"When you open the app for the first time you will be presented with the home screen that doesn’t have any lines. If you want to add new lines to the home screen you need to click on the + button that will lead you to the add lines screen. In case you’ve opened the app before, the lines you’ve chosen the previous time you used it will be presented on the home screen for the current day of the week. The ability to change the schedule depending on the day of the week can be done by clicking on the desired day or by scrolling left-right. For every line displayed on the home screen it is shown the schedule for the previous, current and next hour, and in the absence of any of the three, the next three hours are added. By clicking on a collected card, it expands and shows the schedule for the whole day, while clicking again the card is collected to the nearest 3 hours. If. you desire to remove on of the lines, you can do so by long pressing the schedule to activate an option that offers you to delete the line from the home screen." = "When you open the app for the first time you will be presented with the home screen that doesn’t have any lines. If you want to add new lines to the home screen you need to click on the + button that will lead you to the add lines screen. In case you’ve opened the app before, the lines you’ve chosen the previous time you used it will be presented on the home screen for the current day of the week. The ability to change the schedule depending on the day of the week can be done by clicking on the desired day or by scrolling left-right. For every line displayed on the home screen it is shown the schedule for the previous, current and next hour, and in the absence of any of the three, the next three hours are added. By clicking on a collected card, it expands and shows the schedule for the whole day, while clicking again the card is collected to the nearest 3 hours. If. you desire to remove on of the lines, you can do so by long pressing the schedule to activate an option that offers you to delete the line from the home screen.";
+"Add lines screen" = "Add lines screen";
+"When you open the add lines screen you will be shown urban lines. Switching between urban and suburban lines can be done by clicking on the tabs or by scrolling left-right. By clicking on one of the lines, it is being selected and added to the main screen, while clicking on already selected line it is being unselected and removed from the home screen." = "When you open the add lines screen you will be shown urban lines. Switching between urban and suburban lines can be done by clicking on the tabs or by scrolling left-right. By clicking on one of the lines, it is being selected and added to the main screen, while clicking on already selected line it is being unselected and removed from the home screen.";
+"Settings screen" = "Settings screen";
+"On the settings screen you can change:" = "On the settings screen you can change:";
+"Language" = "Language";
+"Clicking on a language opens a dialog that allows you to select the language in which the content will be displayed." = "Clicking on a language opens a dialog that allows you to select the language in which the content will be displayed.";
+"Theme" = "Theme";
+"Turning this option on and off allows you to choose whether the application will be displayed with a dark or light theme." = "Turning this option on and off allows you to choose whether the application will be displayed with a dark or light theme.";
+"Application update" = "Application update";
+"The app is updated every time the driving season changes." = "The app is updated every time the driving season changes.";
+

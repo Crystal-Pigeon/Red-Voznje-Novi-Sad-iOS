@@ -22,4 +22,7 @@ struct Fonts {
     public static let muliSemiBold12 = UIFont(name: "Muli-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12)
     public static let muliSemiBold13 = UIFont(name: "Muli-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13)
     public static let muliSemiBold20 = UIFont(name: "Muli-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
+    
+    //MARK: Light
+    public static let muliLight15 = UIFont(name: "Muli-Light", size: 15) ?? UIFont.systemFont(ofSize: 15)
 }

@@ -41,6 +41,11 @@ public class LightTheme: Theme {
         .busCell_backgroundColor: Colors.white,
         .busCell_extrasColor: Colors.transparentDarkBlue,
         .addLinesTable: Colors.white,
-        .mainScreenTextColor: Colors.transparentDarkBlue
+        .mainScreenTextColor: Colors.transparentDarkBlue,
+        .supportBackgroundColor: Colors.lightGrey,
+        .supportTitleColor: Colors.darkBlue,
+        .supportTextColor: Colors.darkBlue,
+        .supportContactMailColor: Colors.blue,
+        .supportCopyrightsColor: Colors.transparentDarkBlue
     ]
 }

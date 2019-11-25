@@ -42,6 +42,11 @@ public class DarkTheme: Theme {
         .busCell_extrasColor: Colors.transparentWhiteDarker,
         .addLinesTable: Colors.mediumDark,
         .mainScreenTextColor: Colors.transparentWhiteDarker,
-        .tableSeparatorColor: Colors.transparentWhiteLighter
+        .tableSeparatorColor: Colors.transparentWhiteLighter,
+        .supportBackgroundColor: Colors.mediumDark,
+        .supportTitleColor: Colors.transparentWhiteDarker,
+        .supportTextColor: Colors.transparentWhiteDarker,
+        .supportContactMailColor: Colors.blue,
+        .supportCopyrightsColor: Colors.lightDark
     ]
 }

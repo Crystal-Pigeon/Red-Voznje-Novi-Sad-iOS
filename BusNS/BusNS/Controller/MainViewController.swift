@@ -51,6 +51,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         longPress.minimumPressDuration = 0.4
         self.view.addGestureRecognizer(longPress)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +99,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
     @objc private func settingsButtonTapped() {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(SettingsViewController(), animated: true)
+    }
+    
+    @objc private func rearrangeButtonTapped() {
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(RearrangeFavoritesViewController(), animated: true)
     }
     
     @objc private func handleLongPress(sender: UILongPressGestureRecognizer){

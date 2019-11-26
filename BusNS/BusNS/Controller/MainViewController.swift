@@ -139,6 +139,9 @@ class MainViewController: ASViewController<ASDisplayNode> {
             let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
             actionSheet.addAction(actionDelete)
             actionSheet.addAction(actionCancel)
+            if #available(iOS 13.0, *), Theme.current.mode == .dark {
+                actionSheet.view.overrideUserInterfaceStyle = .dark
+            }
             present(actionSheet, animated: true, completion: nil)
         }
     }

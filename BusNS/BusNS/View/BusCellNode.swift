@@ -44,7 +44,7 @@ final class BusCellNode: ASCellNode {
     //MARK: Layout
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let mainStack = ASStackLayoutSpec.vertical()
-        mainStack.children = [titleStack, directionsStack, createSchedulesStack(),createCommentsStack()]
+        mainStack.children = isOpened ? [titleStack, directionsStack, createSchedulesStack(),createCommentsStack()] : [titleStack, directionsStack, createSchedulesStack()]
         mainStack.spacing = 10
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), child: mainStack)
     }

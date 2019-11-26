@@ -96,6 +96,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(AddLinesViewController(), animated: true)
     }
+    
     @objc private func settingsButtonTapped() {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(SettingsViewController(), animated: true)
@@ -187,7 +188,7 @@ extension MainViewController {
     private func initCollectionNode(width: CGFloat, height: CGFloat) -> ASCollectionNode {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
+        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.03
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
         
         let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)

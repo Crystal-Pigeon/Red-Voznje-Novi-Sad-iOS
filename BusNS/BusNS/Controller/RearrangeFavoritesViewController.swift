@@ -39,7 +39,7 @@ extension RearrangeFavoritesViewController {
     private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
         let tableNode = ASTableNode()
         tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(width), height: ASDimensionMake(height - (height * 0.07 + 3)))
-        tableNode.backgroundColor = Theme.current.color(.addLinesTable)
+        tableNode.backgroundColor = Theme.current.color(.rearrangeFavoritesTable)
         tableNode.delegate = self
         tableNode.dataSource = self
         tableNode.view.isEditing = true
@@ -65,7 +65,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
         let cellNode = ASTextCellNode()
         cellNode.textAttributes = [
             NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.busCell_lineTextColor)
+            NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
         ]
         cellNode.selectionStyle = .none
         

@@ -41,6 +41,7 @@ public class LightTheme: Theme {
         .busCell_backgroundColor: Colors.white,
         .busCell_extrasColor: Colors.transparentDarkBlue,
         .addLinesTable: Colors.white,
+        .addLinesLineColor: Colors.darkBlue,
         .mainScreenTextColor: Colors.transparentDarkBlue,
         .supportBackgroundColor: Colors.lightGrey,
         .supportTitleColor: Colors.darkBlue,
@@ -50,6 +51,8 @@ public class LightTheme: Theme {
         .settingsBackgroundColor: Colors.lightGrey,
         .settingsMainColor: Colors.darkBlue,
         .settingsExplenationColor: Colors.transparentDarkBlue,
-        .settingsLineColor: Colors.transparentDarkBlueLighter
+        .settingsLineColor: Colors.transparentDarkBlueLighter,
+        .rearrangeFavoritesTable: Colors.white,
+        .rearrangeFavoritesLineColor: Colors.darkBlue
     ]
 }

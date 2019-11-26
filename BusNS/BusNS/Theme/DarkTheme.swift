@@ -41,12 +41,15 @@ public class DarkTheme: Theme {
         .busCell_backgroundColor: Colors.lightDark,
         .busCell_extrasColor: Colors.transparentWhiteDarker,
         .addLinesTable: Colors.mediumDark,
+        .addLinesLineColor: Colors.transparentWhiteDarker,
         .mainScreenTextColor: Colors.transparentWhiteDarker,
         .tableSeparatorColor: Colors.transparentWhiteLighter,
         .supportBackgroundColor: Colors.mediumDark,
         .supportTitleColor: Colors.transparentWhiteDarker,
         .supportTextColor: Colors.transparentWhiteDarker,
         .supportContactMailColor: Colors.blue,
-        .supportCopyrightsColor: Colors.lightDark
+        .supportCopyrightsColor: Colors.lightDark,
+        .rearrangeFavoritesTable: Colors.mediumDark,
+        .rearrangeFavoritesLineColor: Colors.transparentWhiteDarker
     ]
 }

@@ -56,15 +56,17 @@ extension SupportViewController {
         let homeScreenTitleStack = self.createHorizontalStack(number: "1.", title: "Home screen")
         let addLinesScreenTitleStack = self.createHorizontalStack(number: "2.", title: "Add lines screen")
         let settingsScreenTitleStack = self.createHorizontalStack(number: "3.", title: "Settings screen")
-        let updateAppTitleStack = self.createHorizontalStack(number: "4.", title: "Application update")
+        let rearrangeScreenTitleStack = self.createHorizontalStack(number: "4.", title: "Rearrange favorites screen")
+        let updateAppTitleStack = self.createHorizontalStack(number: "5.", title: "Application update")
         let languageTitleStack = self.createHorizontalStack(number: "3.1", title: "Language")
         let themeTitleStack = self.createHorizontalStack(number: "3.2", title: "Theme")
 
-        let homeScreenStack = self.createStackWithDescription(title: homeScreenTitleStack, description: "When you open the app for the first time you will be presented with the home screen that doesn’t have any lines. If you want to add new lines to the home screen you need to click on the + button that will lead you to the add lines screen. In case you’ve opened the app before, the lines you’ve chosen the previous time you used it will be presented on the home screen for the current day of the week. The ability to change the schedule depending on the day of the week can be done by clicking on the desired day or by scrolling left-right. For every line displayed on the home screen it is shown the schedule for the previous, current and next hour, and in the absence of any of the three, the next three hours are added. By clicking on a collected card, it expands and shows the schedule for the whole day, while clicking again the card is collected to the nearest 3 hours. If. you desire to remove on of the lines, you can do so by long pressing the schedule to activate an option that offers you to delete the line from the home screen.")
+        let homeScreenStack = self.createStackWithDescription(title: homeScreenTitleStack, description: "When you open the app for the first time you will be presented with the home screen that doesn’t have any lines. If you want to add new lines to the home screen you need to click on the + button that will lead you to the add lines screen. In case you’ve opened the app before, the lines you’ve chosen the previous time you used it will be presented on the home screen for the current day of the week. The ability to change the schedule depending on the day of the week can be done by clicking on the desired day or by scrolling left-right. For every line displayed on the home screen it is shown the schedule for the previous, current and next hour, and in the absence of any of the three, the next three hours are added. By clicking on a collapsed card, it expands and shows the schedule for the whole day, while clicking again the card is collapsed to the nearest 3 hours. If. you desire to remove on of the lines, you can do so by long pressing the schedule to activate an option that offers you to delete the line from the home screen.")
         let addLinesScreeneStack = self.createStackWithDescription(title: addLinesScreenTitleStack, description: "When you open the add lines screen you will be shown urban lines. Switching between urban and suburban lines can be done by clicking on the tabs or by scrolling left-right. By clicking on one of the lines, it is being selected and added to the main screen, while clicking on already selected line it is being unselected and removed from the home screen.")
+        let rearrangeScreenStack = self.createStackWithDescription(title: rearrangeScreenTitleStack, description: "This screen contains all the lines you've previously added to your home screen as your favorites, and on which you can rearrange them as you see fit.")
         let updateAppStack = self.createStackWithDescription(title: updateAppTitleStack, description: "The app is updated every time the driving season changes.")
-        let languageStack = self.createStackWithDescription(title: languageTitleStack, description: "Clicking on a language opens a dialog that allows you to select the language in which the content will be displayed.", insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
-        let themeStack = self.createStackWithDescription(title: themeTitleStack, description: "Turning this option on and off allows you to choose whether the application will be displayed with a dark or light theme.", insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+        let languageStack = self.createStackWithDescription(title: languageTitleStack, description: "Clicking on language opens a dialog that allows you to select the language in which the content will be displayed.", insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+        let themeStack = self.createStackWithDescription(title: themeTitleStack, description: "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or light theme.", insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
         
         containerNode.layoutSpecBlock = { node, constrainedSize in
             self.scrollNode.layoutSpecBlock = { constrainedSize, size in
@@ -75,7 +77,7 @@ extension SupportViewController {
                 settingsScreenStack.spacing = 5
 
                 let helpDescriptionStack = ASStackLayoutSpec.vertical()
-                helpDescriptionStack.children = [homeScreenStack, addLinesScreeneStack, settingsScreenStack, updateAppStack]
+                helpDescriptionStack.children = [homeScreenStack, addLinesScreeneStack, settingsScreenStack,rearrangeScreenStack, updateAppStack]
                 helpDescriptionStack.spacing = 20
 
                 let contactDescriptionStack = ASStackLayoutSpec.horizontal()

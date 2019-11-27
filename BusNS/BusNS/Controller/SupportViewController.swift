@@ -37,6 +37,16 @@ class SupportViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         self.scrollNode.view.showsVerticalScrollIndicator = false
     }
+    
+    @objc func sendEmail() {
+        let email = "contact@crystalpigeon.com"
+        guard let url = URL(string: "mailto:\(email)") else {return}
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
 }
 
 //MARK: Layout
@@ -58,6 +68,7 @@ extension SupportViewController {
         
         containerNode.layoutSpecBlock = { node, constrainedSize in
             self.scrollNode.layoutSpecBlock = { constrainedSize, size in
+                self.emailButtonNode.addTarget(self, action: #selector(self.sendEmail), forControlEvents: .touchUpInside)
             
                 let settingsScreenStack = ASStackLayoutSpec.vertical()
                 settingsScreenStack.children = [self.createStackWithDescription(title: settingsScreenTitleStack, description: "On the settings screen you can change:"), ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0), child: languageStack), ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0), child: themeStack)]

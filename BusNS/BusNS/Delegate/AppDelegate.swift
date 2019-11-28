@@ -15,16 +15,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.setupNavigationAppearance()
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
         if #available(iOS 13.0, *) { } else {
             BusManager.retriveFavorites()
+            if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
+                StorageManager.store("Light", to: .caches, as: StorageKeys.theme)
+            }
+            let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+            if theme == "Light" {
+                Theme.current = LightTheme()
+            } else {
+                Theme.current = DarkTheme()
+            }
             let navigationController = ASNavigationController(rootViewController: MainViewController())
             navigationController.navigationBar.isTranslucent = false
             window.rootViewController = navigationController
+            
         }
+        self.setupNavigationAppearance()
         self.window = window
         return true
     }

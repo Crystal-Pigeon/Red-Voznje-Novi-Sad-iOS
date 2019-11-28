@@ -29,8 +29,8 @@ class MainViewController: ASViewController<ASDisplayNode> {
         super.init(node: containerNode)
         self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Bus NS".localized()
-        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.scrollNode.automaticallyManagesSubnodes = true
+        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
         mainViewModel.observer = self
         layout()
@@ -59,6 +59,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
             self.containerNode.setNeedsLayout()
         }
         self.refreshUI()
+        self.appearance()
+        self.layout()
+        self.workDayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.saturdayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.sundayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)                        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -191,6 +196,10 @@ extension MainViewController {
     }
     
     private func appearance() {
+        
+        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
+        
         self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
         
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)

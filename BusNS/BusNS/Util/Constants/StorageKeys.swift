@@ -14,4 +14,6 @@ struct StorageKeys {
     public static let season = "com.crystalpigeon.season"
     public static let bus = "com.crystalpigeon.bus"
     public static let favorites = "com.crystalpigeon.favourite_lines"
+    public static let language = "com.crystalpigeon.language"
+    public static let theme = "com.crystalpigeon.theme"
 }

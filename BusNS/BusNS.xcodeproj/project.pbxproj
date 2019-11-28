@@ -57,6 +57,7 @@
 		ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
 		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
+		DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
 		DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */; };
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
@@ -131,6 +132,7 @@
 		ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLoaderViewController.swift; sourceTree = "<group>"; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
 		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				AD056227237A18A700010D78 /* AddLinesViewModel.swift */,
 				DF1AAB05237D6A2300045773 /* MainViewModel.swift */,
+				DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				AD056225237A155000010D78 /* ServiceError.swift in Sources */,
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,
+				DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */,
 				AD05621C2379D8C100010D78 /* Line.swift in Sources */,
 				AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */,
 				AD056228237A18A700010D78 /* AddLinesViewModel.swift in Sources */,

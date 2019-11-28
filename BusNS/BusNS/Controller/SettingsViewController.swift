@@ -39,11 +39,10 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
         settingsViewModel.getLanguageAndTheme()
         appearance()
         layout()
-
     }
     
     override func viewDidLoad() {
-                NotificationCenter.default.addObserver(self, selector: #selector(didClickDone), name: NSNotification.Name(rawValue: "didClickDone"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didClickDone), name: NSNotification.Name(rawValue: "didClickDone"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -169,6 +168,13 @@ extension SettingsViewController: SettingsObserver {
             Theme.current = DarkTheme()
         }
         self.appearance()
+        self.navigationController?.navigationBar.tintColor = Theme.current.color(.navigationTintColor)
+        self.navigationController?.navigationBar.barTintColor = Theme.current.color(.navigationBackgroundColor)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: Theme.current.color(.navigationTintColor),
+            .font: Fonts.muliSemiBold20
+        ]
     }
 }
 

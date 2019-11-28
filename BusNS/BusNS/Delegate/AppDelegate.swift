@@ -21,19 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         if #available(iOS 13.0, *) { } else {
             BusManager.retriveFavorites()
-            if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
-                StorageManager.store("Light", to: .caches, as: StorageKeys.theme)
-            }
-            let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
-            if theme == "Light" {
-                Theme.current = LightTheme()
-            } else {
-                Theme.current = DarkTheme()
-            }
             let navigationController = ASNavigationController(rootViewController: MainViewController())
             navigationController.navigationBar.isTranslucent = false
             window.rootViewController = navigationController
-            
+        }
+        if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
+            StorageManager.store("Light", to: .caches, as: StorageKeys.theme)
+        }
+        let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+        if theme == "Light" {
+            Theme.current = LightTheme()
+        } else {
+            Theme.current = DarkTheme()
         }
         self.setupNavigationAppearance()
         self.window = window

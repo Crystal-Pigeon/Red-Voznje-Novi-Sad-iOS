@@ -51,6 +51,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         longPress.minimumPressDuration = 0.4
         self.view.addGestureRecognizer(longPress)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,9 +101,15 @@ class MainViewController: ASViewController<ASDisplayNode> {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(AddLinesViewController(), animated: true)
     }
+    
     @objc private func settingsButtonTapped() {
         guard let navigationController = self.navigationController else { return }
         navigationController.pushViewController(SettingsViewController(), animated: true)
+    }
+    
+    @objc private func rearrangeButtonTapped() {
+        guard let navigationController = self.navigationController else { return }
+        navigationController.pushViewController(RearrangeFavoritesViewController(), animated: true)
     }
     
     @objc private func handleLongPress(sender: UILongPressGestureRecognizer){
@@ -138,6 +145,9 @@ class MainViewController: ASViewController<ASDisplayNode> {
             let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
             actionSheet.addAction(actionDelete)
             actionSheet.addAction(actionCancel)
+            if #available(iOS 13.0, *), Theme.current.mode == .dark {
+                actionSheet.view.overrideUserInterfaceStyle = .dark
+            }
             present(actionSheet, animated: true, completion: nil)
         }
     }
@@ -183,7 +193,7 @@ extension MainViewController {
     private func initCollectionNode(width: CGFloat, height: CGFloat) -> ASCollectionNode {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.05
+        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.03
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
         
         let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)

@@ -19,6 +19,8 @@
 		A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A532826E23798BCD009D240B /* AddLinesViewController.swift */; };
 		A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53282702379B751009D240B /* ASDisplayNode+Extension.swift */; };
 		A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C3D88237AB3470098FA13 /* MainViewController.swift */; };
+		A562862D238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562862C238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift */; };
+		A562862F238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562862E238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift */; };
 		A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B7C2023896C410052CCD0 /* AnimationManager.swift */; };
 		A5E75E91238BE5270080F920 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E75E90238BE5270080F920 /* SupportViewController.swift */; };
 		AD05621C2379D8C100010D78 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621B2379D8C100010D78 /* Line.swift */; };
@@ -89,6 +91,8 @@
 		A532826E23798BCD009D240B /* AddLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewController.swift; sourceTree = "<group>"; };
 		A53282702379B751009D240B /* ASDisplayNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASDisplayNode+Extension.swift"; sourceTree = "<group>"; };
 		A55C3D88237AB3470098FA13 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A562862C238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RearrangeFavoritesViewController.swift; sourceTree = "<group>"; };
+		A562862E238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RearrangeFavoritesViewModel.swift; sourceTree = "<group>"; };
 		A57B7C2023896C410052CCD0 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		A5E75E90238BE5270080F920 /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		AD05621B2379D8C100010D78 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 				AD056227237A18A700010D78 /* AddLinesViewModel.swift */,
 				DF1AAB05237D6A2300045773 /* MainViewModel.swift */,
 				DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */,
+				A562862E238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 				A55C3D88237AB3470098FA13 /* MainViewController.swift */,
 				A5E75E90238BE5270080F920 /* SupportViewController.swift */,
 				DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */,
+				A562862C238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */,
 				DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
+				A562862F238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift in Sources */,
 				A52361B2237C3458006857CA /* DateManager.swift in Sources */,
 				AD81A271237448C60097812D /* SceneDelegate.swift in Sources */,
 				AD9BD4FA23889EB600B1294B /* ASNavigationController+Extension.swift in Sources */,
@@ -577,6 +584,7 @@
 				AD81A2A4237453010097812D /* Endpoint.swift in Sources */,
 				AD05622C237A24D200010D78 /* StorageKeys.swift in Sources */,
 				AD81A2A2237451360097812D /* Environment.swift in Sources */,
+				A562862D238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift in Sources */,
 				DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

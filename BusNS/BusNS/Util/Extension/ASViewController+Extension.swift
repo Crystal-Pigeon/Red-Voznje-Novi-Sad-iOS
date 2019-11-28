@@ -17,6 +17,9 @@ extension ASViewController {
     
     @objc func showAlert(title: String, message: String, duration: Double) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if #available(iOS 13.0, *), Theme.current.mode == .dark {
+            alert.view.overrideUserInterfaceStyle = .dark
+        }
         self.present(alert, animated: true, completion: nil)
         let when = DispatchTime.now() + duration
         DispatchQueue.main.asyncAfter(deadline: when){
@@ -33,6 +36,7 @@ extension ASViewController {
     @objc func removeActivityIndicator() {
         activityLoader.stop()
     }
+    
     @objc func showPicker(with title: String, delegate: UIPickerViewDelegate, dataSource: UIPickerViewDataSource) {
         let actionSheet = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         let picker = UIPickerView(frame: CGRect(x: 0, y: 27, width: actionSheet.view.frame.width - 16, height: 145))
@@ -48,6 +52,10 @@ extension ASViewController {
         
         let height: NSLayoutConstraint = NSLayoutConstraint(item: actionSheet.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 280)
         actionSheet.view.addConstraint(height)
+        
+        if #available(iOS 13.0, *), Theme.current.mode == .dark {
+            actionSheet.view.overrideUserInterfaceStyle = .dark
+        }
         
         present(actionSheet, animated: true, completion: nil)
     }

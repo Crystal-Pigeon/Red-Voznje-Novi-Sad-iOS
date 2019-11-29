@@ -27,13 +27,22 @@ class SettingsViewModel {
     init(){}
     
     public func getLanguageAndTheme(){
-        let languageShort = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
-        if languageShort == "en" {
+        if !StorageManager.fileExists(StorageKeys.language, in: .caches) {
             currentLanguage = "English"
         } else {
-            currentLanguage = "Serbian"
+            let languageShort = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
+            if languageShort == "en" {
+                currentLanguage = "English"
+            } else {
+                currentLanguage = "Serbian"
+            }
         }
-        currentTheme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+        
+        if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
+            currentTheme = "Light"
+        } else {
+            currentTheme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+        }
     }
     
     public func openLanguagePicker(){

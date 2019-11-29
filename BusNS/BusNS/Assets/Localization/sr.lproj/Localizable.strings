@@ -21,6 +21,7 @@
 "Are you sure you want remove the line?" = "Da li ste sigurni da želite da uklonite liniju?";
 "Remove" = "Ukloni";
 "Cancel" = "Odustani";
+"Done" = "U redu";
 "Support" = "Podrška";
 "Help" = "Uputstvo";
 "Contact" = "Kontakt";
@@ -49,10 +50,11 @@
 "Choose language" = "Izaberite jezik";
 "Choose theme" = "Izaberite temu";
 "Clicking on language opens a dialog that allows you to select the language in which the content will be displayed." = "Klikom na jezik otvara se dijalog za biranje jezika na kojem će sadržaj biti prikazan.";
-"Theme" = "Temu";
+"Theme" = "Tema";
 "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or light theme." = "Klikom na temu otvara se dijalog koji vam omogućava da birate da li će aplikacija biti prikazana sa dark ili light temom.";
 "Application update" = "Ažuriranje aplikacije";
 "The app is updated every time the driving season changes." = "Ažuriranje aplikacije vrši se svaki put kada se promeni sezona vožnji.";
 "Rearrange favorites" = "Promena rasporeda linija";
 "Rearrange favorites screen" = "Ekran za promenu rasporeda linija";
 "This screen contains all the lines you've previously added to your home screen as your favorites, and on which you can rearrange them as you see fit." = "Ovaj ekran sadrži sve linije koje ste prethodno dodali na početni ekran kao svoje favorite i na kojem možete da promenite njihov raspored kako vam odgovara.";
+

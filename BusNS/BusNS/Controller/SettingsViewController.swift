@@ -94,15 +94,6 @@ extension SettingsViewController {
     
     private func cellAppearance(node: ASDisplayNode) {
         node.backgroundColor = Theme.current.color(.settingsBackgroundColor)
-        node.layer.shadowColor = Theme.current.color(.settingsLineColor).cgColor
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: 36 - 0.5, width: UIScreen.main.bounds.width, height: 0.5)
-        bottomLine.backgroundColor = Theme.current.color(.settingsLineColor).cgColor
-        let topLine = CALayer()
-        topLine.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.5)
-        topLine.backgroundColor = Theme.current.color(.settingsLineColor).cgColor
-        node.layer.addSublayer(bottomLine)
-        node.layer.addSublayer(topLine)
     }
     
     private func appearance() {
@@ -144,21 +135,6 @@ extension SettingsViewController {
     @objc private func openThemePicker() {
         self.settingsViewModel.openThemePicker()
     }
-    
-    @objc private func didClickDone() {
-        if settingsViewModel.isLanguagesSelected {
-            if (settingsViewModel.languageSelected == nil) {
-                settingsViewModel.didSelectRow(row: 0)
-            }
-            settingsViewModel.changeLanguage()
-        }
-        else {
-            if (settingsViewModel.themeSelected == nil) {
-                settingsViewModel.didSelectRow(row: 0)
-            }
-            settingsViewModel.changeTheme()
-        }
-    }
 }
 
 extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -167,11 +143,11 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        settingsViewModel.isLanguagesSelected ? settingsViewModel.languages.count : settingsViewModel.themes.count
+        settingsViewModel.isLanguagesOpened ? settingsViewModel.languages.count : settingsViewModel.themes.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        settingsViewModel.isLanguagesSelected ? settingsViewModel.languages[row].localized() : settingsViewModel.themes[row].localized()
+        settingsViewModel.isLanguagesOpened ? settingsViewModel.languages[row].localized() : settingsViewModel.themes[row].localized()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -180,8 +156,8 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension SettingsViewController: SettingsObserver {
-    func openPicker(title: String) {
-        self.showPicker(with: title, delegate: self, dataSource: self)
+    func openPicker(title: String, selectedRow: Int = 0) {
+        self.showPicker(with: title, delegate: self, dataSource: self, selectedRow: selectedRow)
     }
     
     func refreshLanguage(){
@@ -189,12 +165,7 @@ extension SettingsViewController: SettingsObserver {
         self.colorAppearance()
     }
     
-    func refreshTheme(theme: String) {
-        if theme == "Light" {
-            Theme.current = LightTheme()
-        } else {
-            Theme.current = DarkTheme()
-        }
+    func refreshTheme() {
         self.colorAppearance()
         
         self.navigationController?.navigationBar.tintColor = Theme.current.color(.navigationTintColor)
@@ -203,6 +174,21 @@ extension SettingsViewController: SettingsObserver {
             .foregroundColor: Theme.current.color(.navigationTintColor),
             .font: Fonts.muliSemiBold20
         ]
+    }
+    
+    @objc private func didClickDone() {
+        if settingsViewModel.isLanguagesOpened {
+            if settingsViewModel.languageSelected == nil {
+                settingsViewModel.didSelectRow(row: 0)
+            }
+            settingsViewModel.changeLanguage()
+        }
+        else {
+            if settingsViewModel.themeSelected == nil {
+                settingsViewModel.didSelectRow(row: 0)
+            }
+            settingsViewModel.changeTheme()
+        }
     }
 }
 

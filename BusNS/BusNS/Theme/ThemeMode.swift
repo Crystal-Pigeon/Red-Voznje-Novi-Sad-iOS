@@ -14,9 +14,9 @@ public enum ThemeMode: Int {
     var description: String {
         switch self {
         case .dark:
-            return "dark"
+            return "Dark"
         default:
-            return "light"
+            return "Light"
         }
     }
 }

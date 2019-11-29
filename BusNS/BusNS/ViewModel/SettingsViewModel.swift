@@ -8,19 +8,19 @@
 
 import Foundation
 protocol SettingsObserver {
-    func openPicker(title: String)
+    func openPicker(title: String, selectedRow: Int)
     func refreshLanguage()
-    func refreshTheme(theme: String)
+    func refreshTheme()
 }
 
 class SettingsViewModel {
     public var observer: SettingsObserver?
     
     public let languages = ["English", "Serbian"]
-    public let themes = ["Dark", "Light"]
+    public let themes = [ThemeMode.light.description, ThemeMode.dark.description]
     public private(set) var currentLanguage = ""
     public private(set) var currentTheme = ""
-    public private(set) var isLanguagesSelected = true
+    public private(set) var isLanguagesOpened = true
     public private(set) var languageSelected: String?
     public private(set) var themeSelected: String?
     
@@ -28,7 +28,7 @@ class SettingsViewModel {
     
     public func getLanguageAndTheme(){
         if !StorageManager.fileExists(StorageKeys.language, in: .caches) {
-            currentLanguage = "English"
+            currentLanguage = languages[0]
         } else {
             let languageShort = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
             if languageShort == "en" {
@@ -39,28 +39,30 @@ class SettingsViewModel {
         }
         
         if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
-            currentTheme = "Light"
+            currentTheme = Theme.current.mode.description
         } else {
             currentTheme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
         }
     }
     
     public func openLanguagePicker(){
-        self.isLanguagesSelected = true
-        self.languageSelected = nil
+        self.isLanguagesOpened = true
+        self.languageSelected = currentLanguage
         guard let delegate = observer else { return }
-        delegate.openPicker(title: "Choose language".localized())
+        let selectedRow = self.languages.firstIndex(of: currentLanguage) ?? 0
+        delegate.openPicker(title: "Choose language".localized(), selectedRow: selectedRow)
     }
     
     public func openThemePicker(){
-        self.isLanguagesSelected = false
-        self.themeSelected = nil
+        self.isLanguagesOpened = false
+        self.themeSelected = currentTheme
         guard let delegate = observer else { return }
-        delegate.openPicker(title: "Choose theme".localized())
+        let selectedRow = self.themes.firstIndex(of: currentTheme) ?? 0
+        delegate.openPicker(title: "Choose theme".localized(), selectedRow: selectedRow)
     }
     
     public func didSelectRow(row: Int) {
-        if isLanguagesSelected {
+        if isLanguagesOpened {
             languageSelected = languages[row]
         } else {
             themeSelected = themes[row]
@@ -82,12 +84,15 @@ class SettingsViewModel {
     public func changeTheme() {
         guard let theme = themeSelected else { return }
         currentTheme = theme
-        if currentTheme == "Light" {
-            StorageManager.store("Light", to: .caches, as: StorageKeys.theme)
+        
+        if currentTheme == ThemeMode.light.description {
+            StorageManager.store(ThemeMode.light.description, to: .caches, as: StorageKeys.theme)
+            Theme.current = LightTheme()
         } else {
-            StorageManager.store("Dark", to: .caches, as: StorageKeys.theme)
+            StorageManager.store(ThemeMode.dark.description, to: .caches, as: StorageKeys.theme)
+            Theme.current = DarkTheme()
         }
         guard let delegate = observer else { return }
-        delegate.refreshTheme(theme: currentTheme)
+        delegate.refreshTheme()
     }
 }

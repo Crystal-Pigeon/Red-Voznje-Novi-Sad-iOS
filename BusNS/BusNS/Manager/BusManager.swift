@@ -13,6 +13,7 @@ class BusManager {
     private static let path = StorageKeys.favorites
     public static var favorites = [String]()
     public static var linesViewModel: AddLinesViewModel?
+    public static var mainViewModel: MainViewModel?
     public static var numberOfFetchedLines = 0 {
         didSet {
             if numberOfFetchedLines == 0 { return }
@@ -24,6 +25,9 @@ class BusManager {
     public static var numberOfFetchedBuses = 0 {
         didSet {
             if numberOfFetchedLines == numberOfFetchedBuses {
+                if let viewModel = self.mainViewModel {
+                    viewModel.fetchedAll()
+                }
                 guard let viewModel = self.linesViewModel else { return }
                 viewModel.fetchedAll()
             }

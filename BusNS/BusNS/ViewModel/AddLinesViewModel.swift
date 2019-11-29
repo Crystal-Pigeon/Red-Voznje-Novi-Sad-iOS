@@ -66,6 +66,8 @@ class AddLinesViewModel {
     }
     
     public func fetchedAll() {
+        self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
+        self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
         guard let delegate = self.observer else { return }
         delegate.fetchedAll()
     }

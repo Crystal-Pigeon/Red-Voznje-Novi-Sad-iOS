@@ -78,11 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        if !BusManager.didFetchAll {
-            StorageManager.remove(StorageKeys.season, from: .caches)
-            StorageManager.remove(StorageKeys.urbanLines, from: .caches)
-            StorageManager.remove(StorageKeys.suburbanLines, from: .caches)
-        }
+//        if !BusManager.didFetchAll {
+//            StorageManager.remove(StorageKeys.season, from: .caches)
+//            StorageManager.remove(StorageKeys.urbanLines, from: .caches)
+//            StorageManager.remove(StorageKeys.suburbanLines, from: .caches)
+//        }
     }
 }
 

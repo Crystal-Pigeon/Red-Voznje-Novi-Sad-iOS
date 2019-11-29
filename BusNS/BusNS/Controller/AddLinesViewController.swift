@@ -23,13 +23,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.containerNode.automaticallyManagesSubnodes = true
-        self.scrollNode.automaticallyManagesSubnodes = true
         self.title = "Add lines".localized()
-        linesViewModel.observer = self
-        layout()
-        scrollLayout()
-        appearance()
     }
     
     required init?(coder: NSCoder) {
@@ -37,12 +31,18 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
-        linesViewModel.getLines()
-        self.scrollNode.view.isPagingEnabled = true
-        self.scrollNode.view.showsHorizontalScrollIndicator = false
-        self.scrollNode.view.delegate = self
+        self.containerNode.automaticallyManagesSubnodes = true
+        self.scrollNode.automaticallyManagesSubnodes = true
+        self.layout()
+        self.scrollLayout()
+        self.appearance()
+        self.linesViewModel.observer = self
+        self.linesViewModel.getLines()
     }
-    
+}
+
+//MARK: Button Actions
+extension AddLinesViewController {
     @objc private func lineTypeButtonTapped(sender: ASButtonNode) {
         if sender == self.urbanBusesButton {
             self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
@@ -52,14 +52,43 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     }
 }
 
+//MARK: Init UI Elements
+extension AddLinesViewController {
+    private func initTableNode() -> ASTableNode {
+        let tableNode = ASTableNode()
+        tableNode.delegate = self
+        tableNode.dataSource = self
+        return tableNode
+    }
+    
+    private func initLinesTypeButtonsLayout(width: CGFloat, height: CGFloat) -> ASLayoutSpec {
+        self.urbanBusesButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(height * 0.07))
+        self.suburbanBusesButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(height * 0.07))
+        self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(3))
+        
+        let horizontalStack = ASStackLayoutSpec.horizontal()
+        horizontalStack.children = [self.urbanBusesButton, self.suburbanBusesButton]
+        
+        let verticalStack = ASStackLayoutSpec.vertical()
+        verticalStack.child = self.separatorNode
+        verticalStack.verticalAlignment = .bottom
+        
+        let overlay = ASOverlayLayoutSpec(child: horizontalStack, overlay: verticalStack)
+        
+        return overlay
+    }
+}
+
 //MARK: Layout
 extension AddLinesViewController {
     private func layout() {
         let buttonStack = self.initLinesTypeButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.urbanBusesTableNode = self.initTableNode()
+        self.suburbanBusesTableNode = self.initTableNode()
         
         self.containerNode.layoutSpecBlock = { node, constrainedSize in
-            self.urbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            self.suburbanBusesTableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
+            self.urbanBusesTableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(constrainedSize.max.width), height: ASDimensionMake(constrainedSize.max.height))
+            self.suburbanBusesTableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(constrainedSize.max.width), height: ASDimensionMake(constrainedSize.max.height))
             
             let stack = ASStackLayoutSpec.vertical()
             stack.children = [buttonStack, self.scrollNode]
@@ -76,50 +105,31 @@ extension AddLinesViewController {
         }
     }
     
-    private func appearance() {
+    private func colorAppearance() {
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
-        
-        self.suburbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
         self.urbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
+        self.suburbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
+        self.urbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.suburbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
         
         self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         
+        if Theme.current.mode == .dark {
+            self.suburbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
+            self.urbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
+        }
+    }
+    
+    private func appearance() {
+        self.colorAppearance()
         self.suburbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
         self.urbanBusesButton.addTarget(self, action: #selector(self.lineTypeButtonTapped(sender:)), forControlEvents: .touchUpInside)
-    }
-    
-    private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
-        let tableNode = ASTableNode()
-        tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(width), height: ASDimensionMake(height - (height * 0.07 + 3)))
-        tableNode.backgroundColor = Theme.current.color(.addLinesTable)
-        tableNode.delegate = self
-        tableNode.dataSource = self
-        if Theme.current.mode == .dark {
-            tableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
-        }
-        return tableNode
-    }
-    
-    private func initLinesTypeButtonsLayout(width: CGFloat, height: CGFloat) -> ASDisplayNode {
-        let linesTypeContainterNode = ASDisplayNode()
-        linesTypeContainterNode.automaticallyManagesSubnodes = true
-        linesTypeContainterNode.backgroundColor = Theme.current.color(.navigationBackgroundColor)
-        linesTypeContainterNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width), ASDimensionMake((height * 0.07) + 3))
-        
-        linesTypeContainterNode.layoutSpecBlock = { node, constrainedSize in
-            let horizontalStack = ASStackLayoutSpec.horizontal()
-            self.urbanBusesButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(height * 0.07))
-            self.suburbanBusesButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(height * 0.07))
-            self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 2), ASDimensionMake(height * 0.01))
-            horizontalStack.children = [self.urbanBusesButton, self.suburbanBusesButton]
-            
-            let verticalStack = ASStackLayoutSpec.vertical()
-            verticalStack.children = [horizontalStack, self.separatorNode]
-            return verticalStack
-        }
-        
-        return linesTypeContainterNode
+        self.scrollNode.view.isPagingEnabled = true
+        self.scrollNode.view.showsHorizontalScrollIndicator = false
+        self.scrollNode.view.delegate = self
+        self.urbanBusesTableNode.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        self.suburbanBusesTableNode.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
 }
 

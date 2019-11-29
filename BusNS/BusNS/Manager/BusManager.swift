@@ -20,6 +20,7 @@ class BusManager {
             viewModel.refreshLines()
         }
     }
+    
     public static var numberOfFetchedBuses = 0 {
         didSet {
             if numberOfFetchedLines == numberOfFetchedBuses {
@@ -28,8 +29,14 @@ class BusManager {
             }
         }
     }
+    
     public static var didFetchAll: Bool {
         return numberOfFetchedLines == numberOfFetchedBuses
+    }
+    
+    public static func didNotFetchAll() {
+        guard let viewModel = self.linesViewModel else { return }
+        viewModel.didNotFetchAll()
     }
     
     public static func storeFavorites() {

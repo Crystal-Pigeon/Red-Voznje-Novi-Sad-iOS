@@ -195,6 +195,9 @@ extension AddLinesViewController: AddLinesObserver {
         self.removeActivityIndicator()
         self.refreshUI()
     }
+    func didNotFetchAll() {
+        self.removeActivityIndicator()
+    }
 }
 
 //MARK: Scrolling between scrollView pages

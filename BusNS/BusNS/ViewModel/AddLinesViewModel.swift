@@ -12,6 +12,7 @@ protocol AddLinesObserver {
     func refreshUI()
     func showLoader()
     func fetchedAll()
+    func didNotFetchAll()
 }
 
 class AddLinesViewModel {
@@ -45,18 +46,33 @@ class AddLinesViewModel {
     public func getLines() {
         guard let delegate = self.observer else { return }
         if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) {
-            if !BusManager.didFetchAll { delegate.showLoader() }
+            if !BusManager.didFetchAll {
+                if !NetworkManager.shared.isInternetAvailable() {
+                    BusManager.didNotFetchAll()
+                } else {
+                    delegate.showLoader()
+                }
+            }
             self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
             self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             delegate.refreshUI()
         } else {
-            delegate.showLoader()
+            if !BusManager.didFetchAll && !NetworkManager.shared.isInternetAvailable() {
+                BusManager.didNotFetchAll()
+            } else {
+                delegate.showLoader()
+            }
         }
     }
     
     public func fetchedAll() {
         guard let delegate = self.observer else { return }
         delegate.fetchedAll()
+    }
+    
+    public func didNotFetchAll() {
+        guard let delegate = self.observer else { return }
+        delegate.didNotFetchAll()
     }
     
     public func refreshLines() {

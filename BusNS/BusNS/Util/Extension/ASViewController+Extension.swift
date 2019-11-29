@@ -27,6 +27,12 @@ extension ASViewController {
         }
     }
     
+    @objc func showInternetAlert(title: String, message: String, okHandler: @escaping (UIAlertAction)->(Void)) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again".localized(), style: .destructive, handler: okHandler))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func showActivityIndicator() {
         if activityLoader.isOnScreen { return }
         activityLoader.modalPresentationStyle = .overFullScreen

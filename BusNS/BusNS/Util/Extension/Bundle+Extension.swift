@@ -13,6 +13,8 @@ extension Bundle {
         var appLang = "en"
         if StorageManager.fileExists(StorageKeys.language, in: .caches) {
             appLang = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
+        } else {
+            appLang = Locale.current.languageCode ?? "en"
         }
         
         let path = Bundle.main.path(forResource: appLang, ofType: "lproj")

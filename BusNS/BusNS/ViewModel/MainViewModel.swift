@@ -67,6 +67,7 @@ class MainViewModel {
             guard let delegate = self.observer else { return }
             if let error = error {
                 delegate.showError(message: error.message)
+                BusManager.didNotFetchAll()
                 return
             }
             if let seasons = seasons{
@@ -93,6 +94,7 @@ class MainViewModel {
             guard let delegate = self.observer else { return }
             if let error = error {
                 delegate.showError(message: error.message)
+                BusManager.didNotFetchAll()
                 return
             }
             if let lines = lines {
@@ -118,6 +120,7 @@ class MainViewModel {
             guard let delegate = self.observer else { return }
             if let error = error {
                 delegate.showError(message: error.message)
+                BusManager.didNotFetchAll()
                 return
             }
             if let lines = lines {
@@ -144,6 +147,7 @@ class MainViewModel {
         BusService.shared.getUrbanBus(id: id) { (buses, error) in
             if let error = error {
                 delegate.showError(message: error.message)
+                BusManager.didNotFetchAll()
                 return
             }
             if let buses = buses {
@@ -163,6 +167,7 @@ class MainViewModel {
         BusService.shared.getSuburbanBus(id: id) { (buses, error) in
             if let error = error {
                 delegate.showError(message: error.message)
+                BusManager.didNotFetchAll()
                 return
             }
             if let buses = buses {

@@ -355,7 +355,10 @@ extension MainViewController: MainObserver {
     }
     
     func showError(message: String) {
-        showAlert(title: "", message: message, duration: 2)
+        showInternetAlert(title: message, message: "") { (_) -> (Void) in
+            StorageManager.remove(StorageKeys.season, from: .caches)
+            self.mainViewModel.getData()
+        }
     }
 }
 

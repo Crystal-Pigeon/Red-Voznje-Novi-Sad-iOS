@@ -51,12 +51,14 @@ class SettingsViewModel {
         guard let delegate = observer else { return }
         delegate.openPicker(title: "Choose language".localized())
     }
+    
     public func openThemePicker(){
         self.isLanguagesSelected = false
         self.themeSelected = nil
         guard let delegate = observer else { return }
         delegate.openPicker(title: "Choose theme".localized())
     }
+    
     public func didSelectRow(row: Int) {
         if isLanguagesSelected {
             languageSelected = languages[row]
@@ -64,6 +66,7 @@ class SettingsViewModel {
             themeSelected = themes[row]
         }
     }
+    
     public func changeLanguage() {
         guard let language = languageSelected else { return }
         currentLanguage = language

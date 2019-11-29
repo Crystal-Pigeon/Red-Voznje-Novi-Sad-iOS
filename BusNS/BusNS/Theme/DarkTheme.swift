@@ -50,6 +50,10 @@ public class DarkTheme: Theme {
         .supportContactMailColor: Colors.blue,
         .supportCopyrightsColor: Colors.transparentWhiteDarker.withAlphaComponent(0.5),
         .rearrangeFavoritesTable: Colors.mediumDark,
-        .rearrangeFavoritesLineColor: Colors.transparentWhiteDarker
+        .rearrangeFavoritesLineColor: Colors.transparentWhiteDarker,
+        .settingsExplenationColor: Colors.transparentWhiteDarker.withAlphaComponent(0.5),
+        .settingsMainColor: Colors.transparentWhiteDarker,
+        .settingsBackgroundColor: Colors.lightDark,
+        .settingsLineColor: Colors.transparentWhiteDarker.withAlphaComponent(0.25),
     ]
 }

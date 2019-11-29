@@ -48,7 +48,7 @@ public class LightTheme: Theme {
         .supportTextColor: Colors.darkBlue,
         .supportContactMailColor: Colors.blue,
         .supportCopyrightsColor: Colors.transparentDarkBlue,
-        .settingsBackgroundColor: Colors.lightGrey,
+        .settingsBackgroundColor: Colors.white,
         .settingsMainColor: Colors.darkBlue,
         .settingsExplenationColor: Colors.transparentDarkBlue,
         .settingsLineColor: Colors.transparentDarkBlueLighter,

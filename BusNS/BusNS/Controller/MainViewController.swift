@@ -40,6 +40,9 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.mainViewModel.getData()
         self.containerNode.automaticallyManagesSubnodes = true
         self.scrollNode.automaticallyManagesSubnodes = true
+        self.workDayBusesCollectionNode = self.initCollectionNode()
+        self.saturdayBusesCollectionNode = self.initCollectionNode()
+        self.sundayBusesCollectionNode = self.initCollectionNode()
         self.layout()
         self.scrollLayout()
         self.appearance()
@@ -54,11 +57,17 @@ class MainViewController: ASViewController<ASDisplayNode> {
             self.scrollNode.setNeedsLayout()
             self.containerNode.setNeedsLayout()
         }
-        if !mainViewModel.isFirstInit {
+        self.setupCurrentDay()
+        if mainViewModel.didRefresh {
             self.refreshUI()
         }
-        self.mainViewModel.isFirstInit = false
-        self.setupCurrentDay()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.mainViewModel.shouldSetNeedsLayout() && !mainViewModel.didRefresh {
+            self.refreshUI()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -209,9 +218,6 @@ extension MainViewController {
     private func layout() {
         let emptyScreenStack = self.initEmptyScreenLayout()
         let buttonsStack = self.initDaysButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        self.workDayBusesCollectionNode = self.initCollectionNode()
-        self.saturdayBusesCollectionNode = self.initCollectionNode()
-        self.sundayBusesCollectionNode = self.initCollectionNode()
         
         containerNode.layoutSpecBlock = { node, constrainedSize in
             self.workDayBusesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height))
@@ -343,6 +349,7 @@ extension MainViewController: MainObserver {
         self.workDayBusesCollectionNode.reloadData()
         self.saturdayBusesCollectionNode.reloadData()
         self.sundayBusesCollectionNode.reloadData()
+        self.mainViewModel.didRefresh = true
     }
     
     func refreshCell(busID: String) {

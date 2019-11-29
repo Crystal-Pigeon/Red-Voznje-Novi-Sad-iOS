@@ -48,7 +48,7 @@ public class DarkTheme: Theme {
         .supportTitleColor: Colors.transparentWhiteDarker,
         .supportTextColor: Colors.transparentWhiteDarker,
         .supportContactMailColor: Colors.blue,
-        .supportCopyrightsColor: Colors.lightDark,
+        .supportCopyrightsColor: Colors.transparentWhiteDarker.withAlphaComponent(0.5),
         .rearrangeFavoritesTable: Colors.mediumDark,
         .rearrangeFavoritesLineColor: Colors.transparentWhiteDarker
     ]

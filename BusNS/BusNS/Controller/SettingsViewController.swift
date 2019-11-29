@@ -46,7 +46,14 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
         self.settingsViewModel.getLanguageAndTheme()
         self.layout()
         self.appearance()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(didClickDone), name: NSNotification.Name(rawValue: "didClickDone"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didClickDone"), object: nil)
     }
     
     required init?(coder: NSCoder) {

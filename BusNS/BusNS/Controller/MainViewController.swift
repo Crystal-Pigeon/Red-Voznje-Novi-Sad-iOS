@@ -154,8 +154,8 @@ extension MainViewController {
             let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
             actionSheet.addAction(actionDelete)
             actionSheet.addAction(actionCancel)
-            if #available(iOS 13.0, *), Theme.current.mode == .dark {
-                actionSheet.view.overrideUserInterfaceStyle = .dark
+            if #available(iOS 13.0, *) {
+                actionSheet.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
             }
             present(actionSheet, animated: true, completion: nil)
         }

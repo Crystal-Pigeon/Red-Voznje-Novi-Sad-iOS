@@ -61,11 +61,7 @@ extension ASViewController {
         actionSheet.view.addConstraint(height)
         
         if #available(iOS 13.0, *) {
-            if Theme.current.mode == .dark {
-                actionSheet.view.overrideUserInterfaceStyle = .dark
-            } else {
-                actionSheet.view.overrideUserInterfaceStyle = .light
-            }
+            actionSheet.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
         }
         
         present(actionSheet, animated: true, completion: nil)

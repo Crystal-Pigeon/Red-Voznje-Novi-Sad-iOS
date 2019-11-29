@@ -78,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        StorageManager.store(Theme.current.mode.description, to: .caches, as: StorageKeys.theme)
         if !BusManager.didFetchAll {
             StorageManager.remove(StorageKeys.season, from: .caches)
             StorageManager.remove(StorageKeys.urbanLines, from: .caches)

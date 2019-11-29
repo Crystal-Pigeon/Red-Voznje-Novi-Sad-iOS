@@ -28,8 +28,8 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
         self.containerNode.automaticallyManagesSubnodes = true
         self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
         self.layout()
-        if #available(iOS 13.0, *), Theme.current.mode == .dark {
-            self.view.overrideUserInterfaceStyle = .dark
+        if #available(iOS 13.0, *) {
+            self.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
         }
     }
 }

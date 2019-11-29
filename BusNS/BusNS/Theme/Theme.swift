@@ -9,13 +9,6 @@
 import UIKit
 
 public class Theme {
-    
-    //MARK: Color objects
-    public let blackColor = UIColor.black
-    
-    //MARK: Font objects
-    public let defaultFont = UIFont.systemFont(ofSize: 12)
-    
     //MARK: Current theme
     public static var current: Theme = LightTheme()
     
@@ -24,6 +17,7 @@ public class Theme {
         return .light
     }
     
+    //MARK: Getting color for color identifier
     public func color(_ id: ColorIdentifier) -> UIColor {
         if let color = colorRepository[id] {
             return color
@@ -31,7 +25,8 @@ public class Theme {
         return colorRepository[.defaultColor]!
     }
     
+    //MARK: Setting colors for color identifiers
     private lazy var colorRepository: [ColorIdentifier : UIColor] = [
-        .defaultColor : blackColor
+        .defaultColor : Colors.black
     ]
 }

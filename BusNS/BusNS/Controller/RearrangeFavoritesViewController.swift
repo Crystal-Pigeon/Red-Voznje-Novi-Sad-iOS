@@ -17,10 +17,6 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.containerNode.automaticallyManagesSubnodes = true
-        self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
-        self.title = "Rearrange favorites".localized()
-        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +24,10 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
+        self.containerNode.automaticallyManagesSubnodes = true
+        self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
+        self.title = "Rearrange favorites".localized()
+        self.layout()
         if #available(iOS 13.0, *), Theme.current.mode == .dark {
             self.view.overrideUserInterfaceStyle = .dark
         }
@@ -36,15 +36,15 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
 
 extension RearrangeFavoritesViewController {
     private func layout() {
+        self.tableNode = initTableNode()
         self.containerNode.layoutSpecBlock = { node, constrainedSize in
-            self.tableNode = self.initTableNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), child: self.tableNode)
+            self.tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(constrainedSize.max.width), height: ASDimensionMake(constrainedSize.max.height))
+            return ASWrapperLayoutSpec(layoutElement: self.tableNode)
         }
     }
     
-    private func initTableNode(width: CGFloat, height: CGFloat) -> ASTableNode {
+    private func initTableNode() -> ASTableNode {
         let tableNode = ASTableNode()
-        tableNode.style.preferredLayoutSize = ASLayoutSize(width: ASDimensionMake(width), height: ASDimensionMake(height - (height * 0.07 + 3)))
         tableNode.backgroundColor = Theme.current.color(.rearrangeFavoritesTable)
         tableNode.delegate = self
         tableNode.dataSource = self
@@ -67,17 +67,14 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        
         let cellNode = ASTextCellNode()
         cellNode.textAttributes = [
             NSAttributedString.Key.font: Fonts.muliRegular15,
             NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
         ]
         cellNode.selectionStyle = .none
+        cellNode.text = rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row])
         
-        if let bus = BusManager.getBusBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row])?.first {
-            cellNode.text = bus.number + " " + bus.name
-        }
         return cellNode
     }
     

@@ -18,6 +18,11 @@ class RearrangeFavoritesViewModel {
         }
     }
     
+    public func getBusNameBy(id: String) -> String {
+        guard let bus = BusManager.getBusBy(id: id)?.first else { return "" }
+        return bus.number + " " + bus.name
+    }
+    
     public func rearrange(sourceIndexPath: IndexPath, destinationIndexPath: IndexPath){
         let movedObject = favorites[sourceIndexPath.row]
         favorites.remove(at: sourceIndexPath.row)

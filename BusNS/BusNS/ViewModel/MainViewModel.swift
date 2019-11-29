@@ -30,6 +30,7 @@ class MainViewModel {
     }
     public let tagsDict = [0:"R", 1: "S", 2: "N"]
     private var lastCount = BusManager.favorites.count
+    public var isFirstInit = true
     
     init(){}
     

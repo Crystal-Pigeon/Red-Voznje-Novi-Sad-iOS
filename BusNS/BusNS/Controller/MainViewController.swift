@@ -15,6 +15,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let workdayButton = ASButtonNode()
     private let saturdayButton = ASButtonNode()
     private let sundayButton = ASButtonNode()
+    private let addButton = ASButtonNode()
     private let separatorNode = ASDisplayNode()
     private let messageLabelNode = ASTextNode()
     private let logoImageNode = ASImageNode()
@@ -27,15 +28,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.containerNode.automaticallyManagesSubnodes = true
         self.title = "Bus NS".localized()
-        self.scrollNode.automaticallyManagesSubnodes = true
-        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
-        self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
-        mainViewModel.observer = self
-        layout()
-        scrollLayout()
-        appearance()
     }
     
     required init?(coder: NSCoder) {
@@ -43,31 +36,48 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
     
     override func viewDidLoad() {
+        self.mainViewModel.observer = self
         self.mainViewModel.getData()
-        self.scrollNode.view.isPagingEnabled = true
-        self.scrollNode.view.showsHorizontalScrollIndicator = false
-        self.scrollNode.view.delegate = self
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 0.4
-        self.view.addGestureRecognizer(longPress)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
+        self.containerNode.automaticallyManagesSubnodes = true
+        self.scrollNode.automaticallyManagesSubnodes = true
+        self.layout()
+        self.scrollLayout()
+        self.appearance()
+        self.setupNavigationBarButtons()
+        self.setupLongPressGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.colorAppearance()
         if self.mainViewModel.shouldSetNeedsLayout() {
             self.scrollNode.setNeedsLayout()
             self.containerNode.setNeedsLayout()
         }
-        self.refreshUI()
-        self.appearance()
-        self.layout()
-        self.workDayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
-        self.saturdayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
-        self.sundayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)                        
+        if !mainViewModel.isFirstInit {
+            self.refreshUI()
+        }
+        self.mainViewModel.isFirstInit = false
+        self.setupCurrentDay()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.mainViewModel.resetLastCount()
+    }
+    
+    private func setupLongPressGesture() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 0.4
+        self.view.addGestureRecognizer(longPress)
+    }
+    
+    private func setupNavigationBarButtons() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
+    }
+    
+    private func setupCurrentDay() {
         if DateManager.instance.getDayOfWeek() == "N" {
             self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: false)
         } else if DateManager.instance.getDayOfWeek() == "S" {
@@ -76,11 +86,10 @@ class MainViewController: ASViewController<ASDisplayNode> {
             self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.mainViewModel.resetLastCount()
-    }
-    
+}
+
+//MARK: Button Actions
+extension MainViewController {
     @objc private func dayButtonTapped(sender: ASButtonNode) {
         if sender == workdayButton {
             if !self.mainViewModel.favorites.isEmpty {
@@ -153,20 +162,61 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
 }
 
+//MARK: Init UI Elements
+extension MainViewController {
+    private func initCollectionNode() -> ASCollectionNode {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.03
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
+        
+        let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
+        collectionNode.delegate = self
+        collectionNode.dataSource = self
+        collectionNode.showsVerticalScrollIndicator = false
+        return collectionNode
+    }
+    
+    private func initDaysButtonsLayout(width: CGFloat, height: CGFloat) -> ASLayoutSpec {
+        self.workdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.saturdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.sundayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
+        self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(3))
+        
+        let horizontalStack = ASStackLayoutSpec.horizontal()
+        horizontalStack.children = [self.workdayButton, self.saturdayButton, self.sundayButton]
+        
+        let verticalStack = ASStackLayoutSpec.vertical()
+        verticalStack.child = self.separatorNode
+        verticalStack.verticalAlignment = .bottom
+        
+        let overlay = ASOverlayLayoutSpec(child: horizontalStack, overlay: verticalStack)
+        
+        return overlay
+    }
+    
+    private func initEmptyScreenLayout() -> ASLayoutSpec {
+        let stack = ASStackLayoutSpec.vertical()
+        stack.spacing = UIScreen.main.bounds.height * 0.05
+        stack.horizontalAlignment = .middle
+        stack.children = [self.messageLabelNode, self.logoImageNode]
+        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), child: stack)
+    }
+}
+
 //MARK: Layout
 extension MainViewController {
     private func layout() {
         let emptyScreenStack = self.initEmptyScreenLayout()
         let buttonsStack = self.initDaysButtonsLayout(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        let addButton = self.addButtonAppereance()
+        self.workDayBusesCollectionNode = self.initCollectionNode()
+        self.saturdayBusesCollectionNode = self.initCollectionNode()
+        self.sundayBusesCollectionNode = self.initCollectionNode()
         
         containerNode.layoutSpecBlock = { node, constrainedSize in
-            self.workDayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            self.workDayBusesCollectionNode.view.tag = 0
-            self.saturdayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            self.saturdayBusesCollectionNode.view.tag = 1
-            self.sundayBusesCollectionNode = self.initCollectionNode(width: constrainedSize.max.width, height: constrainedSize.max.height)
-            self.sundayBusesCollectionNode.view.tag = 2
+            self.workDayBusesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height))
+            self.saturdayBusesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height))
+            self.sundayBusesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height))
             
             let stack = ASStackLayoutSpec.vertical()
             stack.children = self.mainViewModel.favorites.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.scrollNode]
@@ -174,7 +224,7 @@ extension MainViewController {
             let addButtonStack = ASStackLayoutSpec.vertical()
             addButtonStack.verticalAlignment = .bottom
             addButtonStack.horizontalAlignment = .right
-            addButtonStack.child = addButton
+            addButtonStack.child = self.addButton
             
             let insetSpec = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), child: addButtonStack)
             
@@ -190,106 +240,68 @@ extension MainViewController {
         }
      }
     
-    private func initCollectionNode(width: CGFloat, height: CGFloat) -> ASCollectionNode {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = UIScreen.main.bounds.width * 0.03
-        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: UIScreen.main.bounds.height * 0.07 + 10, right: 0)
-        
-        let collectionNode = ASCollectionNode(collectionViewLayout: flowLayout)
-        collectionNode.delegate = self
-        collectionNode.dataSource = self
-        collectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width), ASDimensionMake(height))
-        collectionNode.backgroundColor = Theme.current.color(.backgroundColor)
-        collectionNode.showsVerticalScrollIndicator = false
-        return collectionNode
-    }
-    
-    private func appearance() {
-        
+    private func colorAppearance() {
         self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.scrollNode.backgroundColor = Theme.current.color(.backgroundColor)
-        
-        self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
-        
+        self.workDayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.saturdayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
+        self.sundayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
-        
         self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: Fonts.muliRegular17)
-        self.messageLabelNode.truncationMode = .byWordWrapping
-        self.messageLabelNode.maximumNumberOfLines = 2
-        self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.7), ASDimensionAuto)
+        self.dayButtonAppearance(dayButton: workdayButton, title: "Work day".localized())
+        self.dayButtonAppearance(dayButton: saturdayButton, title: "Saturday".localized())
+        self.dayButtonAppearance(dayButton: sundayButton, title: "Sunday".localized())
+        
+        self.addButton.backgroundColor = Theme.current.color(.addButtonBackgroundColor)
+        self.addButton.layer.shadowColor = Theme.current.color(.shadowColor).cgColor
         
         if Theme.current.mode == .dark {
             self.logoImageNode.image = UIImage(named: "logo-white")
             self.logoImageNode.alpha = 0.75
+            self.addButton.setImage(UIImage(named: "plus-white"), for: .normal)
+            self.addButton.alpha = 0.75
         } else {
             self.logoImageNode.image = UIImage(named: "logo")
+            self.addButton.setImage(UIImage(named: "plus"), for: .normal)
         }
-        self.logoImageNode.contentMode = .scaleAspectFit
-        self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.5), ASDimensionAuto)
-        
-        setupDayButtonAppearance(dayButton: workdayButton, title: "Work day".localized())
-        setupDayButtonAppearance(dayButton: saturdayButton, title: "Saturday".localized())
-        setupDayButtonAppearance(dayButton: sundayButton, title: "Sunday".localized())
     }
     
-    private func setupDayButtonAppearance(dayButton: ASButtonNode, title: String) {
+    private func appearance() {
+        self.workDayBusesCollectionNode.view.tag = 0
+        self.saturdayBusesCollectionNode.view.tag = 1
+        self.sundayBusesCollectionNode.view.tag = 2
+        
+        self.addButtonAppereance()
+        
+        self.scrollNode.view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width * 3)
+        self.scrollNode.view.isPagingEnabled = true
+        self.scrollNode.view.showsHorizontalScrollIndicator = false
+        self.scrollNode.view.delegate = self
+       
+        self.messageLabelNode.truncationMode = .byWordWrapping
+        self.messageLabelNode.maximumNumberOfLines = 2
+        self.messageLabelNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.7), ASDimensionAuto)
+        
+        self.logoImageNode.contentMode = .scaleAspectFit
+        self.logoImageNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.5), ASDimensionAuto)
+    }
+    
+    private func addButtonAppereance() {
+        self.addButton.style.preferredSize = CGSize(width: 60, height: 60)
+        self.addButton.cornerRadius = 30
+        self.addButton.layer.shadowOffset = CGSize(width: 6, height: 6)
+        self.addButton.layer.shadowRadius = 24
+        self.addButton.layer.shadowOpacity = 1
+        self.addButton.layer.masksToBounds = false
+        self.addButton.contentHorizontalAlignment = .middle
+        self.addButton.contentVerticalAlignment = .center
+        self.addButton.addTarget(self, action: #selector(addButtonTapped(sender:)), forControlEvents: .touchUpInside)
+    }
+    
+    private func dayButtonAppearance(dayButton: ASButtonNode, title: String) {
         dayButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
         dayButton.setAttributedTitle(self.node.attributed(text: title, color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         dayButton.addTarget(self, action: #selector(dayButtonTapped(sender:)), forControlEvents: .touchUpInside)
-    }
-    
-    private func initDaysButtonsLayout(width: CGFloat, height: CGFloat) -> ASDisplayNode {
-        let daysContainterNode = ASDisplayNode()
-        daysContainterNode.automaticallyManagesSubnodes = true
-        daysContainterNode.backgroundColor = Theme.current.color(.navigationBackgroundColor)
-        self.workdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-        self.saturdayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-        self.sundayButton.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(height * 0.07))
-        self.separatorNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(width / 3), ASDimensionMake(3))
-        
-        daysContainterNode.layoutSpecBlock = { node, constrainedSize in
-            let horizontalStack = ASStackLayoutSpec.horizontal()
-            horizontalStack.children = [self.workdayButton, self.saturdayButton, self.sundayButton]
-            
-            let verticalStack = ASStackLayoutSpec.vertical()
-            verticalStack.children = [horizontalStack, self.separatorNode]
-            
-            return verticalStack
-        }
-        return daysContainterNode
-    }
-    
-    private func initEmptyScreenLayout() -> ASLayoutSpec {
-        let stack = ASStackLayoutSpec.vertical()
-        stack.spacing = UIScreen.main.bounds.height * 0.05
-        stack.horizontalAlignment = .middle
-        stack.children = [self.messageLabelNode, self.logoImageNode]
-        return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), child: stack)
-    }
-    
-    private func addButtonAppereance() -> ASButtonNode {
-        let button = ASButtonNode()
-        button.style.preferredSize = CGSize(width: 60, height: 60)
-        button.cornerRadius = 30
-        button.layer.shadowOffset = CGSize(width: 6, height: 6)
-        button.layer.shadowColor = Theme.current.color(.shadowColor).cgColor
-        button.layer.shadowRadius = 24
-        button.layer.shadowOpacity = 1
-        button.layer.masksToBounds = false
-        button.backgroundColor = Theme.current.color(.addButtonBackgroundColor)
-        if Theme.current.mode == .dark {
-            button.setImage(UIImage(named: "plus-white"), for: .normal)
-            button.alpha = 0.75
-        } else {
-            button.setImage(UIImage(named: "plus"), for: .normal)
-        }
-        button.contentHorizontalAlignment = .middle
-        button.contentVerticalAlignment = .center
-        
-        button.addTarget(self, action: #selector(addButtonTapped(sender:)), forControlEvents: .touchUpInside)
-        
-        return button
     }
 }
 

@@ -17,6 +17,7 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
+        self.title = "Rearrange favorites".localized()
     }
     
     required init?(coder: NSCoder) {
@@ -26,7 +27,6 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         self.containerNode.automaticallyManagesSubnodes = true
         self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
-        self.title = "Rearrange favorites".localized()
         self.layout()
         if #available(iOS 13.0, *), Theme.current.mode == .dark {
             self.view.overrideUserInterfaceStyle = .dark

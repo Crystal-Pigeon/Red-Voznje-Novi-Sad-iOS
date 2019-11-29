@@ -24,13 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.isTranslucent = false
         window.rootViewController = navigationController
         
-        self.setupTheme()
+        self.setupTheme(window: window)
         self.setupNavigationAppearance()
         self.window = window
         return true
     }
     
-    func setupNavigationAppearance() {
+    private func setupNavigationAppearance() {
         let barButtonItemAppearance = UIBarButtonItem.appearance()
         barButtonItemAppearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
         let navigationBarAppearace = UINavigationBar.appearance()
@@ -43,15 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
     }
     
-    func setupTheme() {
+    private func setupTheme(window: UIWindow) {
         if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
-            StorageManager.store("Light", to: .caches, as: StorageKeys.theme)
-        }
-        let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
-        if theme == "Light" {
-            Theme.current = LightTheme()
+            if #available(iOS 13.0, *) {
+                let theme = window.traitCollection.userInterfaceStyle
+                Theme.current = theme == .dark ? DarkTheme() : LightTheme()
+            } else {
+                Theme.current = LightTheme()
+            }
         } else {
-            Theme.current = DarkTheme()
+            let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+            if theme == ThemeMode.dark.description {
+                Theme.current = DarkTheme()
+            } else {
+                Theme.current = LightTheme()
+            }
         }
     }
 

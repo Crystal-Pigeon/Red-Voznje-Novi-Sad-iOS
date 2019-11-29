@@ -54,20 +54,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
         super.viewWillAppear(animated)
         self.colorAppearance()
         if self.mainViewModel.shouldSetNeedsLayout() {
-            self.scrollNode.setNeedsLayout()
             self.containerNode.setNeedsLayout()
+            self.scrollNode.setNeedsLayout()
         }
         self.setupCurrentDay()
-        if mainViewModel.didRefresh {
-            self.refreshUI()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if self.mainViewModel.shouldSetNeedsLayout() && !mainViewModel.didRefresh {
-            self.refreshUI()
-        }
+        self.refreshUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -225,7 +216,7 @@ extension MainViewController {
             self.sundayBusesCollectionNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(constrainedSize.max.width), ASDimensionMake(constrainedSize.max.height))
             
             let stack = ASStackLayoutSpec.vertical()
-            stack.children = self.mainViewModel.favorites.isEmpty ? [buttonsStack, emptyScreenStack] : [buttonsStack, self.scrollNode]
+            stack.children = self.mainViewModel.favorites.isEmpty ? [buttonsStack, emptyScreenStack, self.scrollNode] : [buttonsStack, self.scrollNode]
 
             let addButtonStack = ASStackLayoutSpec.vertical()
             addButtonStack.verticalAlignment = .bottom
@@ -349,7 +340,6 @@ extension MainViewController: MainObserver {
         self.workDayBusesCollectionNode.reloadData()
         self.saturdayBusesCollectionNode.reloadData()
         self.sundayBusesCollectionNode.reloadData()
-        self.mainViewModel.didRefresh = true
     }
     
     func refreshCell(busID: String) {

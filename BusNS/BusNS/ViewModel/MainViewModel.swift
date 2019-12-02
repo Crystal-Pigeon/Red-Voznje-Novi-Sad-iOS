@@ -70,8 +70,8 @@ class MainViewModel {
         SeasonService.self.shared.getSeason { (seasons, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
-                delegate.showError(message: error.message)
                 BusManager.didNotFetchAll()
+                delegate.showError(message: error.message)
                 return
             }
             if let seasons = seasons{
@@ -96,8 +96,8 @@ class MainViewModel {
         LineService.shared.getUrbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
-                delegate.showError(message: error.message)
                 BusManager.didNotFetchAll()
+                delegate.showError(message: error.message)
                 return
             }
             if let lines = lines {
@@ -121,8 +121,8 @@ class MainViewModel {
         LineService.shared.getSuburbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
-                delegate.showError(message: error.message)
                 BusManager.didNotFetchAll()
+                delegate.showError(message: error.message)
                 return
             }
             if let lines = lines {
@@ -147,8 +147,8 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getUrbanBus(id: id) { (buses, error) in
             if let error = error {
-                delegate.showError(message: error.message)
                 BusManager.didNotFetchAll()
+                delegate.showError(message: error.message)
                 return
             }
             if let buses = buses {
@@ -166,8 +166,8 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getSuburbanBus(id: id) { (buses, error) in
             if let error = error {
-                delegate.showError(message: error.message)
                 BusManager.didNotFetchAll()
+                delegate.showError(message: error.message)
                 return
             }
             if let buses = buses {

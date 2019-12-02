@@ -21,6 +21,12 @@ class SeasonService: Service {
         }
         
         AF.request(Endpoint.Season.get(), method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            switch response.result {
+                case .failure:
+                    completionHandler(nil, ServiceError.internetError)
+                    return
+                default: break
+            }
             guard let statusCode = response.response?.statusCode else { return }
             guard let data = response.data else { return }
             let decoder = JSONDecoder()

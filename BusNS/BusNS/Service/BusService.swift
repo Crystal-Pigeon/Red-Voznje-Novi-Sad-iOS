@@ -33,6 +33,12 @@ class BusService: Service {
             return
         }
         AF.request(Endpoint.Bus.getBy(id: id, type: type), method: .get, encoding: JSONEncoding.default, headers:  headers).responseJSON { response in
+            switch response.result {
+                case .failure:
+                    completionHandler(nil, ServiceError.internetError)
+                    return
+                default: break
+            }
             guard let statusCode = response.response?.statusCode else { return }
             guard let data = response.data else { return }
             let decoder = JSONDecoder()

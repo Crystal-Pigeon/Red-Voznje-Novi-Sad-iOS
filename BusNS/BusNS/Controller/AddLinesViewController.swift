@@ -197,6 +197,8 @@ extension AddLinesViewController: AddLinesObserver {
     }
     func didNotFetchAll() {
         self.removeActivityIndicator()
+        guard let navigation = self.navigationController else { return }
+        navigation.popViewController(animated: true)
     }
 }
 

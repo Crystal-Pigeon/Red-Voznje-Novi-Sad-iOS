@@ -22,6 +22,7 @@ class SupportViewController: ASViewController<ASDisplayNode> {
     private let updateAppText = "The app is updated every time the driving season changes."
     private let languageText = "Clicking on language opens a dialog that allows you to select the language in which the content will be displayed."
     private let themeText = "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or light theme."
+    private let linesAvailabilityText = "As far as the lines availability goes, we wanted to let you know that the app also works in offline mode. What this means is that once all of the data is downloaded, you will be able to access desired lines at times of need, even when you don't have internet connection."
     
     init() {
         self.containerNode = ASDisplayNode()
@@ -69,6 +70,7 @@ extension SupportViewController {
         let updateAppTitleStack = self.createHorizontalStack(number: "5.", title: "Application update")
         let languageTitleStack = self.createHorizontalStack(number: "3.1", title: "Language")
         let themeTitleStack = self.createHorizontalStack(number: "3.2", title: "Theme")
+        let linesAvailabilityTitleStack = self.createHorizontalStack(number: "6.", title: "Lines availability")
 
         let homeScreenStack = self.createStackWithDescription(title: homeScreenTitleStack, description: homeScreenText)
         let addLinesScreeneStack = self.createStackWithDescription(title: addLinesScreenTitleStack, description: addLinesScreenText)
@@ -76,6 +78,7 @@ extension SupportViewController {
         let updateAppStack = self.createStackWithDescription(title: updateAppTitleStack, description: updateAppText)
         let languageStack = self.createStackWithDescription(title: languageTitleStack, description: languageText, insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
         let themeStack = self.createStackWithDescription(title: themeTitleStack, description: themeText, insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0))
+        let linesAvailabilityStack = self.createStackWithDescription(title: linesAvailabilityTitleStack, description: linesAvailabilityText)
         
 
         let settingsStack = self.createStackWithDescription(title: settingsScreenTitleStack, description: "On the settings screen you can change:")
@@ -91,13 +94,12 @@ extension SupportViewController {
                 ]
                 settingsScreenStack.spacing = 5
                 
-                helpDescriptionStack.children = [homeScreenStack, addLinesScreeneStack, settingsScreenStack,rearrangeScreenStack, updateAppStack]
+                helpDescriptionStack.children = [homeScreenStack, addLinesScreeneStack, settingsScreenStack,rearrangeScreenStack, updateAppStack, linesAvailabilityStack]
                 helpDescriptionStack.spacing = 20
                 
                 contactDescriptionStack.children = [self.emailImageNode, self.emailButtonNode]
-                contactDescriptionStack.horizontalAlignment = .middle
-                contactDescriptionStack.alignItems = .center
-                contactDescriptionStack.spacing = 5
+                contactDescriptionStack.verticalAlignment = .bottom
+                contactDescriptionStack.spacing = 4
 
                 helpStack.spacing = 20
                 contactStack.spacing = 20
@@ -119,8 +121,9 @@ extension SupportViewController {
         self.containerNode.backgroundColor = Theme.current.color(.supportBackgroundColor)
         self.scrollNode.backgroundColor = Theme.current.color(.supportBackgroundColor)
         self.emailImageNode.image = UIImage(named: "email_icon")
-        self.emailImageNode.style.preferredSize = CGSize(width: 19, height: 14)
-        self.emailImageNode.contentMode = .scaleAspectFit
+        self.emailImageNode.style.preferredSize = CGSize(width: 21, height: 15)
+        self.emailImageNode.alpha = 0.7
+        self.emailImageNode.contentMode = .scaleAspectFill
         self.emailButtonNode.setAttributedTitle(self.node.attributed(text: "contact@crystalpigeon.com", color: Theme.current.color(.supportContactMailColor), font: Fonts.muliLight15), for: .normal)
         self.emailButtonNode.addTarget(self, action: #selector(self.sendEmail), forControlEvents: .touchUpInside)
         self.copyrightsTextNode.attributedText = self.node.attributed(text: "Copyrights ® Crystal Pigeon, 2019", color: Theme.current.color(.supportCopyrightsColor), font: Fonts.muliRegular13)

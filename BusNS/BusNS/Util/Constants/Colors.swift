@@ -24,5 +24,6 @@ struct Colors {
     public static let lightDark = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1)
     public static let transparentWhiteDarker = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.75)
     public static let transparentWhiteLighter = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.25)
+    public static let separatorGrey = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
     public static let clear = UIColor.clear
 }

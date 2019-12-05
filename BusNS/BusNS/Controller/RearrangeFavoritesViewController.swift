@@ -49,9 +49,8 @@ extension RearrangeFavoritesViewController {
         tableNode.delegate = self
         tableNode.dataSource = self
         tableNode.view.isEditing = true
-        if Theme.current.mode == .dark {
-            tableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
-        }
+        tableNode.view.separatorColor = rearrangeFavoritesViewModel.favorites.isEmpty ? UIColor.clear : Theme.current.color(.tableSeparatorColor)
+        tableNode.view.tableFooterView = UIView(frame: .zero)
         return tableNode
     }
 }
@@ -63,7 +62,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return self.rearrangeFavoritesViewModel.favorites.count
+        return !self.rearrangeFavoritesViewModel.favorites.isEmpty ? self.rearrangeFavoritesViewModel.favorites.count : 1
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
@@ -73,7 +72,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
         ]
         cellNode.selectionStyle = .none
-        cellNode.text = rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row])
+        cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any buses to favorites".localized()
         
         return cellNode
     }
@@ -87,7 +86,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return !self.rearrangeFavoritesViewModel.favorites.isEmpty
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

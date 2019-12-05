@@ -53,6 +53,7 @@ public class LightTheme: Theme {
         .settingsExplenationColor: Colors.transparentDarkBlue,
         .settingsLineColor: Colors.transparentDarkBlueLighter,
         .rearrangeFavoritesTable: Colors.white,
-        .rearrangeFavoritesLineColor: Colors.darkBlue
+        .rearrangeFavoritesLineColor: Colors.darkBlue,
+        .tableSeparatorColor: Colors.separatorGrey
     ]
 }

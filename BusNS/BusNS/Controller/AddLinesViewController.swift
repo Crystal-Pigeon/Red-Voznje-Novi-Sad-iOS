@@ -58,6 +58,7 @@ extension AddLinesViewController {
         let tableNode = ASTableNode()
         tableNode.delegate = self
         tableNode.dataSource = self
+        tableNode.view.tableFooterView = UIView(frame: .zero)
         return tableNode
     }
     
@@ -106,6 +107,7 @@ extension AddLinesViewController {
     }
     
     private func colorAppearance() {
+        self.containerNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
         self.urbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
         self.suburbanBusesButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
@@ -115,10 +117,8 @@ extension AddLinesViewController {
         self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
         
-        if Theme.current.mode == .dark {
-            self.suburbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
-            self.urbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
-        }
+        self.suburbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
+        self.urbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
     }
     
     private func appearance() {

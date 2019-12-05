@@ -54,6 +54,7 @@ public class LightTheme: Theme {
         .settingsLineColor: Colors.transparentDarkBlueLighter,
         .rearrangeFavoritesTable: Colors.white,
         .rearrangeFavoritesLineColor: Colors.darkBlue,
-        .tableSeparatorColor: Colors.separatorGrey
+        .tableSeparatorColor: Colors.separatorGrey,
+        .animationTextColor: Colors.white
     ]
 }

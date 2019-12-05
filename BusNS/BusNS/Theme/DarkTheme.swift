@@ -55,5 +55,6 @@ public class DarkTheme: Theme {
         .settingsMainColor: Colors.transparentWhiteDarker,
         .settingsBackgroundColor: Colors.lightDark,
         .settingsLineColor: Colors.transparentWhiteDarker.withAlphaComponent(0.25),
+        .animationTextColor: Colors.white
     ]
 }

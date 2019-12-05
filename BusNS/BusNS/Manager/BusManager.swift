@@ -21,6 +21,7 @@ class BusManager {
             viewModel.refreshLines()
         }
     }
+    public static var wasOnLinesScreen = false
     
     public static var numberOfFetchedBuses = 0 {
         didSet {
@@ -34,11 +35,13 @@ class BusManager {
         }
     }
     
-    public static var didFetchAll: Bool {
+    public static var isFetchedAll: Bool {
         return numberOfFetchedLines == numberOfFetchedBuses
     }
     
     public static func didNotFetchAll() {
+        self.numberOfFetchedBuses = 0
+        self.numberOfFetchedLines = 0
         guard let viewModel = self.linesViewModel else { return }
         viewModel.didNotFetchAll()
     }

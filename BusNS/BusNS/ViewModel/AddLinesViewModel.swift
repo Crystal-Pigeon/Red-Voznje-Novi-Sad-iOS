@@ -55,6 +55,7 @@ class AddLinesViewModel {
     }
     
     public func fetchedAll() {
+        guard StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) else { return }
         self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
         self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
         guard let delegate = self.observer else { return }

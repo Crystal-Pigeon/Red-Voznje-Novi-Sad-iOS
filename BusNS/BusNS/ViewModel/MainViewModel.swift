@@ -32,6 +32,7 @@ class MainViewModel {
     private var lastCount = BusManager.favorites.count
     private var urbanBuses = [[Bus]]()
     private var suburbanBuses = [[Bus]]()
+    private var didShowError = false
     
     init(){
         BusManager.mainViewModel = self
@@ -106,11 +107,21 @@ class MainViewModel {
                 
                 let favouriteUrban = self.urbanLines.filter { self.favorites.contains($0.id)}
                 favouriteUrban.forEach { line in
+                    guard NetworkManager.shared.isInternetAvailable() else {
+                        BusManager.didNotFetchAll()
+                        delegate.showError(message: ServiceError.internetError.message)
+                        return
+                    }
                     self.fetchUrbanBus(line: line, isFavourite: true)
                 }
                 
                 let notFavouriteUrban = self.urbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteUrban.forEach { line in
+                    guard NetworkManager.shared.isInternetAvailable() else {
+                        BusManager.didNotFetchAll()
+                        delegate.showError(message: ServiceError.internetError.message)
+                        return
+                    }
                     self.fetchUrbanBus(line: line, isFavourite: false)
                 }
             }
@@ -131,11 +142,21 @@ class MainViewModel {
                 
                 let favouriteSuburban = self.suburbanLines.filter { self.favorites.contains($0.id)}
                 favouriteSuburban.forEach { line in
+                    guard NetworkManager.shared.isInternetAvailable() else {
+                        BusManager.didNotFetchAll()
+                        delegate.showError(message: ServiceError.internetError.message)
+                        return
+                    }
                     self.fetchSuburbanBus(line: line, isFavourite: true)
                 }
                 
                 let notFavouriteSuburban = self.suburbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteSuburban.forEach { line in
+                    guard NetworkManager.shared.isInternetAvailable() else {
+                        BusManager.didNotFetchAll()
+                        delegate.showError(message: ServiceError.internetError.message)
+                        return
+                    }
                     self.fetchSuburbanBus(line: line, isFavourite: false)
                 }
             }
@@ -147,6 +168,8 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getUrbanBus(id: id) { (buses, error) in
             if let error = error {
+                if self.didShowError { return }
+                self.didShowError = true
                 BusManager.didNotFetchAll()
                 delegate.showError(message: error.message)
                 return
@@ -166,6 +189,8 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getSuburbanBus(id: id) { (buses, error) in
             if let error = error {
+                if self.didShowError { return }
+                self.didShowError = true
                 BusManager.didNotFetchAll()
                 delegate.showError(message: error.message)
                 return

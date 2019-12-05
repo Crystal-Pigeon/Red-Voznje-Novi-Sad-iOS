@@ -35,6 +35,7 @@ extension ASViewController {
     
     @objc func showActivityIndicator() {
         if activityLoader.isOnScreen { return }
+        activityLoader = ActivityLoaderViewController()
         activityLoader.modalPresentationStyle = .overFullScreen
         self.present(activityLoader, animated: false, completion: nil)
     }

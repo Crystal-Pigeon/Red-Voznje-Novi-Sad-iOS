@@ -45,25 +45,51 @@ extension ASViewController {
     
     @objc func showPicker(with title: String, delegate: UIPickerViewDelegate, dataSource: UIPickerViewDataSource, selectedRow: Int = 0) {
         let actionSheet = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        let picker = UIPickerView(frame: CGRect(x: 0, y: 27, width: actionSheet.view.frame.width - 16, height: 145))
-        picker.dataSource = dataSource
-        picker.delegate = delegate
-        picker.selectRow(selectedRow, inComponent: 0, animated: false)
-        actionSheet.view.addSubview(picker)
         
-        actionSheet.addAction(UIAlertAction(title: "Done".localized(), style: .default, handler: { action in
-            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "didClickDone"), object: nil)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil))
-        
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: actionSheet.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 280)
-        actionSheet.view.addConstraint(height)
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        if deviceIdiom == .pad {
+            let height: NSLayoutConstraint = NSLayoutConstraint(item: actionSheet.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 280)
+            actionSheet.view.addConstraint(height)
+            let width: NSLayoutConstraint = NSLayoutConstraint(item: actionSheet.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 500)
+            actionSheet.view.addConstraint(width)
+            
+            let picker = UIPickerView(frame: CGRect(x: 0, y: 50, width: 500, height: 200))
+            picker.dataSource = dataSource
+            picker.delegate = delegate
+            picker.selectRow(selectedRow, inComponent: 0, animated: false)
+            actionSheet.view.addSubview(picker)
+            
+            actionSheet.addAction(UIAlertAction(title: "Done".localized(), style: .default, handler: { action in
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "didClickDone"), object: nil)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil))
+            
+            if let popoverController = actionSheet.popoverPresentationController {
+                popoverController.sourceView = self.view //to set the source of your alert
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+                popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+            }
+            
+        }
+        else {
+            let picker = UIPickerView(frame: CGRect(x: 0, y: 27, width: actionSheet.view.frame.width - 16, height: 145))
+            picker.dataSource = dataSource
+            picker.delegate = delegate
+            picker.selectRow(selectedRow, inComponent: 0, animated: false)
+            actionSheet.view.addSubview(picker)
+            
+            actionSheet.addAction(UIAlertAction(title: "Done".localized(), style: .default, handler: { action in
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "didClickDone"), object: nil)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil))
+            
+            let height: NSLayoutConstraint = NSLayoutConstraint(item: actionSheet.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 280)
+            actionSheet.view.addConstraint(height)
+        }
         
         if #available(iOS 13.0, *) {
             actionSheet.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
         }
-        
         present(actionSheet, animated: true, completion: nil)
     }
 }

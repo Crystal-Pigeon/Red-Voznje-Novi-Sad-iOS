@@ -28,7 +28,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.title = "Bus NS".localized()
+        self.title = "Red Vožnje - Novi Sad".localized()
     }
     
     required init?(coder: NSCoder) {

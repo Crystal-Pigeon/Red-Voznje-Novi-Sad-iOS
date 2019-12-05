@@ -43,6 +43,7 @@ class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
         textLayer.font = Fonts.muliRegular10
         textLayer.foregroundColor = Theme.current.color(.animationTextColor).cgColor
         textLayer.alignmentMode = .center
+        textLayer.contentsScale = UIScreen.main.scale
         
         containerView.layer.addSublayer(imageLayer)
         containerView.layer.addSublayer(textLayer)

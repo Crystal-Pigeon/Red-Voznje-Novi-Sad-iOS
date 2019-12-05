@@ -33,6 +33,9 @@ class MainViewModel {
     private var urbanBuses = [[Bus]]()
     private var suburbanBuses = [[Bus]]()
     private var didShowError = false
+    private var isDataAlreadyCached: Bool {
+        return StorageManager.fileExists(StorageKeys.season, in: .caches)
+    }
     
     init(){
         BusManager.mainViewModel = self
@@ -71,12 +74,13 @@ class MainViewModel {
         SeasonService.self.shared.getSeason { (seasons, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
+                if self.isDataAlreadyCached { return }
                 BusManager.didNotFetchAll()
                 delegate.showError(message: error.message)
                 return
             }
             if let seasons = seasons{
-                let newSeason = seasons[0]
+                let newSeason = seasons[0] //TEST: Season(date: "01-06-2020", season: "LETO 2020")
                 let oldSeason: Season?
                 if StorageManager.fileExists(StorageKeys.season, in: .caches) {
                     oldSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
@@ -88,7 +92,6 @@ class MainViewModel {
                 
                 self.fetchUrbanLines()
                 self.fetchSuburbanLines()
-                
             }
         }
     }
@@ -97,6 +100,7 @@ class MainViewModel {
         LineService.shared.getUrbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
+                if self.isDataAlreadyCached { return }
                 BusManager.didNotFetchAll()
                 delegate.showError(message: error.message)
                 return
@@ -132,6 +136,7 @@ class MainViewModel {
         LineService.shared.getSuburbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
+                if self.isDataAlreadyCached { return }
                 BusManager.didNotFetchAll()
                 delegate.showError(message: error.message)
                 return
@@ -168,6 +173,7 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getUrbanBus(id: id) { (buses, error) in
             if let error = error {
+                if self.isDataAlreadyCached { return }
                 if self.didShowError { return }
                 self.didShowError = true
                 BusManager.didNotFetchAll()
@@ -189,6 +195,7 @@ class MainViewModel {
         let id = line.id
         BusService.shared.getSuburbanBus(id: id) { (buses, error) in
             if let error = error {
+                if self.isDataAlreadyCached { return }
                 if self.didShowError { return }
                 self.didShowError = true
                 BusManager.didNotFetchAll()

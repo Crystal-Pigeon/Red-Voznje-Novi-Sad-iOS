@@ -17,7 +17,7 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.title = "Rearrange favorites".localized()
+        self.title = "Rearrange".localized()
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +72,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
         ]
         cellNode.selectionStyle = .none
-        cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any buses to favorites".localized()
+        cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized()
         
         return cellNode
     }

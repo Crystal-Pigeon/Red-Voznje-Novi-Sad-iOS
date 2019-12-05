@@ -34,7 +34,7 @@
 "Language" = "Language";
 "Language text" = "Clicking on language opens a dialog that allows you to select the language in which the content will be displayed.";
 "Theme" = "Theme";
-"Theme text" = "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or light theme.";
+"Theme text" = "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or a light theme.";
 "Update" = "Update";
 "Update app text" = "The app is updated every time the driving season changes.";
 "Settings" = "Settings";
@@ -49,10 +49,10 @@
 "Light Theme" = "Light Theme";
 "Choose language" = "Choose language";
 "Choose theme" = "Choose theme";
-"Rearrange favorites" = "Rearrange favorites";
+"Rearrange" = "Rearrange";
 "Rearrange favorites screen" = "Rearrange favorites screen";
 "Rearrange screen text" = "This screen contains all the lines you've previously added to your home screen as your favorites, and on which you can rearrange them as you see fit.";
 "Try again" = "Try again";
 "Availability" = "Availability";
 "Lines availability text" = "We wanted to let you know that the app also works in offline mode. What this means is that once all of the data is downloaded, you will be able to access desired bus schedules at times of need, even when you don't have internet connection.";
-"You haven't added any buses to favorites" = "You haven't added any buses to favorites";
+"You haven't added any lines to favorites" = "You haven't added any lines to favorites";

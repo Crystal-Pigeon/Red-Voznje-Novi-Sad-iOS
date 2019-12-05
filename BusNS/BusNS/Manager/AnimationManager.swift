@@ -17,7 +17,7 @@ class AnimationManager {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.fromValue = 1.0
         animation.toValue = 1.2
-        animation.duration = 0.5
+        animation.duration = 0.4
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.repeatCount = .infinity
         animation.autoreverses = true

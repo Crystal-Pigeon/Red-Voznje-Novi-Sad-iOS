@@ -31,4 +31,5 @@ public enum ColorIdentifier: Int {
     case supportBackgroundColor, supportTitleColor, supportTextColor, supportContactMailColor, supportCopyrightsColor
     case settingsBackgroundColor, settingsMainColor, settingsExplenationColor, settingsLineColor
     case rearrangeFavoritesTable, rearrangeFavoritesLineColor
+    case animationTextColor
 }

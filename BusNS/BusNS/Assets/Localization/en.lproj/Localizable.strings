@@ -56,3 +56,4 @@
 "Availability" = "Availability";
 "Lines availability text" = "We wanted to let you know that the app also works in offline mode. What this means is that once all of the data is downloaded, you will be able to access desired bus schedules at times of need, even when you don't have internet connection.";
 "You haven't added any lines to favorites" = "You haven't added any lines to favorites";
+"Loading lines..." =  "Loading lines...";

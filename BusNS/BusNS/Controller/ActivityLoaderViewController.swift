@@ -27,13 +27,25 @@ class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
     
     override func viewDidLoad() {
         let containerView = UIView(frame: self.view.bounds)
+        
         let imageLayer = CAShapeLayer()
         imageLayer.backgroundColor = UIColor.clear.cgColor
         imageLayer.bounds = CGRect(x: UIScreen.main.bounds.midX - 42, y: UIScreen.main.bounds.midY - 40, width: 84, height: 80)
         imageLayer.position = CGPoint(x: UIScreen.main.bounds.midX ,y: UIScreen.main.bounds.midY)
         imageLayer.contents = UIImage(named: "logo-white")?.cgImage
         imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
+        
+        let textLayer = CATextLayer()
+        textLayer.backgroundColor = UIColor.clear.cgColor
+        textLayer.frame = CGRect(x: UIScreen.main.bounds.midX - 75, y: UIScreen.main.bounds.midY + 60, width: 150, height: 20)
+        textLayer.string = "Loading lines...".localized()
+        textLayer.fontSize = 14
+        textLayer.font = Fonts.muliRegular10
+        textLayer.foregroundColor = Theme.current.color(.animationTextColor).cgColor
+        textLayer.alignmentMode = .center
+        
         containerView.layer.addSublayer(imageLayer)
+        containerView.layer.addSublayer(textLayer)
         self.view.addSubview(containerView)
     }
     

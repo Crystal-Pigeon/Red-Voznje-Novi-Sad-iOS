@@ -92,17 +92,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
 extension MainViewController {
     @objc private func dayButtonTapped(sender: ASButtonNode) {
         if sender == workdayButton {
-            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            }
         } else if sender == saturdayButton {
-            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 3, y: 0), animated: true)
-            }
         } else if sender == sundayButton {
-            if !self.mainViewModel.favorites.isEmpty {
                 self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: true)
-            }
         }
     }
     

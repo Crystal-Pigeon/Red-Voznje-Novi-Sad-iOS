@@ -28,7 +28,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
-        self.title = "Red Vožnje - Novi Sad".localized()
+        self.title = "Red Vožnje".localized()
     }
     
     required init?(coder: NSCoder) {
@@ -154,6 +154,11 @@ extension MainViewController {
             let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
             actionSheet.addAction(actionDelete)
             actionSheet.addAction(actionCancel)
+            if let popoverController = actionSheet.popoverPresentationController {
+                popoverController.sourceView = self.view //to set the source of your alert
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+                popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+            }
             if #available(iOS 13.0, *) {
                 actionSheet.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
             }
@@ -217,6 +222,7 @@ extension MainViewController {
             
             let stack = ASStackLayoutSpec.vertical()
             stack.children = self.mainViewModel.favorites.isEmpty ? [buttonsStack, emptyScreenStack, self.scrollNode] : [buttonsStack, self.scrollNode]
+            self.scrollNode.isHidden = self.mainViewModel.favorites.isEmpty
 
             let addButtonStack = ASStackLayoutSpec.vertical()
             addButtonStack.verticalAlignment = .bottom

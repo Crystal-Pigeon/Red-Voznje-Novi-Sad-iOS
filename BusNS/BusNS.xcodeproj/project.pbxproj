@@ -109,7 +109,7 @@
 		AD4C69C2237471A600DC5D7B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		AD4C69C4237471EE00DC5D7B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		AD583D79237979E000AE24AD /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Red Vožnje - Novi Sad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD81A26B237448C60097812D /* Red Vožnje.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Red Vožnje.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD81A26E237448C60097812D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD81A270237448C60097812D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AD81A277237448CA0097812D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 		AD81A26C237448C60097812D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */,
+				AD81A26B237448C60097812D /* Red Vožnje.app */,
 				AD81A281237448CA0097812D /* BusNSTests.xctest */,
 			);
 			name = Products;
@@ -423,7 +423,7 @@
 			);
 			name = BusNS;
 			productName = BusNS;
-			productReference = AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */;
+			productReference = AD81A26B237448C60097812D /* Red Vožnje.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AD81A280237448CA0097812D /* BusNSTests */ = {
@@ -764,7 +764,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crystalpigeon.busns;
-				PRODUCT_NAME = "Red Vožnje - Novi Sad";
+				PRODUCT_NAME = "Red Vožnje";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -787,7 +787,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crystalpigeon.busns;
-				PRODUCT_NAME = "Red Vožnje - Novi Sad";
+				PRODUCT_NAME = "Red Vožnje";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

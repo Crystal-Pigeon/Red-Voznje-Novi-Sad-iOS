@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupTheme(window: UIWindow) {
-        if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
+        if !StorageManager.isThemeAlreadyCached {
             if #available(iOS 13.0, *) {
                 let theme = window.traitCollection.userInterfaceStyle
                 Theme.current = theme == .dark ? DarkTheme() : LightTheme()
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Theme.current = LightTheme()
             }
         } else {
-            let theme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+            let theme = StorageManager.retrieveTheme()
             if theme == ThemeMode.dark.description {
                 Theme.current = DarkTheme()
             } else {

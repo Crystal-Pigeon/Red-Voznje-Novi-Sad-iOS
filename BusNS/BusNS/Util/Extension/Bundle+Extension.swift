@@ -11,8 +11,8 @@ import Foundation
 extension Bundle {
     public static func localizedBundle() -> Bundle! {
         var appLang = "en"
-        if StorageManager.fileExists(StorageKeys.language, in: .caches) {
-            appLang = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
+        if StorageManager.isLanguageAlreadyCached {
+            appLang = StorageManager.retrieveLanguage()
         } else {
             appLang = Locale.current.languageCode ?? "en"
         }

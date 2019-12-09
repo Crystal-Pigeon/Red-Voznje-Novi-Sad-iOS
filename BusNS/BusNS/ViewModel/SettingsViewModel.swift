@@ -27,10 +27,10 @@ class SettingsViewModel {
     init(){}
     
     public func getLanguageAndTheme(){
-        if !StorageManager.fileExists(StorageKeys.language, in: .caches) {
+        if !StorageManager.isLanguageAlreadyCached {
             currentLanguage = languages[0]
         } else {
-            let languageShort = StorageManager.retrieve(StorageKeys.language, from: .caches, as: String.self)
+            let languageShort = StorageManager.retrieveLanguage()
             if languageShort == "en" {
                 currentLanguage = "English"
             } else {
@@ -38,10 +38,10 @@ class SettingsViewModel {
             }
         }
         
-        if !StorageManager.fileExists(StorageKeys.theme, in: .caches) {
+        if !StorageManager.isThemeAlreadyCached {
             currentTheme = Theme.current.mode.description
         } else {
-            currentTheme = StorageManager.retrieve(StorageKeys.theme, from: .caches, as: String.self)
+            currentTheme = StorageManager.retrieveTheme()
         }
     }
     
@@ -73,9 +73,9 @@ class SettingsViewModel {
         guard let language = languageSelected else { return }
         currentLanguage = language
         if currentLanguage == "English" {
-            StorageManager.store("en", to: .caches, as: StorageKeys.language)
+            StorageManager.cache(language: "en")
         } else {
-            StorageManager.store("sr", to: .caches, as: StorageKeys.language)
+            StorageManager.cache(language: "sr")
         }
         guard let delegate = observer else { return }
         delegate.refreshLanguage()
@@ -86,10 +86,10 @@ class SettingsViewModel {
         currentTheme = theme
         
         if currentTheme == ThemeMode.light.description {
-            StorageManager.store(ThemeMode.light.description, to: .caches, as: StorageKeys.theme)
+            StorageManager.cache(theme: ThemeMode.light.description)
             Theme.current = LightTheme()
         } else {
-            StorageManager.store(ThemeMode.dark.description, to: .caches, as: StorageKeys.theme)
+            StorageManager.cache(theme: ThemeMode.dark.description)
             Theme.current = DarkTheme()
         }
         guard let delegate = observer else { return }

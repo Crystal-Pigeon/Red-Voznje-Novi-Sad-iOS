@@ -14,11 +14,14 @@ class BusManager {
     public static var favorites = [String]()
     public static var linesViewModel: AddLinesViewModel?
     public static var mainViewModel: MainViewModel?
+    public static var fetchLinesFlag = false
     public static var numberOfFetchedLines = 0 {
         didSet {
             if numberOfFetchedLines == 0 { return }
             guard let viewModel = self.linesViewModel else { return }
             viewModel.refreshLines()
+            if fetchLinesFlag { viewModel.fetchedAll() }
+            fetchLinesFlag = true
         }
     }
     public static var wasOnLinesScreen = false

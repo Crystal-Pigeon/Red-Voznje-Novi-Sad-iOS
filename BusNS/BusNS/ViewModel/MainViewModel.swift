@@ -107,6 +107,7 @@ class MainViewModel {
             }
             if let lines = lines {
                 self.urbanLines = lines
+                StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
                 BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteUrban = self.urbanLines.filter { self.favorites.contains($0.id)}
@@ -143,6 +144,7 @@ class MainViewModel {
             }
             if let lines = lines {
                 self.suburbanLines = lines
+                StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
                 BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteSuburban = self.suburbanLines.filter { self.favorites.contains($0.id)}
@@ -183,9 +185,10 @@ class MainViewModel {
             if let buses = buses {
                 self.urbanBuses.append(buses)
                 BusManager.numberOfFetchedBuses += 1
-                if isFavourite {
-                    delegate.refreshCell(busID: id)
-                }
+                guard let first = buses.first else { return }
+                let sk = StorageKeys.bus + "\(first.id)"
+                StorageManager.store(buses, to: .caches, as: sk)
+                delegate.refreshCell(busID: id)
             }
         }
     }
@@ -205,26 +208,27 @@ class MainViewModel {
             if let buses = buses {
                 self.suburbanBuses.append(buses)
                 BusManager.numberOfFetchedBuses += 1
-                if isFavourite {
-                    delegate.refreshCell(busID: id)
-                }
+                guard let first = buses.first else { return }
+                let sk = StorageKeys.bus + "\(first.id)"
+                StorageManager.store(buses, to: .caches, as: sk)
+                delegate.refreshCell(busID: id)
             }
         }
     }
     
     public func fetchedAll() {
         StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
-        StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
-        StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
-        for bus in self.urbanBuses {
-            guard let first = bus.first else { return }
-            let sk = StorageKeys.bus + "\(first.id)"
-            StorageManager.store(bus, to: .caches, as: sk)
-        }
-        for bus in self.suburbanBuses {
-            guard let first = bus.first else { return }
-            let sk = StorageKeys.bus + "\(first.id)"
-            StorageManager.store(bus, to: .caches, as: sk)
-        }
+//        StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
+//        StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
+//        for bus in self.urbanBuses {
+//            guard let first = bus.first else { return }
+//            let sk = StorageKeys.bus + "\(first.id)"
+//            StorageManager.store(bus, to: .caches, as: sk)
+//        }
+//        for bus in self.suburbanBuses {
+//            guard let first = bus.first else { return }
+//            let sk = StorageKeys.bus + "\(first.id)"
+//            StorageManager.store(bus, to: .caches, as: sk)
+//        }
     }
 }

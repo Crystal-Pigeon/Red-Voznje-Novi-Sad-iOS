@@ -324,7 +324,7 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
             let newBus = Bus(id: bus.id, number: bus.number, name: bus.name, lineA: nil, lineB: nil, line: "There is no schedule".localized(), day: self.mainViewModel.tagsDict[collectionNode.view.tag]!, scheduleA: nil, scheduleB: nil, schedule: nil, extras: "")
             return BusCellNode(bus: newBus)
         }
-        return ASCellNode()
+        return EmptyBusCellNode()
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {

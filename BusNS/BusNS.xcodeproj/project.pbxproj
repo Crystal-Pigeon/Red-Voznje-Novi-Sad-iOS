@@ -32,6 +32,7 @@
 		AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD056229237A213300010D78 /* ASViewController+Extension.swift */; };
 		AD05622C237A24D200010D78 /* StorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622B237A24D200010D78 /* StorageKeys.swift */; };
 		AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622D237A26B300010D78 /* AddLinesViewModelTest.swift */; };
+		AD2B2075239E8BB500402DA8 /* EmptyBusCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */; };
 		AD2D8FC323827DF0005B4F9E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; };
 		AD2D8FC423827DF0005B4F9E /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
 		AD2D8FC523827DF0005B4F9E /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; };
@@ -104,6 +105,7 @@
 		AD056229237A213300010D78 /* ASViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASViewController+Extension.swift"; sourceTree = "<group>"; };
 		AD05622B237A24D200010D78 /* StorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKeys.swift; sourceTree = "<group>"; };
 		AD05622D237A26B300010D78 /* AddLinesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinesViewModelTest.swift; sourceTree = "<group>"; };
+		AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBusCellNode.swift; sourceTree = "<group>"; };
 		AD4C69BF23746D0800DC5D7B /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4C69C023746D1300DC5D7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4C69C2237471A600DC5D7B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				A52361B4237C3977006857CA /* BusCellNode.swift */,
+				AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				AD81A26F237448C60097812D /* AppDelegate.swift in Sources */,
 				AD4C69C3237471A600DC5D7B /* String+Extension.swift in Sources */,
 				AD056223237A140F00010D78 /* Service.swift in Sources */,
+				AD2B2075239E8BB500402DA8 /* EmptyBusCellNode.swift in Sources */,
 				AD81A29623744E1C0097812D /* LightTheme.swift in Sources */,
 				AD9BD4F82388892300B1294B /* BusManager.swift in Sources */,
 				AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */,

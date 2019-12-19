@@ -76,5 +76,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        if !StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) || !StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) {
+            StorageManager.remove(StorageKeys.season, from: .caches)
+            return
+        }
+        let urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
+        let suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
+        for line in urbanLines {
+            if !StorageManager.fileExists(StorageKeys.bus + line.id, in: .caches) {
+                StorageManager.remove(StorageKeys.season, from: .caches)
+                return
+            }
+        }
+        for line in suburbanLines {
+            if !StorageManager.fileExists(StorageKeys.bus + line.id, in: .caches) {
+                StorageManager.remove(StorageKeys.season, from: .caches)
+                return
+            }
+        }
+    }
 }
 

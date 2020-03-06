@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2D20A0C84B2A5DF1F4DFFBF /* Pods_BusNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87B9A54E8D64CC78BA49377 /* Pods_BusNS.framework */; };
 		A51EC26E237453E600298B09 /* Muli-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2672374528000298B09 /* Muli-ExtraLight.ttf */; };
 		A51EC271237453F000298B09 /* Muli-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2622374527F00298B09 /* Muli-Black.ttf */; };
 		A51EC272237453F300298B09 /* Muli-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A51EC2642374527F00298B09 /* Muli-ExtraBold.ttf */; };
@@ -33,11 +34,6 @@
 		AD05622C237A24D200010D78 /* StorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622B237A24D200010D78 /* StorageKeys.swift */; };
 		AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05622D237A26B300010D78 /* AddLinesViewModelTest.swift */; };
 		AD2B2075239E8BB500402DA8 /* EmptyBusCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */; };
-		AD2D8FC323827DF0005B4F9E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AC23745DF10097812D /* Alamofire.framework */; };
-		AD2D8FC423827DF0005B4F9E /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AE23745DF10097812D /* AsyncDisplayKit.framework */; };
-		AD2D8FC523827DF0005B4F9E /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AD23745DF10097812D /* PINCache.framework */; };
-		AD2D8FC623827DF0005B4F9E /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AA23745DF10097812D /* PINOperation.framework */; };
-		AD2D8FC723827DF0005B4F9E /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD81A2AB23745DF10097812D /* PINRemoteImage.framework */; };
 		AD4C69BC23746D0300DC5D7B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4C69BE23746D0300DC5D7B /* Localizable.strings */; };
 		AD4C69C3237471A600DC5D7B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C2237471A600DC5D7B /* String+Extension.swift */; };
 		AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C69C4237471EE00DC5D7B /* Bundle+Extension.swift */; };
@@ -67,6 +63,7 @@
 		DF520E74237C134C004DAE75 /* BusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E73237C134C004DAE75 /* BusTests.swift */; };
 		DF520E7C237C2273004DAE75 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E7B237C2273004DAE75 /* Bus.swift */; };
 		DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */; };
+		FB0E7C86374A5E84C6375A71 /* Pods_BusNSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C01EA29818206B3C5627BF /* Pods_BusNSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +77,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08C01EA29818206B3C5627BF /* Pods_BusNSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusNSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		134AAC884E2740D1F26F64A7 /* Pods-BusNSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusNSTests.release.xcconfig"; path = "Target Support Files/Pods-BusNSTests/Pods-BusNSTests.release.xcconfig"; sourceTree = "<group>"; };
+		7CBCE48E576E14A44AC931E1 /* Pods-BusNS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusNS.release.xcconfig"; path = "Target Support Files/Pods-BusNS/Pods-BusNS.release.xcconfig"; sourceTree = "<group>"; };
+		8C2C172C18958909D7FDCFF6 /* Pods-BusNSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusNSTests.debug.xcconfig"; path = "Target Support Files/Pods-BusNSTests/Pods-BusNSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8F547AF47838BDCE637D85D8 /* Pods-BusNS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusNS.debug.xcconfig"; path = "Target Support Files/Pods-BusNS/Pods-BusNS.debug.xcconfig"; sourceTree = "<group>"; };
 		A51EC2612374527F00298B09 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
 		A51EC2622374527F00298B09 /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
 		A51EC2642374527F00298B09 /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -111,7 +113,7 @@
 		AD4C69C2237471A600DC5D7B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		AD4C69C4237471EE00DC5D7B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		AD583D79237979E000AE24AD /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		AD81A26B237448C60097812D /* Red Vožnje.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Red Vožnje.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Red Vožnje - Novi Sad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD81A26E237448C60097812D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD81A270237448C60097812D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AD81A277237448CA0097812D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		AD9BD4F72388892300B1294B /* BusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusManager.swift; sourceTree = "<group>"; };
 		AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASNavigationController+Extension.swift"; sourceTree = "<group>"; };
 		ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLoaderViewController.swift; sourceTree = "<group>"; };
+		C87B9A54E8D64CC78BA49377 /* Pods_BusNS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusNS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
 		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -152,11 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD2D8FC323827DF0005B4F9E /* Alamofire.framework in Frameworks */,
-				AD2D8FC423827DF0005B4F9E /* AsyncDisplayKit.framework in Frameworks */,
-				AD2D8FC523827DF0005B4F9E /* PINCache.framework in Frameworks */,
-				AD2D8FC623827DF0005B4F9E /* PINOperation.framework in Frameworks */,
-				AD2D8FC723827DF0005B4F9E /* PINRemoteImage.framework in Frameworks */,
+				A2D20A0C84B2A5DF1F4DFFBF /* Pods_BusNS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB0E7C86374A5E84C6375A71 /* Pods_BusNSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,13 +282,14 @@
 				AD81A284237448CA0097812D /* BusNSTests */,
 				AD81A26C237448C60097812D /* Products */,
 				AD81A2A923745DF10097812D /* Frameworks */,
+				DA6A92A59B3D5CFA6E0E66B7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		AD81A26C237448C60097812D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AD81A26B237448C60097812D /* Red Vožnje.app */,
+				AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */,
 				AD81A281237448CA0097812D /* BusNSTests.xctest */,
 			);
 			name = Products;
@@ -391,6 +392,8 @@
 				AD81A2AD23745DF10097812D /* PINCache.framework */,
 				AD81A2AA23745DF10097812D /* PINOperation.framework */,
 				AD81A2AB23745DF10097812D /* PINRemoteImage.framework */,
+				C87B9A54E8D64CC78BA49377 /* Pods_BusNS.framework */,
+				08C01EA29818206B3C5627BF /* Pods_BusNSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -408,6 +411,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		DA6A92A59B3D5CFA6E0E66B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F547AF47838BDCE637D85D8 /* Pods-BusNS.debug.xcconfig */,
+				7CBCE48E576E14A44AC931E1 /* Pods-BusNS.release.xcconfig */,
+				8C2C172C18958909D7FDCFF6 /* Pods-BusNSTests.debug.xcconfig */,
+				134AAC884E2740D1F26F64A7 /* Pods-BusNSTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -415,10 +429,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD81A28A237448CA0097812D /* Build configuration list for PBXNativeTarget "BusNS" */;
 			buildPhases = (
+				82C724054ECF2DC6CE595C04 /* [CP] Check Pods Manifest.lock */,
 				AD81A267237448C60097812D /* Sources */,
 				AD81A268237448C60097812D /* Frameworks */,
 				AD81A269237448C60097812D /* Resources */,
-				AD81A2BA23745E010097812D /* ShellScript */,
+				8FDC2CEBC03A7CF67C3E6D86 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -426,13 +441,14 @@
 			);
 			name = BusNS;
 			productName = BusNS;
-			productReference = AD81A26B237448C60097812D /* Red Vožnje.app */;
+			productReference = AD81A26B237448C60097812D /* Red Vožnje - Novi Sad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AD81A280237448CA0097812D /* BusNSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD81A28D237448CA0097812D /* Build configuration list for PBXNativeTarget "BusNSTests" */;
 			buildPhases = (
+				6E7E5DD643B4A81F1914AC9D /* [CP] Check Pods Manifest.lock */,
 				AD81A27D237448CA0097812D /* Sources */,
 				AD81A27E237448CA0097812D /* Frameworks */,
 				AD81A27F237448CA0097812D /* Resources */,
@@ -515,32 +531,66 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AD81A2BA23745E010097812D /* ShellScript */ = {
+		6E7E5DD643B4A81F1914AC9D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PINCache.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PINOperation.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PINRemoteImage.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AsyncDisplayKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINCache.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINOperation.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PINRemoteImage.framework",
+				"$(DERIVED_FILE_DIR)/Pods-BusNSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82C724054ECF2DC6CE595C04 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BusNS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FDC2CEBC03A7CF67C3E6D86 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BusNS/Pods-BusNS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BusNS/Pods-BusNS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BusNS/Pods-BusNS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -753,22 +803,22 @@
 		};
 		AD81A28B237448CA0097812D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F547AF47838BDCE637D85D8 /* Pods-BusNS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crystalpigeon.busns;
-				PRODUCT_NAME = "Red Vožnje";
+				PRODUCT_NAME = "Red Vožnje - Novi Sad";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -776,22 +826,23 @@
 		};
 		AD81A28C237448CA0097812D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CBCE48E576E14A44AC931E1 /* Pods-BusNS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crystalpigeon.busns;
-				PRODUCT_NAME = "Red Vožnje";
+				PRODUCT_NAME = "Red Vožnje - Novi Sad";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -799,6 +850,7 @@
 		};
 		AD81A28E237448CA0097812D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C2C172C18958909D7FDCFF6 /* Pods-BusNSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -820,6 +872,7 @@
 		};
 		AD81A28F237448CA0097812D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 134AAC884E2740D1F26F64A7 /* Pods-BusNSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

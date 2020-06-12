@@ -77,7 +77,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
     }
     
-    private func setupCurrentDay() {
+    func setupCurrentDay() {
         if DateManager.instance.getDayOfWeek() == "N" {
             self.scrollNode.view.setContentOffset(CGPoint(x: UIScreen.main.bounds.width / 3 * 6, y: 0), animated: false)
         } else if DateManager.instance.getDayOfWeek() == "S" {
@@ -85,6 +85,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
         } else {
             self.scrollNode.view.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         }
+        self.scrollViewDidScroll(self.scrollNode.view)
     }
 }
 

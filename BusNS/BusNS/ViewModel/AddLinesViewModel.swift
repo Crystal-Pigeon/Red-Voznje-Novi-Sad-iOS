@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 protocol AddLinesObserver {
     func refreshUI()
@@ -39,6 +40,7 @@ class AddLinesViewModel {
             }
         } else {
             favorites.append(id)
+            Analytics.logEvent("bus_favourite" , parameters: ["line":id])
         }
         BusManager.storeFavorites()
     }

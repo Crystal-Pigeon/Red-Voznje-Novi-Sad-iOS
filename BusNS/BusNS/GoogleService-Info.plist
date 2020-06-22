@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>895444465653-m6bqdbr92niokt149g48mk5t8r48dnhk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.895444465653-m6bqdbr92niokt149g48mk5t8r48dnhk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkShZ0Gy7aYs_v4SZHXhxRyp0UX5L1kB0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>895444465653</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.crystalpigeon.busns</string>
+	<key>PROJECT_ID</key>
+	<string>busns-8c7ff</string>
+	<key>STORAGE_BUCKET</key>
+	<string>busns-8c7ff.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:895444465653:ios:89db63235e63c4193812bc</string>
+	<key>DATABASE_URL</key>
+	<string>https://busns-8c7ff.firebaseio.com</string>
+</dict>
+</plist>

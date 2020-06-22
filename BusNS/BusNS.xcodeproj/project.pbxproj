@@ -61,6 +61,8 @@
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
 		DF520E74237C134C004DAE75 /* BusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E73237C134C004DAE75 /* BusTests.swift */; };
 		DF520E7C237C2273004DAE75 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E7B237C2273004DAE75 /* Bus.swift */; };
+		DFA12E6024A09DDB0059B622 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFA12E5F24A09DDB0059B622 /* GoogleService-Info.plist */; };
+		DFA12E6124A09DDB0059B622 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFA12E5F24A09DDB0059B622 /* GoogleService-Info.plist */; };
 		DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */; };
 		FB0E7C86374A5E84C6375A71 /* Pods_BusNSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C01EA29818206B3C5627BF /* Pods_BusNSTests.framework */; };
 /* End PBXBuildFile section */
@@ -145,6 +147,7 @@
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
 		DF520E73237C134C004DAE75 /* BusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTests.swift; sourceTree = "<group>"; };
 		DF520E7B237C2273004DAE75 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
+		DFA12E5F24A09DDB0059B622 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -306,6 +309,7 @@
 				AD056226237A188100010D78 /* ViewModel */,
 				AD81A2BB237461AE0097812D /* Controller */,
 				A51EC2422374525C00298B09 /* Assets */,
+				DFA12E5F24A09DDB0059B622 /* GoogleService-Info.plist */,
 				AD81A27C237448CA0097812D /* Info.plist */,
 			);
 			path = BusNS;
@@ -431,6 +435,7 @@
 				AD81A268237448C60097812D /* Frameworks */,
 				AD81A269237448C60097812D /* Resources */,
 				8FDC2CEBC03A7CF67C3E6D86 /* [CP] Embed Pods Frameworks */,
+				DFA12E6224A0A14C0059B622 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -514,6 +519,7 @@
 				AD81A27B237448CA0097812D /* LaunchScreen.storyboard in Resources */,
 				AD81A278237448CA0097812D /* Assets.xcassets in Resources */,
 				A51EC26E237453E600298B09 /* Muli-ExtraLight.ttf in Resources */,
+				DFA12E6024A09DDB0059B622 /* GoogleService-Info.plist in Resources */,
 				A51EC272237453F300298B09 /* Muli-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,6 +528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA12E6124A09DDB0059B622 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +595,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BusNS/Pods-BusNS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DFA12E6224A0A14C0059B622 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -804,7 +830,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LXX5Y58F8S;
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -827,7 +854,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = LXX5Y58F8S;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusNS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -9,6 +9,8 @@ target 'BusNS' do
   # Pods for BusNS
 	pod "Texture", :inhibit_warnings => true
 	pod 'Alamofire', '~> 5.0', :inhibit_warnings => true
+        pod 'Firebase/Analytics', :inhibit_warnings => true
+	pod 'Firebase/Crashlytics', :inhibit_warnings => true
 
   target 'BusNSTests' do
     inherit! :search_paths

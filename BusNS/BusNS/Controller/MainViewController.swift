@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-class MainViewController: ASViewController<ASDisplayNode> {
+class MainViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -25,7 +25,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let scrollNode = ASScrollNode()
     private var mainViewModel = MainViewModel()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Red Vožnje".localized()

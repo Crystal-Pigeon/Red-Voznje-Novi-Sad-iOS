@@ -8,13 +8,13 @@
 
 import AsyncDisplayKit
 
-class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
+class RearrangeFavoritesViewController: ASDKViewController<ASDisplayNode> {
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
     private var tableNode = ASTableNode()
     private let rearrangeFavoritesViewModel = RearrangeFavoritesViewModel()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Rearrange".localized()

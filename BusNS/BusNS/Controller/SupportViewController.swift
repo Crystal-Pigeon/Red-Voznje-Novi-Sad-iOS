@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-class SupportViewController: ASViewController<ASDisplayNode> {
+class SupportViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -24,7 +24,7 @@ class SupportViewController: ASViewController<ASDisplayNode> {
     private let themeText = "Theme text"
     private let linesAvailabilityText = "Lines availability text"
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Support".localized()

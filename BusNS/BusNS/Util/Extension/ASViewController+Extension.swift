@@ -10,7 +10,7 @@ import AsyncDisplayKit
 
 fileprivate var activityLoader = ActivityLoaderViewController()
 
-extension ASViewController {
+extension ASDKViewController {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

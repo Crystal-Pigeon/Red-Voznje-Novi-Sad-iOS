@@ -7,7 +7,7 @@
 //
 import AsyncDisplayKit
 
-class SettingsViewController: ASViewController<ASDisplayNode> {
+class SettingsViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -34,7 +34,7 @@ class SettingsViewController: ASViewController<ASDisplayNode> {
     
     private var settingsViewModel = SettingsViewModel()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Settings".localized()

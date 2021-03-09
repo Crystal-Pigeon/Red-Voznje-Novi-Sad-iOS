@@ -8,14 +8,14 @@
 
 import AsyncDisplayKit
 
-class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
+class ActivityLoaderViewController: ASDKViewController<ASDisplayNode> {
     
     private let containerNode: ASDisplayNode
     public var isOnScreen: Bool {
         return self.isViewLoaded && view.window != nil
     }
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.backgroundColor = UIColor.black.withAlphaComponent(0.25)

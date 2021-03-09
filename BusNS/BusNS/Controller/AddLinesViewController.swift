@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-class AddLinesViewController: ASViewController<ASDisplayNode> {
+class AddLinesViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -20,7 +20,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     private var urbanBusesTableNode = ASTableNode()
     private var suburbanBusesTableNode = ASTableNode()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Add lines".localized()

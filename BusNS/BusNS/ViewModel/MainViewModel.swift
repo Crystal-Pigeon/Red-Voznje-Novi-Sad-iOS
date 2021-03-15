@@ -12,6 +12,7 @@ protocol  MainObserver {
     func refreshUI()
     func refreshCell(busID: String)
     func showError(message: String)
+    func showToast()
 }
 
 class MainViewModel {
@@ -88,7 +89,10 @@ class MainViewModel {
                     oldSeason = nil
                 }
                 self.currentSeason = newSeason
-                guard newSeason != oldSeason else { return }
+                guard newSeason != oldSeason else {
+                    delegate.showToast()
+                    return
+                }
                 
                 self.fetchUrbanLines()
                 self.fetchSuburbanLines()
@@ -218,6 +222,8 @@ class MainViewModel {
     
     public func fetchedAll() {
         StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
+        guard let delegate = self.observer else { return }
+        delegate.showToast()
 //        StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
 //        StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
 //        for bus in self.urbanBuses {

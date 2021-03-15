@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import Toast_Swift
 
 class MainViewController: ASDKViewController<ASDisplayNode> {
     
@@ -342,6 +343,11 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
 
 //MARK: Observer
 extension MainViewController: MainObserver {
+    func showToast() {        
+        guard let nav = self.navigationController else { return }
+        nav.topViewController?.view.makeToast("Everything is up to date".localized())
+    }
+    
     func refreshUI() {
         self.workDayBusesCollectionNode.reloadData()
         self.saturdayBusesCollectionNode.reloadData()

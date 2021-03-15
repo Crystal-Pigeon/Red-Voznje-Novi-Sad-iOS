@@ -107,12 +107,14 @@ PODS:
     - Texture/Core
   - Texture/Video (3.0.0):
     - Texture/Core
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Texture
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
@@ -132,6 +134,7 @@ SPEC REPOS:
     - PINRemoteImage
     - PromisesObjC
     - Texture
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
@@ -150,7 +153,8 @@ SPEC CHECKSUMS:
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Texture: 2f109e937850d94d1d07232041c9c7313ccddb81
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 01199ac13db97ed119e90a3e9b973c6d487c04b6
+PODFILE CHECKSUM: 9647650c51b87edbc2f8eef43b36c6843c3e9475
 
 COCOAPODS: 1.10.1

@@ -48,18 +48,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupTheme(window: UIWindow) {
         if !StorageManager.isThemeAlreadyCached {
-            if #available(iOS 13.0, *) {
-                let theme = window.traitCollection.userInterfaceStyle
-                Theme.current = theme == .dark ? DarkTheme() : LightTheme()
-            } else {
-                Theme.current = LightTheme()
-            }
+            let theme = window.traitCollection.userInterfaceStyle
+            Theme.current = theme == .dark ? DarkTheme() : LightTheme()
         } else {
             let theme = StorageManager.retrieveTheme()
             if theme == ThemeMode.dark.description {
                 Theme.current = DarkTheme()
-            } else {
+            } else if theme == ThemeMode.light.description{
                 Theme.current = LightTheme()
+            } else {
+                let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
+                Theme.current = theme == .dark ? DarkTheme() : LightTheme()
             }
         }
     }

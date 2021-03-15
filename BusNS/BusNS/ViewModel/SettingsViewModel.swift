@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 protocol SettingsObserver {
     func openPicker(title: String, selectedRow: Int)
     func refreshLanguage()
@@ -17,7 +19,7 @@ class SettingsViewModel {
     public var observer: SettingsObserver?
     
     public let languages = ["English", "Serbian"]
-    public let themes = [ThemeMode.light.description, ThemeMode.dark.description]
+    public let themes = [ThemeMode.light.description, ThemeMode.dark.description, ThemeMode.auto.description]
     public private(set) var currentLanguage = ""
     public private(set) var currentTheme = ""
     public private(set) var isLanguagesOpened = true
@@ -88,9 +90,13 @@ class SettingsViewModel {
         if currentTheme == ThemeMode.light.description {
             StorageManager.cache(theme: ThemeMode.light.description)
             Theme.current = LightTheme()
-        } else {
+        } else if currentTheme == ThemeMode.dark.description{
             StorageManager.cache(theme: ThemeMode.dark.description)
             Theme.current = DarkTheme()
+        } else {
+            let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
+            Theme.current = theme == .dark ? DarkTheme() : LightTheme()
+            StorageManager.cache(theme: ThemeMode.auto.description)
         }
         guard let delegate = observer else { return }
         delegate.refreshTheme()

@@ -11,12 +11,15 @@ import Foundation
 public enum ThemeMode: Int {
     case light
     case dark
+    case auto
     var description: String {
         switch self {
         case .dark:
             return "Dark"
-        default:
+        case .light:
             return "Light"
+        case .auto:
+            return "System"
         }
     }
 }

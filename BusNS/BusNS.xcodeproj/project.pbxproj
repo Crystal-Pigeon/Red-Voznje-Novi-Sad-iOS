@@ -55,6 +55,11 @@
 		ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
 		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
+		DF3620C925FB9F4D00BECDB1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620C825FB9F4D00BECDB1 /* Stack.swift */; };
+		DF3620CF25FB9F7700BECDB1 /* HorizontalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620CE25FB9F7700BECDB1 /* HorizontalStack.swift */; };
+		DF3620D325FB9FA400BECDB1 /* DescriptionStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620D225FB9FA400BECDB1 /* DescriptionStack.swift */; };
+		DF3620D725FB9FBB00BECDB1 /* TitleStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620D625FB9FBB00BECDB1 /* TitleStack.swift */; };
+		DF3620DB25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620DA25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift */; };
 		DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
 		DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */; };
@@ -140,6 +145,11 @@
 		C87B9A54E8D64CC78BA49377 /* Pods_BusNS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusNS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
 		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		DF3620C825FB9F4D00BECDB1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		DF3620CE25FB9F7700BECDB1 /* HorizontalStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalStack.swift; sourceTree = "<group>"; };
+		DF3620D225FB9FA400BECDB1 /* DescriptionStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionStack.swift; sourceTree = "<group>"; };
+		DF3620D625FB9FBB00BECDB1 /* TitleStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStack.swift; sourceTree = "<group>"; };
+		DF3620DA25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackWithTitleAndDescription.swift; sourceTree = "<group>"; };
 		DF4A4BD8238D9B6D00894B43 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
@@ -198,6 +208,7 @@
 		A52361B3237C395E006857CA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DF3620C725FB9F4300BECDB1 /* Stacks */,
 				A52361B4237C3977006857CA /* BusCellNode.swift */,
 				AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */,
 			);
@@ -422,6 +433,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DF3620C725FB9F4300BECDB1 /* Stacks */ = {
+			isa = PBXGroup;
+			children = (
+				DF3620C825FB9F4D00BECDB1 /* Stack.swift */,
+				DF3620CE25FB9F7700BECDB1 /* HorizontalStack.swift */,
+				DF3620D225FB9FA400BECDB1 /* DescriptionStack.swift */,
+				DF3620D625FB9FBB00BECDB1 /* TitleStack.swift */,
+				DF3620DA25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift */,
+			);
+			path = Stacks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -622,14 +645,18 @@
 			files = (
 				A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */,
 				ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */,
+				DF3620CF25FB9F7700BECDB1 /* HorizontalStack.swift in Sources */,
+				DF3620D725FB9FBB00BECDB1 /* TitleStack.swift in Sources */,
 				AD056225237A155000010D78 /* ServiceError.swift in Sources */,
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,
 				DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */,
+				DF3620C925FB9F4D00BECDB1 /* Stack.swift in Sources */,
 				AD05621C2379D8C100010D78 /* Line.swift in Sources */,
 				AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */,
 				AD056228237A18A700010D78 /* AddLinesViewModel.swift in Sources */,
 				AD81A2A8237455040097812D /* Colors.swift in Sources */,
+				DF3620DB25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift in Sources */,
 				AD81A29423744DB00097812D /* ThemeMode.swift in Sources */,
 				A53282712379B751009D240B /* ASDisplayNode+Extension.swift in Sources */,
 				AD81A29223744D8B0097812D /* Theme.swift in Sources */,
@@ -647,6 +674,7 @@
 				A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */,
 				DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */,
 				DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */,
+				DF3620D325FB9FA400BECDB1 /* DescriptionStack.swift in Sources */,
 				DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */,
 				AD81A29823744EFD0097812D /* DarkTheme.swift in Sources */,
 				A562862F238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift in Sources */,

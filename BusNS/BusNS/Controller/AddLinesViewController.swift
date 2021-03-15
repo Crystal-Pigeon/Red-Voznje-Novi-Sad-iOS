@@ -39,6 +39,11 @@ class AddLinesViewController: ASDKViewController<ASDisplayNode> {
         self.linesViewModel.observer = self
         self.linesViewModel.getLines()
     }
+    
+    override func updateColor() {
+        self.colorAppearance()
+        self.refreshUI()
+    }
 }
 
 //MARK: Button Actions

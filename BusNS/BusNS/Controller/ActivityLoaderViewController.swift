@@ -11,6 +11,8 @@ import AsyncDisplayKit
 class ActivityLoaderViewController: ASDKViewController<ASDisplayNode> {
     
     private let containerNode: ASDisplayNode
+    private let textLayer = CATextLayer()
+    
     public var isOnScreen: Bool {
         return self.isViewLoaded && view.window != nil
     }
@@ -35,7 +37,6 @@ class ActivityLoaderViewController: ASDKViewController<ASDisplayNode> {
         imageLayer.contents = UIImage(named: "logo-white")?.cgImage
         imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
         
-        let textLayer = CATextLayer()
         textLayer.backgroundColor = UIColor.clear.cgColor
         textLayer.frame = CGRect(x: UIScreen.main.bounds.midX - 75, y: UIScreen.main.bounds.midY + 60, width: 150, height: 20)
         textLayer.string = "Loading lines...".localized()
@@ -48,6 +49,10 @@ class ActivityLoaderViewController: ASDKViewController<ASDisplayNode> {
         containerView.layer.addSublayer(imageLayer)
         containerView.layer.addSublayer(textLayer)
         self.view.addSubview(containerView)
+    }
+    
+    override func updateColor() {
+        textLayer.foregroundColor = Theme.current.color(.animationTextColor).cgColor
     }
     
     public func stop() {

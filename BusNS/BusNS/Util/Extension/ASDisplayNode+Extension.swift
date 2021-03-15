@@ -25,3 +25,18 @@ extension ASDisplayNode {
         return NSAttributedString(string: text, attributes: attrs)
     }
 }
+
+func attributed(text: String, color: UIColor, font: UIFont, alignment: NSTextAlignment = NSTextAlignment.center, isUnderlined: Bool = false) -> NSAttributedString {
+    let style = NSMutableParagraphStyle()
+    style.alignment = alignment
+    
+    var attrs : [NSAttributedString.Key : Any] =  [
+        .font: font,
+        .foregroundColor: color,
+        .paragraphStyle: style
+    ]
+    if isUnderlined {
+        attrs[.underlineStyle] = NSUnderlineStyle.single.rawValue
+    }
+    return NSAttributedString(string: text, attributes: attrs)
+}

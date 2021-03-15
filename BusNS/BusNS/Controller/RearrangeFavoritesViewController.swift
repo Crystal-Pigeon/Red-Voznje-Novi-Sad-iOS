@@ -28,7 +28,17 @@ class RearrangeFavoritesViewController: ASDKViewController<ASDisplayNode> {
         self.containerNode.automaticallyManagesSubnodes = true
         self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
         self.layout()
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), Theme.current.mode != .auto {
+            self.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
+        }
+    }
+    
+    override func updateColor() {
+        tableNode.backgroundColor = Theme.current.color(.rearrangeFavoritesTable)
+        tableNode.view.separatorColor = rearrangeFavoritesViewModel.favorites.isEmpty ? UIColor.clear : Theme.current.color(.tableSeparatorColor)
+        self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
+        self.tableNode.reloadData()
+        if #available(iOS 13.0, *), Theme.current.mode != .auto {
             self.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
         }
     }

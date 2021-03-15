@@ -61,6 +61,11 @@ class MainViewController: ASDKViewController<ASDisplayNode> {
         self.refreshUI()
     }
     
+    override func updateColor() {
+        self.colorAppearance()
+        self.refreshUI()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.mainViewModel.resetLastCount()
@@ -154,7 +159,7 @@ extension MainViewController {
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
                 popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
             }
-            if #available(iOS 13.0, *) {
+            if #available(iOS 13.0, *), Theme.current.mode != .auto {
                 actionSheet.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
             }
             present(actionSheet, animated: true, completion: nil)

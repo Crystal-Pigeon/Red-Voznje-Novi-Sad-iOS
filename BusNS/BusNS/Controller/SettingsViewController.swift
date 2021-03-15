@@ -59,6 +59,10 @@ class SettingsViewController: ASDKViewController<ASDisplayNode> {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func updateColor() {
+        self.colorAppearance()
+    }
 }
 
 //MARK: Layout

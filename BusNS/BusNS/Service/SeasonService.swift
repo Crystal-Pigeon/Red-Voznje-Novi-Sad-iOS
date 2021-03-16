@@ -10,12 +10,23 @@ import Foundation
 import Alamofire
 
 class SeasonService: Service {
-    private init(){}
     
+    // MARK: - Properties
+    private let networkManager: NetworkManagerProtocol
+    
+    // MARK: - Init
+    private init(networkManager: NetworkManagerProtocol = NetworkManager.shared){
+        self.networkManager = networkManager
+    }
+    
+    // MARK: - Instances
     public static var shared = SeasonService()
+    public static var testOffline = SeasonService(networkManager: NetworkManagerOfflineMock())
+    public static var testOnline = SeasonService(networkManager: NetworkManagerOfflineMock())
     
+    // MARK: - Methods
     public func getSeason(completionHandler: @escaping (_ data: [Season]?, _ error: ServiceError?) -> Void) {
-        if !NetworkManager.shared.isInternetAvailable() {
+        if !networkManager.isInternetAvailable() {
             completionHandler(nil, ServiceError.internetError)
             return
         }

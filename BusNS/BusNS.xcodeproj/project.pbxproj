@@ -53,6 +53,7 @@
 		AD9BD4F82388892300B1294B /* BusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BD4F72388892300B1294B /* BusManager.swift */; };
 		AD9BD4FA23889EB600B1294B /* ASNavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */; };
 		ADCE20342389A01500A32092 /* ActivityLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */; };
+		DF17D1762600E54400C12F8F /* SeasonServiceNoInternetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF17D1752600E54400C12F8F /* SeasonServiceNoInternetTests.swift */; };
 		DF1AAB04237D51F100045773 /* BusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB03237D51F100045773 /* BusService.swift */; };
 		DF1AAB06237D6A2300045773 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1AAB05237D6A2300045773 /* MainViewModel.swift */; };
 		DF3620C925FB9F4D00BECDB1 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3620C825FB9F4D00BECDB1 /* Stack.swift */; };
@@ -144,6 +145,7 @@
 		AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASNavigationController+Extension.swift"; sourceTree = "<group>"; };
 		ADCE20332389A01500A32092 /* ActivityLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLoaderViewController.swift; sourceTree = "<group>"; };
 		C87B9A54E8D64CC78BA49377 /* Pods_BusNS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusNS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF17D1752600E54400C12F8F /* SeasonServiceNoInternetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonServiceNoInternetTests.swift; sourceTree = "<group>"; };
 		DF1AAB03237D51F100045773 /* BusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusService.swift; sourceTree = "<group>"; };
 		DF1AAB05237D6A2300045773 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DF3620C825FB9F4D00BECDB1 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		AD81A284237448CA0097812D /* BusNSTests */ = {
 			isa = PBXGroup;
 			children = (
+				DF17D17B2600E97300C12F8F /* SeasonService */,
 				AD05622F237A26D300010D78 /* Model */,
 				AD056230237A26DF00010D78 /* ViewModel */,
 				AD81A287237448CA0097812D /* Info.plist */,
@@ -434,6 +437,14 @@
 				134AAC884E2740D1F26F64A7 /* Pods-BusNSTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DF17D17B2600E97300C12F8F /* SeasonService */ = {
+			isa = PBXGroup;
+			children = (
+				DF17D1752600E54400C12F8F /* SeasonServiceNoInternetTests.swift */,
+			);
+			path = SeasonService;
 			sourceTree = "<group>";
 		};
 		DF3620C725FB9F4300BECDB1 /* Stacks */ = {
@@ -700,6 +711,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */,
+				DF17D1762600E54400C12F8F /* SeasonServiceNoInternetTests.swift in Sources */,
 				AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */,
 				DF520E74237C134C004DAE75 /* BusTests.swift in Sources */,
 				AD05621E2379DB1600010D78 /* LineTests.swift in Sources */,

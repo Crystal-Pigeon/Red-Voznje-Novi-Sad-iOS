@@ -38,7 +38,7 @@ struct Bus: Codable {
     private func getScheduleBy3Hours(schedule: [String:[String]]) -> [String] {
         let allHours = self.getScheduleByHour(schedule: schedule)
         var threeHours = [String]()
-        let hour = Int(DateManager.instance.getHour()) ?? 0
+        let hour = DateManager.instance.getHour()
         for oneHour in allHours {
             guard let hourInt = Int(oneHour.split(separator: ":")[0]) else { break }
             if (hourInt == hour - 1 || hourInt >= hour) {

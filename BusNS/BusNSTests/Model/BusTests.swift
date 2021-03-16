@@ -9,7 +9,7 @@
 import Foundation
 
 import XCTest
-@testable import BusNS
+@testable import Red_Vožnje___Novi_Sad
 
 class BusTests: XCTestCase {
 
@@ -1340,19 +1340,19 @@ class BusTests: XCTestCase {
     func test_getScheduleABy3Hours(){
         let bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "S", scheduleA: ["00":[], "01":[], "02":[], "03":[], "04":[], "05":[], "06":[], "07":[], "08":[], "09":[],"10":[], "11": [], "12": [] ,"13":[], "14": [], "15": [] ,"16":[], "17": [], "18": [] ,"19":[], "20": [], "21": [] , "22": [], "23": [] ], scheduleB: ["19": ["00"], "16": ["50"], "20": ["05"], "13": ["35"], "09": ["30"], "11": ["30"], "17": ["55"], "14": ["40"], "07": ["05"], "06": ["00"], "04": ["55"], "15": ["45"]], schedule: nil, extras: "")
         let array = bus.getScheduleABy3Hours()
-        let expectedResult = ["\(Int(DateManager.instance.getHour())! - 1): ","\(Int(DateManager.instance.getHour())!): ","\(Int(DateManager.instance.getHour())! + 1): "]
+        let expectedResult = ["\(Int(DateManager.instance.getHour() - 1)): ","\(Int(DateManager.instance.getHour())): ","\(Int(DateManager.instance.getHour()) + 1): "]
         XCTAssertEqual(array, expectedResult)
     }
     func test_getScheduleBBy3Hours(){
         let bus = Bus(id: "52", number: "52", name: "VETERNIK", lineA: "Polasci za  VETERNIK", lineB: "Polasci iz  VETERNIK", line: nil, day: "S", scheduleA: ["13": ["05"], "23": ["40"], "11": ["00"], "16": ["20"], "15": ["15"], "19": ["35"], "06": ["35"], "18": ["30"], "05": ["30"], "14": ["10"], "17": ["25"], "09": ["00"]], scheduleB: ["00":[], "01":[], "02":[], "03":[], "04":[], "05":[], "06":[], "07":[], "08":[], "09":[],"10":[], "11": [], "12": [] ,"13":[], "14": [], "15": [] ,"16":[], "17": [], "18": [] ,"19":[], "20": [], "21": [] , "22": [], "23": [] ], schedule: nil, extras: "")
         let array = bus.getScheduleBBy3Hours()
-        let expectedResult = ["\(Int(DateManager.instance.getHour())! - 1): ","\(Int(DateManager.instance.getHour())!): ","\(Int(DateManager.instance.getHour())! + 1): "]
+        let expectedResult = ["\(DateManager.instance.getHour() - 1): ","\(DateManager.instance.getHour()): ","\(DateManager.instance.getHour() + 1): "]
         XCTAssertEqual(array, expectedResult)
     }
     func test_getOneWayScheduleBy3Hours(){
         let bus = Bus(id: "7A.", number: "7A", name: "N.NASELJE-Z.STAN-F.PIJA-LIMAN4-N.NASELJE", lineA: nil, lineB: nil, line: "N.NASELJE - Z.STAN - F.PIJA - LIMAN4 - N.NASELJE", day: "S", scheduleA: nil, scheduleB: nil, schedule: ["00":[], "01":[], "02":[], "03":[], "04":[], "05":[], "06":[], "07":[], "08":[], "09":[],"10":[], "11": [], "12": [] ,"13":[], "14": [], "15": [] ,"16":[], "17": [], "18": [] ,"19":[], "20": [], "21": [] , "22": [], "23": [] ], extras: "CRVENO - NISKOPODNI, ZELENO PODVUČENO - NISKOPODNI SA RAMPOM")
         let array = bus.getOneWayScheduleBy3Hours()
-        let expectedResult = ["\(Int(DateManager.instance.getHour())! - 1): ","\(Int(DateManager.instance.getHour())!): ","\(Int(DateManager.instance.getHour())! + 1): "]
+        let expectedResult = ["\(DateManager.instance.getHour() - 1): ","\(DateManager.instance.getHour()): ","\(DateManager.instance.getHour() + 1): "]
         XCTAssertEqual(array, expectedResult)
     }
 }

@@ -9,7 +9,6 @@
 import Foundation
 import SystemConfiguration
 
-
 protocol NetworkManagerProtocol {
     func isInternetAvailable() -> Bool
 }
@@ -38,18 +37,5 @@ public class NetworkManager: NetworkManagerProtocol {
         let isReachable = flags.contains(.reachable)
         let needsConnection = flags.contains(.connectionRequired)
         return (isReachable && !needsConnection)
-    }
-}
-
-// MARK: - Mocks
-class NetworkManagerOfflineMock: NetworkManagerProtocol {
-    func isInternetAvailable() -> Bool {
-        return false
-    }
-}
-
-class NetworkManagerOnlineMock: NetworkManagerProtocol {
-    func isInternetAvailable() -> Bool {
-        return true
     }
 }

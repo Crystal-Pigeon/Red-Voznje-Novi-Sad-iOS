@@ -17,6 +17,9 @@ protocol  MainObserver {
 
 class MainViewModel {
     public var observer: MainObserver?
+    private let seasonService = SeasonService()
+    private let lineService = LineService()
+    private let busService = BusService()
     
     public private(set) var currentSeason: Season?
     public private(set) var urbanLines = [Line]()
@@ -72,7 +75,7 @@ class MainViewModel {
     }
     
     private func fetchSeason() {
-        SeasonService.self.shared.getSeason { (seasons, error) in
+        self.seasonService.getSeason { (seasons, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
                 if self.isDataAlreadyCached { return }
@@ -101,7 +104,7 @@ class MainViewModel {
     }
     
     private func fetchUrbanLines() {
-        LineService.shared.getUrbanLines { (lines, error) in
+        self.lineService.getUrbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
                 if self.isDataAlreadyCached { return }
@@ -138,7 +141,7 @@ class MainViewModel {
     }
     
     private func fetchSuburbanLines() {
-        LineService.shared.getSuburbanLines { (lines, error) in
+        self.lineService.getSuburbanLines { (lines, error) in
             guard let delegate = self.observer else { return }
             if let error = error {
                 if self.isDataAlreadyCached { return }
@@ -177,7 +180,7 @@ class MainViewModel {
     private func fetchUrbanBus(line: Line, isFavourite: Bool) {
         guard let delegate = self.observer else { return }
         let id = line.id
-        BusService.shared.getUrbanBus(id: id) { (buses, error) in
+        self.busService.getUrbanBus(id: id) { (buses, error) in
             if let error = error {
                 if self.isDataAlreadyCached { return }
                 if self.didShowError { return }
@@ -200,7 +203,7 @@ class MainViewModel {
     private func fetchSuburbanBus(line: Line, isFavourite: Bool) {
         guard let delegate = self.observer else { return }
         let id = line.id
-        BusService.shared.getSuburbanBus(id: id) { (buses, error) in
+        self.busService.getSuburbanBus(id: id) { (buses, error) in
             if let error = error {
                 if self.isDataAlreadyCached { return }
                 if self.didShowError { return }

@@ -9,15 +9,18 @@
 import Foundation
 import Alamofire
 
-public protocol Service {
-    var headers: HTTPHeaders { get }
-}
-
-extension Service {
-    var headers: HTTPHeaders {
-        return [
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        ]
+class Service {
+    
+    // MARK: - Properties
+    let networkManager: NetworkManagerProtocol
+    let network: NetworkProtocol
+    let headers: HTTPHeaders = [
+        "Content-Type": "application/json",
+        "Accept": "application/json"]
+    
+    // MARK: - Init
+    init(networkManager: NetworkManagerProtocol = NetworkManager.shared, network: NetworkProtocol = Network.shared){
+        self.networkManager = networkManager
+        self.network = network
     }
 }

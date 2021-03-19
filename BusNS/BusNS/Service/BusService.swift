@@ -10,11 +10,7 @@ import Foundation
 import Alamofire
 
 class BusService: Service {
-    
-    private init(){}
-    
-    public static var shared = BusService()
-    
+
     public func getSuburbanBus(id: String, completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
         getBus(type: "rvp", id: id) { (buses, error) in
             completionHandler(buses, error)
@@ -27,20 +23,21 @@ class BusService: Service {
         }
     }
     
-    private func getBus(type: String, id: String , completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
-        if !NetworkManager.shared.isInternetAvailable() {
+    public func getBus(type: String, id: String , completionHandler: @escaping (_ data: [Bus]?, _ error: ServiceError?) -> Void) {
+        if !self.networkManager.isInternetAvailable() {
             completionHandler(nil, ServiceError.internetError)
             return
         }
-        AF.request(Endpoint.Bus.getBy(id: id, type: type), method: .get, encoding: JSONEncoding.default, headers:  headers).responseJSON { response in
-            switch response.result {
-                case .failure:
-                    completionHandler(nil, ServiceError.internetError)
-                    return
-                default: break
+        
+        self.network.sendRequest(headers: self.headers, endpoint: Endpoint.Bus.getBy(id: id, type: type)) { (failed, statusCode, data) in
+            
+            if failed {
+                completionHandler(nil, ServiceError.internetError)
+                return
             }
-            guard let statusCode = response.response?.statusCode else { return }
-            guard let data = response.data else { return }
+
+            guard let statusCode = statusCode else { return }
+            guard let data = data else { return }
             let decoder = JSONDecoder()
             switch statusCode {
             case 200..<300:

@@ -11,19 +11,6 @@ import Alamofire
 
 class SeasonService: Service {
     
-    // MARK: - Properties
-    private let networkManager: NetworkManagerProtocol
-    
-    // MARK: - Init
-    private init(networkManager: NetworkManagerProtocol = NetworkManager.shared){
-        self.networkManager = networkManager
-    }
-    
-    // MARK: - Instances
-    public static var shared = SeasonService()
-    public static var testOffline = SeasonService(networkManager: NetworkManagerOfflineMock())
-    public static var testOnline = SeasonService(networkManager: NetworkManagerOfflineMock())
-    
     // MARK: - Methods
     public func getSeason(completionHandler: @escaping (_ data: [Season]?, _ error: ServiceError?) -> Void) {
         if !networkManager.isInternetAvailable() {
@@ -31,15 +18,16 @@ class SeasonService: Service {
             return
         }
         
-        AF.request(Endpoint.Season.get(), method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
-            switch response.result {
-                case .failure:
-                    completionHandler(nil, ServiceError.internetError)
-                    return
-                default: break
+        self.network.sendRequest(headers: self.headers, endpoint: Endpoint.Season.get()) { (failed, statusCode, data) in
+            
+            if failed {
+                completionHandler(nil, ServiceError.internetError)
+                return
             }
-            guard let statusCode = response.response?.statusCode else { return }
-            guard let data = response.data else { return }
+            
+            guard let statusCode = statusCode else { return }
+            guard let data = data else { return }
+            
             let decoder = JSONDecoder()
             switch(statusCode) {
             case 200..<300:
@@ -62,3 +50,4 @@ class SeasonService: Service {
         }
     }
 }
+

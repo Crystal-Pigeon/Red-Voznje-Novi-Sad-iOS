@@ -14,18 +14,20 @@ public enum Directory {
 }
 
 public protocol StorageService {
-    static func store<T: Encodable>(_ object: T, to directory: Directory, as fileName: String)
-    static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T
-    static func clear(_ directory: Directory)
-    static func remove(_ fileName: String, from directory: Directory)
-    static func fileExists(_ fileName: String, in directory: Directory) -> Bool
+     func store<T: Encodable>(_ object: T, to directory: Directory, as fileName: String)
+     func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T
+     func clear(_ directory: Directory)
+     func remove(_ fileName: String, from directory: Directory)
+     func fileExists(_ fileName: String, in directory: Directory) -> Bool
 }
 
 public class StorageManager: StorageService {
     
-    fileprivate init() { }
+    public static let shared = StorageManager()
     
-    static fileprivate func getURL(for directory: Directory) -> URL {
+    private init() { }
+    
+     fileprivate func getURL(for directory: Directory) -> URL {
         var searchPathDirectory: FileManager.SearchPathDirectory
         
         switch directory {
@@ -42,7 +44,7 @@ public class StorageManager: StorageService {
         }
     }
     
-    public static func store<T: Encodable>(_ object: T, to directory: Directory, as fileName: String) {
+    public  func store<T: Encodable>(_ object: T, to directory: Directory, as fileName: String) {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
         
         let encoder = JSONEncoder()
@@ -57,7 +59,7 @@ public class StorageManager: StorageService {
         }
     }
     
-    public static func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T {
+    public  func retrieve<T: Decodable>(_ fileName: String, from directory: Directory, as type: T.Type) -> T {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
         
         if !FileManager.default.fileExists(atPath: url.path) {
@@ -77,7 +79,7 @@ public class StorageManager: StorageService {
         }
     }
     
-    public static func clear(_ directory: Directory) {
+    public  func clear(_ directory: Directory) {
         let url = getURL(for: directory)
         do {
             let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
@@ -89,7 +91,7 @@ public class StorageManager: StorageService {
         }
     }
     
-    public static func remove(_ fileName: String, from directory: Directory) {
+    public  func remove(_ fileName: String, from directory: Directory) {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
         if FileManager.default.fileExists(atPath: url.path) {
             do {
@@ -100,32 +102,32 @@ public class StorageManager: StorageService {
         }
     }
     
-    public static func fileExists(_ fileName: String, in directory: Directory) -> Bool {
+    public  func fileExists(_ fileName: String, in directory: Directory) -> Bool {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
         return FileManager.default.fileExists(atPath: url.path)
     }
     
-    public static func cache(theme: String) {
+    public  func cache(theme: String) {
         UserDefaults.standard.set(theme, forKey: StorageKeys.theme)
     }
     
-    public static func cache(language: String) {
+    public  func cache(language: String) {
         UserDefaults.standard.set(language, forKey: StorageKeys.language)
     }
     
-    public static var isThemeAlreadyCached: Bool {
+    public  var isThemeAlreadyCached: Bool {
         return UserDefaults.standard.value(forKey: StorageKeys.theme) != nil
     }
     
-    public static var isLanguageAlreadyCached: Bool {
+    public  var isLanguageAlreadyCached: Bool {
         return UserDefaults.standard.value(forKey: StorageKeys.language) != nil
     }
     
-    public static func retrieveTheme() -> String {
+    public  func retrieveTheme() -> String {
         return UserDefaults.standard.value(forKey: StorageKeys.theme) as? String ?? ThemeMode.light.description
     }
     
-    public static func retrieveLanguage() -> String {
+    public  func retrieveLanguage() -> String {
         return UserDefaults.standard.value(forKey: StorageKeys.language) as? String ?? "en"
     }
 }

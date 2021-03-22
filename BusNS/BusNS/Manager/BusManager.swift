@@ -50,17 +50,17 @@ class BusManager {
     }
     
     public static func storeFavorites() {
-        StorageManager.store(self.favorites, to: .caches, as: path)
+        StorageManager.shared.store(self.favorites, to: .caches, as: path)
     }
     
     public static func retriveFavorites() {
-        if StorageManager.fileExists(path, in: .caches) {
-            self.favorites = StorageManager.retrieve(path, from: .caches, as: [String].self)
+        if StorageManager.shared.fileExists(path, in: .caches) {
+            self.favorites = StorageManager.shared.retrieve(path, from: .caches, as: [String].self)
         }
     }
     
     public static func getBusBy(id: String) -> [Bus]? {
-        if !StorageManager.fileExists(StorageKeys.bus + id, in: .caches) { return nil }
-        return StorageManager.retrieve(StorageKeys.bus + id, from: .caches, as: [Bus].self)
+        if !StorageManager.shared.fileExists(StorageKeys.bus + id, in: .caches) { return nil }
+        return StorageManager.shared.retrieve(StorageKeys.bus + id, from: .caches, as: [Bus].self)
     }
 }

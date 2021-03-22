@@ -47,9 +47,9 @@ class AddLinesViewModel {
     
     public func getLines() {
         guard let delegate = self.observer else { return }
-        if StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) {
-            self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
-            self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
+        if StorageManager.shared.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.shared.fileExists(StorageKeys.suburbanLines, in: .caches) {
+            self.urbanLines = StorageManager.shared.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
+            self.suburbanLines = StorageManager.shared.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
             delegate.refreshUI()
         } else {
             delegate.showLoader()
@@ -57,9 +57,9 @@ class AddLinesViewModel {
     }
     
     public func fetchedAll() {
-        guard StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) else { return }
-        self.urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
-        self.suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
+        guard StorageManager.shared.fileExists(StorageKeys.urbanLines, in: .caches) && StorageManager.shared.fileExists(StorageKeys.suburbanLines, in: .caches) else { return }
+        self.urbanLines = StorageManager.shared.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
+        self.suburbanLines = StorageManager.shared.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
         guard let delegate = self.observer else { return }
         delegate.fetchedAll()
     }

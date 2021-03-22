@@ -29,10 +29,10 @@ class SettingsViewModel {
     init(){}
     
     public func getLanguageAndTheme(){
-        if !StorageManager.isLanguageAlreadyCached {
+        if !StorageManager.shared.isLanguageAlreadyCached {
             currentLanguage = languages[0]
         } else {
-            let languageShort = StorageManager.retrieveLanguage()
+            let languageShort = StorageManager.shared.retrieveLanguage()
             if languageShort == "en" {
                 currentLanguage = "English"
             } else {
@@ -40,10 +40,10 @@ class SettingsViewModel {
             }
         }
         
-        if !StorageManager.isThemeAlreadyCached {
+        if !StorageManager.shared.isThemeAlreadyCached {
             currentTheme = Theme.current.mode.description
         } else {
-            currentTheme = StorageManager.retrieveTheme()
+            currentTheme = StorageManager.shared.retrieveTheme()
         }
     }
     
@@ -75,9 +75,9 @@ class SettingsViewModel {
         guard let language = languageSelected else { return }
         currentLanguage = language
         if currentLanguage == "English" {
-            StorageManager.cache(language: "en")
+            StorageManager.shared.cache(language: "en")
         } else {
-            StorageManager.cache(language: "sr")
+            StorageManager.shared.cache(language: "sr")
         }
         guard let delegate = observer else { return }
         delegate.refreshLanguage()
@@ -88,15 +88,15 @@ class SettingsViewModel {
         currentTheme = theme
         
         if currentTheme == ThemeMode.light.description {
-            StorageManager.cache(theme: ThemeMode.light.description)
+            StorageManager.shared.cache(theme: ThemeMode.light.description)
             Theme.current = LightTheme()
         } else if currentTheme == ThemeMode.dark.description{
-            StorageManager.cache(theme: ThemeMode.dark.description)
+            StorageManager.shared.cache(theme: ThemeMode.dark.description)
             Theme.current = DarkTheme()
         } else {
             let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
             Theme.current = theme == .dark ? DarkTheme() : LightTheme()
-            StorageManager.cache(theme: ThemeMode.auto.description)
+            StorageManager.shared.cache(theme: ThemeMode.auto.description)
         }
         guard let delegate = observer else { return }
         delegate.refreshTheme()

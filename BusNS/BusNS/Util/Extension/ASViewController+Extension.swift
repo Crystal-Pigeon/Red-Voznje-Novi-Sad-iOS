@@ -100,7 +100,7 @@ extension ASDKViewController {
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        let theme = StorageManager.retrieveTheme()
+        let theme = StorageManager.shared.retrieveTheme()
         if theme == ThemeMode.auto.description {
             if  #available(iOS 13.0, *) {
                 if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {

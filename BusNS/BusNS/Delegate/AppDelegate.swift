@@ -56,11 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupTheme(window: UIWindow) {
-        if !StorageManager.isThemeAlreadyCached {
+        if !StorageManager.shared.isThemeAlreadyCached {
             let theme = window.traitCollection.userInterfaceStyle
             Theme.current = theme == .dark ? DarkTheme() : LightTheme()
         } else {
-            let theme = StorageManager.retrieveTheme()
+            let theme = StorageManager.shared.retrieveTheme()
             if theme == ThemeMode.dark.description {
                 Theme.current = DarkTheme()
             } else if theme == ThemeMode.light.description{
@@ -73,21 +73,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        if !StorageManager.fileExists(StorageKeys.urbanLines, in: .caches) || !StorageManager.fileExists(StorageKeys.suburbanLines, in: .caches) {
-            StorageManager.remove(StorageKeys.season, from: .caches)
+        if !StorageManager.shared.fileExists(StorageKeys.urbanLines, in: .caches) || !StorageManager.shared.fileExists(StorageKeys.suburbanLines, in: .caches) {
+            StorageManager.shared.remove(StorageKeys.season, from: .caches)
             return
         }
-        let urbanLines = StorageManager.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
-        let suburbanLines = StorageManager.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
+        let urbanLines = StorageManager.shared.retrieve(StorageKeys.urbanLines, from: .caches, as: [Line].self)
+        let suburbanLines = StorageManager.shared.retrieve(StorageKeys.suburbanLines, from: .caches, as: [Line].self)
         for line in urbanLines {
-            if !StorageManager.fileExists(StorageKeys.bus + line.id, in: .caches) {
-                StorageManager.remove(StorageKeys.season, from: .caches)
+            if !StorageManager.shared.fileExists(StorageKeys.bus + line.id, in: .caches) {
+                StorageManager.shared.remove(StorageKeys.season, from: .caches)
                 return
             }
         }
         for line in suburbanLines {
-            if !StorageManager.fileExists(StorageKeys.bus + line.id, in: .caches) {
-                StorageManager.remove(StorageKeys.season, from: .caches)
+            if !StorageManager.shared.fileExists(StorageKeys.bus + line.id, in: .caches) {
+                StorageManager.shared.remove(StorageKeys.season, from: .caches)
                 return
             }
         }

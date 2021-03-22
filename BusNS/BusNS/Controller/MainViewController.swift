@@ -146,7 +146,7 @@ extension MainViewController {
                 self.workDayBusesCollectionNode.deleteItems(at: [indexPath])
                 self.saturdayBusesCollectionNode.deleteItems(at: [indexPath])
                 self.sundayBusesCollectionNode.deleteItems(at: [indexPath])
-                StorageManager.store(self.mainViewModel.favorites, to: .caches, as: StorageKeys.favorites)
+                StorageManager.shared.store(self.mainViewModel.favorites, to: .caches, as: StorageKeys.favorites)
                 if self.mainViewModel.favorites.isEmpty {
                     self.containerNode.setNeedsLayout()
                 }
@@ -322,8 +322,8 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     func collectionNode(_ collectionNode: ASCollectionNode, nodeForItemAt indexPath: IndexPath) -> ASCellNode {
         let busId = mainViewModel.favorites[indexPath.row]
         let path = StorageKeys.bus + busId
-        if StorageManager.fileExists(path, in: .caches) {
-            let buses = StorageManager.retrieve(path, from: .caches, as: [Bus].self)
+        if StorageManager.shared.fileExists(path, in: .caches) {
+            let buses = StorageManager.shared.retrieve(path, from: .caches, as: [Bus].self)
             if let bus = buses.first(where: { $0.day == self.mainViewModel.tagsDict[collectionNode.view.tag]} )  {
                 return BusCellNode(bus: bus)
             }

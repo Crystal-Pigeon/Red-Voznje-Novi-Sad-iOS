@@ -16,10 +16,17 @@ protocol  MainObserver {
 }
 
 class MainViewModel {
+    
     public var observer: MainObserver?
-    private let seasonService = SeasonService()
+    
+    // services
+    private let seasonService: SeasonService
     private let lineService = LineService()
     private let busService = BusService()
+    
+    //manager
+    private let networkManager: NetworkManagerProtocol
+    private let storageManager: StorageService
     
     public private(set) var currentSeason: Season?
     public private(set) var urbanLines = [Line]()
@@ -38,10 +45,13 @@ class MainViewModel {
     private var suburbanBuses = [[Bus]]()
     private var didShowError = false
     private var isDataAlreadyCached: Bool {
-        return StorageManager.fileExists(StorageKeys.season, in: .caches)
+        return self.storageManager.fileExists(StorageKeys.season, in: .caches)
     }
     
-    init(){
+    init(networkManager: NetworkManagerProtocol = NetworkManager.shared, storageManager: StorageService = StorageManager.shared, seasonService: SeasonService = SeasonService()){
+        self.networkManager = networkManager
+        self.storageManager = storageManager
+        self.seasonService = seasonService
         BusManager.mainViewModel = self
     }
     
@@ -59,9 +69,9 @@ class MainViewModel {
     }
     
     public func getData() {
-        if !NetworkManager.shared.isInternetAvailable() {
-            if StorageManager.fileExists(StorageKeys.season, in: .caches) {
-                self.currentSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
+        if !self.networkManager.isInternetAvailable() {
+            if self.storageManager.fileExists(StorageKeys.season, in: .caches) {
+                self.currentSeason = self.storageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
                 return
             }
             else {
@@ -86,8 +96,8 @@ class MainViewModel {
             if let seasons = seasons{
                 let newSeason = seasons[0] //TEST: Season(date: "01-06-2020", season: "LETO 2020")
                 let oldSeason: Season?
-                if StorageManager.fileExists(StorageKeys.season, in: .caches) {
-                    oldSeason = StorageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
+                if self.storageManager.fileExists(StorageKeys.season, in: .caches) {
+                    oldSeason = self.storageManager.retrieve(StorageKeys.season, from: .caches, as: Season.self)
                 } else {
                     oldSeason = nil
                 }
@@ -114,12 +124,12 @@ class MainViewModel {
             }
             if let lines = lines {
                 self.urbanLines = lines
-                StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
+                self.storageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
                 BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteUrban = self.urbanLines.filter { self.favorites.contains($0.id)}
                 favouriteUrban.forEach { line in
-                    guard NetworkManager.shared.isInternetAvailable() else {
+                    guard self.networkManager.isInternetAvailable() else {
                         BusManager.didNotFetchAll()
                         delegate.showError(message: ServiceError.internetError.message)
                         return
@@ -129,7 +139,7 @@ class MainViewModel {
                 
                 let notFavouriteUrban = self.urbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteUrban.forEach { line in
-                    guard NetworkManager.shared.isInternetAvailable() else {
+                    guard self.networkManager.isInternetAvailable() else {
                         BusManager.didNotFetchAll()
                         delegate.showError(message: ServiceError.internetError.message)
                         return
@@ -151,12 +161,12 @@ class MainViewModel {
             }
             if let lines = lines {
                 self.suburbanLines = lines
-                StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
+                self.storageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)
                 BusManager.numberOfFetchedLines += lines.count
                 
                 let favouriteSuburban = self.suburbanLines.filter { self.favorites.contains($0.id)}
                 favouriteSuburban.forEach { line in
-                    guard NetworkManager.shared.isInternetAvailable() else {
+                    guard self.networkManager.isInternetAvailable() else {
                         BusManager.didNotFetchAll()
                         delegate.showError(message: ServiceError.internetError.message)
                         return
@@ -166,7 +176,7 @@ class MainViewModel {
                 
                 let notFavouriteSuburban = self.suburbanLines.filter{ !self.favorites.contains($0.id)}
                 notFavouriteSuburban.forEach { line in
-                    guard NetworkManager.shared.isInternetAvailable() else {
+                    guard self.networkManager.isInternetAvailable() else {
                         BusManager.didNotFetchAll()
                         delegate.showError(message: ServiceError.internetError.message)
                         return
@@ -194,7 +204,7 @@ class MainViewModel {
                 BusManager.numberOfFetchedBuses += 1
                 guard let first = buses.first else { return }
                 let sk = StorageKeys.bus + "\(first.id)"
-                StorageManager.store(buses, to: .caches, as: sk)
+                self.storageManager.store(buses, to: .caches, as: sk)
                 delegate.refreshCell(busID: id)
             }
         }
@@ -217,14 +227,14 @@ class MainViewModel {
                 BusManager.numberOfFetchedBuses += 1
                 guard let first = buses.first else { return }
                 let sk = StorageKeys.bus + "\(first.id)"
-                StorageManager.store(buses, to: .caches, as: sk)
+                self.storageManager.store(buses, to: .caches, as: sk)
                 delegate.refreshCell(busID: id)
             }
         }
     }
     
     public func fetchedAll() {
-        StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
+        self.storageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
         guard let delegate = self.observer else { return }
         delegate.showToast()
 //        StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)

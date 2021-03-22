@@ -68,6 +68,8 @@
 		DF51973B2604B3BB000E4430 /* SeasonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF51973A2604B3BB000E4430 /* SeasonServiceTests.swift */; };
 		DF51973F2604D203000E4430 /* BusServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF51973E2604D203000E4430 /* BusServiceTests.swift */; };
 		DF5197452604D416000E4430 /* LineServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5197442604D416000E4430 /* LineServiceTests.swift */; };
+		DF5197492604DC8D000E4430 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5197482604DC8D000E4430 /* MainViewModelTests.swift */; };
+		DF51974D2604E2DA000E4430 /* StorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF51974C2604E2DA000E4430 /* StorageMock.swift */; };
 		DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6B237BFE4D004DAE75 /* Season.swift */; };
 		DF520E6E237BFFB6004DAE75 /* SeasonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */; };
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
@@ -165,6 +167,8 @@
 		DF51973A2604B3BB000E4430 /* SeasonServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonServiceTests.swift; sourceTree = "<group>"; };
 		DF51973E2604D203000E4430 /* BusServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusServiceTests.swift; sourceTree = "<group>"; };
 		DF5197442604D416000E4430 /* LineServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineServiceTests.swift; sourceTree = "<group>"; };
+		DF5197482604DC8D000E4430 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		DF51974C2604E2DA000E4430 /* StorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMock.swift; sourceTree = "<group>"; };
 		DF520E6B237BFE4D004DAE75 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		DF520E6D237BFFB6004DAE75 /* SeasonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTests.swift; sourceTree = "<group>"; };
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				AD05622D237A26B300010D78 /* AddLinesViewModelTest.swift */,
+				DF5197482604DC8D000E4430 /* MainViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 			children = (
 				DF51972E2604AAFF000E4430 /* NetworkManagerMock.swift */,
 				DF5197342604AB19000E4430 /* NetworkMock.swift */,
+				DF51974C2604E2DA000E4430 /* StorageMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -687,6 +693,7 @@
 				DF3620D725FB9FBB00BECDB1 /* TitleStack.swift in Sources */,
 				AD056225237A155000010D78 /* ServiceError.swift in Sources */,
 				AD81A29D2374503D0097812D /* NetworkManager.swift in Sources */,
+				DF51974D2604E2DA000E4430 /* StorageMock.swift in Sources */,
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,
 				DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */,
 				DF44BD0A25FF880300986988 /* SettingsCell.swift in Sources */,
@@ -743,6 +750,7 @@
 				AD05622E237A26B300010D78 /* AddLinesViewModelTest.swift in Sources */,
 				DF520E74237C134C004DAE75 /* BusTests.swift in Sources */,
 				AD05621E2379DB1600010D78 /* LineTests.swift in Sources */,
+				DF5197492604DC8D000E4430 /* MainViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import Foundation
 
 import XCTest
-@testable import Red_Vožnje___Novi_Sad
+@testable import Red_Voznje___Novi_Sad
 
 class SeasonTests: XCTestCase {
 

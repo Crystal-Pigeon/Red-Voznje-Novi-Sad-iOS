@@ -160,6 +160,7 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
             NSAttributedString.Key.foregroundColor: Theme.current.color(.addLinesLineColor)
         ]
         cellNode.selectionStyle = .none
+        cellNode.backgroundColor = .clear
         
         if tableNode == self.urbanBusesTableNode {
             cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name

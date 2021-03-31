@@ -88,14 +88,17 @@ extension SettingsViewController: ASTableDataSource, ASTableDelegate {
         
         if indexPath.section == 0 {
             let cell = SettingsCell(title: "Language", settingsDescription: "Change the language in the application", selectedValue: settingsViewModel.currentLanguage)
+            cell.backgroundColor = .clear
             cell.buttonNode.addTarget(self, action: #selector(openLanguagePicker), forControlEvents: .touchUpInside)
             return cell
         } else if indexPath.section == 1 {
             let cell = SettingsCell(title: "Theme", settingsDescription: "Change the theme in the application", selectedValue: settingsViewModel.currentTheme)
+            cell.backgroundColor = .clear
             cell.buttonNode.addTarget(self, action: #selector(openThemePicker), forControlEvents: .touchUpInside)
             return cell
         } else {
             let cell = SettingsCell(title: "Support", settingsDescription: "Open the support window", selectedValue: nil)
+            cell.backgroundColor = .clear
             cell.buttonNode.addTarget(self, action: #selector(openSupportPage), forControlEvents: .touchUpInside)
             return cell
         }

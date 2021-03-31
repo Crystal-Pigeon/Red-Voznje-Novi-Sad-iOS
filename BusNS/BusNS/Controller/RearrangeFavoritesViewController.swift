@@ -83,6 +83,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
         ]
         cellNode.selectionStyle = .none
         cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized()
+        cellNode.backgroundColor = .clear
         
         return cellNode
     }

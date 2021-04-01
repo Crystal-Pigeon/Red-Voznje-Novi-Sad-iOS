@@ -8,6 +8,7 @@
 
 import AsyncDisplayKit
 import Toast_Swift
+import FirebaseAnalytics
 
 class MainViewController: ASDKViewController<ASDisplayNode> {
     
@@ -142,6 +143,7 @@ extension MainViewController {
             
             let actionSheet = UIAlertController(title: busName, message: "Are you sure you want remove the line?".localized(), preferredStyle: .actionSheet)
             let actionDelete = UIAlertAction(title: "Remove".localized(), style: .destructive) { (action) in
+                Analytics.logEvent("delete_lane_on_long_press", parameters: ["lane_number": busID])
                 self.mainViewModel.favorites.remove(at: indexPath.row)
                 self.workDayBusesCollectionNode.deleteItems(at: [indexPath])
                 self.saturdayBusesCollectionNode.deleteItems(at: [indexPath])
@@ -336,6 +338,7 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCellNode {
+            Analytics.logEvent("collapse_schedule", parameters: nil)
             cell.isOpened = !cell.isOpened
         }
     }

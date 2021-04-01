@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import FirebaseAnalytics
 
 class RearrangeFavoritesViewController: ASDKViewController<ASDisplayNode> {
     //MARK: UI Properties
@@ -94,6 +95,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        Analytics.logEvent("sort_favorite_lanes", parameters: nil)
         rearrangeFavoritesViewModel.rearrange(sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
     }
 }

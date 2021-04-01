@@ -6,6 +6,7 @@
 //  Copyright © 2019 Crystal Pigeon. All rights reserved.
 //
 import AsyncDisplayKit
+import FirebaseAnalytics
 
 class SettingsViewController: ASDKViewController<ASDisplayNode> {
     
@@ -116,6 +117,7 @@ extension SettingsViewController: ASTableDataSource, ASTableDelegate {
 extension SettingsViewController {
     @objc private func openSupportPage() {
         guard let navigationController = self.navigationController else { return }
+        Analytics.logEvent("open_support_screen", parameters: nil)
         navigationController.pushViewController(SupportViewController(), animated: true)
     }
     

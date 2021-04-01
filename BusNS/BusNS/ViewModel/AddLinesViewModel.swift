@@ -38,6 +38,7 @@ class AddLinesViewModel {
             favorites.removeAll { (element) -> Bool in
                 return id == element
             }
+            Analytics.logEvent("delete_lane_by_deselecting", parameters: ["lane_number": id])
         } else {
             favorites.append(id)
             Analytics.logEvent("bus_favourite" , parameters: ["line":id])

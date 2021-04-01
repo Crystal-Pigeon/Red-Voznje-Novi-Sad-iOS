@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAnalytics
 
 protocol SettingsObserver {
     func openPicker(title: String, selectedRow: Int)
@@ -74,6 +75,8 @@ class SettingsViewModel {
     public func changeLanguage() {
         guard let language = languageSelected else { return }
         currentLanguage = language
+        Analytics.logEvent("change_language_event", parameters: ["lang": language])
+        
         if currentLanguage == "English" {
             StorageManager.cache(language: "en")
         } else {
@@ -86,6 +89,7 @@ class SettingsViewModel {
     public func changeTheme() {
         guard let theme = themeSelected else { return }
         currentTheme = theme
+        Analytics.logEvent("change_theme_event", parameters: ["theme": theme])
         
         if currentTheme == ThemeMode.light.description {
             StorageManager.cache(theme: ThemeMode.light.description)

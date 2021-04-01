@@ -23,6 +23,7 @@
 		A562862D238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562862C238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift */; };
 		A562862F238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562862E238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift */; };
 		A57B7C2123896C410052CCD0 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B7C2023896C410052CCD0 /* AnimationManager.swift */; };
+		A5E58DEF2615EC6D002DCA46 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E58DEE2615EC6D002DCA46 /* Haptic.swift */; };
 		A5E75E91238BE5270080F920 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E75E90238BE5270080F920 /* SupportViewController.swift */; };
 		AD05621C2379D8C100010D78 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621B2379D8C100010D78 /* Line.swift */; };
 		AD05621E2379DB1600010D78 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD05621D2379DB1600010D78 /* LineTests.swift */; };
@@ -105,6 +106,7 @@
 		A562862C238C5BC9003D6A23 /* RearrangeFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RearrangeFavoritesViewController.swift; sourceTree = "<group>"; };
 		A562862E238C5BDF003D6A23 /* RearrangeFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RearrangeFavoritesViewModel.swift; sourceTree = "<group>"; };
 		A57B7C2023896C410052CCD0 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
+		A5E58DEE2615EC6D002DCA46 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		A5E75E90238BE5270080F920 /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		AD05621B2379D8C100010D78 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		AD05621D2379DB1600010D78 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				AD81A2A7237455040097812D /* Colors.swift */,
 				AD583D79237979E000AE24AD /* Fonts.swift */,
 				AD05622B237A24D200010D78 /* StorageKeys.swift */,
+				A5E58DEE2615EC6D002DCA46 /* Haptic.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				DF3620C925FB9F4D00BECDB1 /* Stack.swift in Sources */,
 				AD05621C2379D8C100010D78 /* Line.swift in Sources */,
 				AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */,
+				A5E58DEF2615EC6D002DCA46 /* Haptic.swift in Sources */,
 				AD056228237A18A700010D78 /* AddLinesViewModel.swift in Sources */,
 				AD81A2A8237455040097812D /* Colors.swift in Sources */,
 				DF3620DB25FB9FE800BECDB1 /* StackWithTitleAndDescription.swift in Sources */,

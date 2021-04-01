@@ -165,6 +165,8 @@ extension MainViewController {
             if #available(iOS 13.0, *), Theme.current.mode != .auto {
                 actionSheet.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
             }
+            
+            Haptic.shared.pulse()
             present(actionSheet, animated: true, completion: nil)
         }
     }

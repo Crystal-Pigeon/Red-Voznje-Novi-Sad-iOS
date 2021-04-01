@@ -76,15 +76,8 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let cellNode = ASTextCellNode()
-        cellNode.textAttributes = [
-            NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
-        ]
-        cellNode.selectionStyle = .none
-        cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized()
-        cellNode.backgroundColor = .clear
-        
+        let cellNode = LineCellNode(line: !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized(), color: Theme.current.color(.rearrangeFavoritesLineColor))
+        cellNode.style.height = ASDimensionMake(50)
         return cellNode
     }
     

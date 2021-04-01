@@ -154,26 +154,21 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         
-        let cellNode = ASTextCellNode()
-        cellNode.textAttributes = [
-            NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.addLinesLineColor)
-        ]
-        cellNode.selectionStyle = .none
-        cellNode.backgroundColor = .clear
-        
         if tableNode == self.urbanBusesTableNode {
-            cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name
+            let cellNode = LineCellNode(line: linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name, color: Theme.current.color(.addLinesLineColor))
             if linesViewModel.favorites.contains(linesViewModel.urbanLines[indexPath.row].id) {
-                 cellNode.accessoryType = .checkmark
+                cellNode.accessoryType = .checkmark
             }
+            cellNode.style.height = ASDimensionMake(50)
+            return cellNode
         } else {
-            cellNode.text = linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name
+            let cellNode = LineCellNode(line: linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name, color: Theme.current.color(.addLinesLineColor))
             if linesViewModel.favorites.contains(linesViewModel.suburbanLines[indexPath.row].id) {
-                 cellNode.accessoryType = .checkmark
+                cellNode.accessoryType = .checkmark
             }
+            cellNode.style.height = ASDimensionMake(50)
+            return cellNode
         }
-        return cellNode
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {

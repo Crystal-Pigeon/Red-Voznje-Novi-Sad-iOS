@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAnalytics
 
 protocol AddLinesObserver {
     func refreshUI()

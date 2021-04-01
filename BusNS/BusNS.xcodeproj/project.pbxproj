@@ -67,6 +67,8 @@
 		DF520E70237C05A8004DAE75 /* SeasonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E6F237C05A8004DAE75 /* SeasonService.swift */; };
 		DF520E74237C134C004DAE75 /* BusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E73237C134C004DAE75 /* BusTests.swift */; };
 		DF520E7C237C2273004DAE75 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF520E7B237C2273004DAE75 /* Bus.swift */; };
+		DF68DD1B2615B9D700B55809 /* LineCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF68DD1A2615B9D700B55809 /* LineCellNode.swift */; };
+		DF68DD1F2615CDA600B55809 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF68DD1E2615CDA600B55809 /* NSAttributedString+Extension.swift */; };
 		DFDDCD5D25F7B3BF00DBF30D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFDDCD5C25F7B3BF00DBF30D /* GoogleService-Info.plist */; };
 		DFDFFDE2238C17B1007049C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */; };
 		FB0E7C86374A5E84C6375A71 /* Pods_BusNSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C01EA29818206B3C5627BF /* Pods_BusNSTests.framework */; };
@@ -158,6 +160,8 @@
 		DF520E6F237C05A8004DAE75 /* SeasonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonService.swift; sourceTree = "<group>"; };
 		DF520E73237C134C004DAE75 /* BusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTests.swift; sourceTree = "<group>"; };
 		DF520E7B237C2273004DAE75 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
+		DF68DD1A2615B9D700B55809 /* LineCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineCellNode.swift; sourceTree = "<group>"; };
+		DF68DD1E2615CDA600B55809 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		DFDDCD5C25F7B3BF00DBF30D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DFDFFDE1238C17B1007049C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +218,7 @@
 				A52361B4237C3977006857CA /* BusCellNode.swift */,
 				AD2B2074239E8BB500402DA8 /* EmptyBusCellNode.swift */,
 				DF44BD0925FF880300986988 /* SettingsCell.swift */,
+				DF68DD1A2615B9D700B55809 /* LineCellNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				A53282702379B751009D240B /* ASDisplayNode+Extension.swift */,
 				AD056229237A213300010D78 /* ASViewController+Extension.swift */,
 				AD9BD4F923889EB600B1294B /* ASNavigationController+Extension.swift */,
+				DF68DD1E2615CDA600B55809 /* NSAttributedString+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -655,6 +661,7 @@
 				AD583D7A237979E000AE24AD /* Fonts.swift in Sources */,
 				DF4A4BD9238D9B6D00894B43 /* SettingsViewModel.swift in Sources */,
 				DF44BD0A25FF880300986988 /* SettingsCell.swift in Sources */,
+				DF68DD1F2615CDA600B55809 /* NSAttributedString+Extension.swift in Sources */,
 				DF3620C925FB9F4D00BECDB1 /* Stack.swift in Sources */,
 				AD05621C2379D8C100010D78 /* Line.swift in Sources */,
 				AD4C69C5237471EE00DC5D7B /* Bundle+Extension.swift in Sources */,
@@ -674,6 +681,7 @@
 				AD81A29623744E1C0097812D /* LightTheme.swift in Sources */,
 				AD9BD4F82388892300B1294B /* BusManager.swift in Sources */,
 				AD05622A237A213300010D78 /* ASViewController+Extension.swift in Sources */,
+				DF68DD1B2615B9D700B55809 /* LineCellNode.swift in Sources */,
 				A55C3D89237AB3470098FA13 /* MainViewController.swift in Sources */,
 				A532826F23798BCD009D240B /* AddLinesViewController.swift in Sources */,
 				DF520E6C237BFE4D004DAE75 /* Season.swift in Sources */,

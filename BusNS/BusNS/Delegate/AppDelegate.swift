@@ -47,19 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupTheme(window: UIWindow) {
-        if !StorageManager.isThemeAlreadyCached {
-            let theme = window.traitCollection.userInterfaceStyle
-            Theme.current = theme == .dark ? DarkTheme() : LightTheme()
+        let theme = StorageManager.retrieveTheme()
+        if theme == ThemeMode.dark.description {
+            Theme.current = DarkTheme()
+        } else if theme == ThemeMode.light.description{
+            Theme.current = LightTheme()
         } else {
-            let theme = StorageManager.retrieveTheme()
-            if theme == ThemeMode.dark.description {
-                Theme.current = DarkTheme()
-            } else if theme == ThemeMode.light.description{
-                Theme.current = LightTheme()
-            } else {
-                let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
-                Theme.current = theme == .dark ? DarkTheme() : LightTheme()
-            }
+            let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
+            Theme.current = theme == .dark ? DarkTheme() : LightTheme()
         }
     }
     

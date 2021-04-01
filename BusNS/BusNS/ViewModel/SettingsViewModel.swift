@@ -40,12 +40,7 @@ class SettingsViewModel {
                 currentLanguage = "Serbian"
             }
         }
-        
-        if !StorageManager.isThemeAlreadyCached {
-            currentTheme = Theme.current.mode.description
-        } else {
             currentTheme = StorageManager.retrieveTheme()
-        }
     }
     
     public func openLanguagePicker(){

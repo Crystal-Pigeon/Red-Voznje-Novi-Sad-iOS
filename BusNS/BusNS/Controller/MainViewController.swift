@@ -359,18 +359,6 @@ extension MainViewController: MainObserver {
         self.sundayBusesCollectionNode.reloadData()
     }
     
-    func refreshCell(busID: String) {
-        if let wdIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.workDayBusesCollectionNode.reloadItems(at: [IndexPath(row: wdIndex, section: 0)])
-        }
-        if let satIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.saturdayBusesCollectionNode.reloadItems(at: [IndexPath(row: satIndex, section: 0)])
-        }
-        if let sunIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.sundayBusesCollectionNode.reloadItems(at: [IndexPath(row: sunIndex, section: 0)])
-        }
-    }
-    
     func showError(message: String) {
         showInternetAlert(title: message, message: "") { (_) -> (Void) in
             self.mainViewModel.getData()

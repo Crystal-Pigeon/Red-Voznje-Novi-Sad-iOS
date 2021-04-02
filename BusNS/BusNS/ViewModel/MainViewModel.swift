@@ -10,7 +10,6 @@ import Foundation
 
 protocol  MainObserver {
     func refreshUI()
-    func refreshCell(busID: String)
     func showError(message: String)
     func showToast()
 }
@@ -125,7 +124,19 @@ class MainViewModel {
                 }
                 
                 let notFavouriteUrban = self.urbanLines.filter{ !self.favorites.contains($0.id)}
-                notFavouriteUrban.forEach { line in
+                
+//                // FOR TESTING
+//                var currentIndex = 0
+//                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { timer in
+//                    self.fetchUrbanBus(line: notFavouriteUrban[currentIndex], isFavourite: false)
+//                    currentIndex += 1
+//
+//                    if currentIndex == notFavouriteUrban.count {
+//                        timer.invalidate()
+//                    }
+//                }
+                
+                for line in notFavouriteUrban {
                     guard NetworkManager.shared.isInternetAvailable() else {
                         BusManager.didNotFetchAll()
                         delegate.showError(message: ServiceError.internetError.message)
@@ -192,7 +203,6 @@ class MainViewModel {
                 guard let first = buses.first else { return }
                 let sk = StorageKeys.bus + "\(first.id)"
                 StorageManager.store(buses, to: .caches, as: sk)
-                delegate.refreshCell(busID: id)
             }
         }
     }
@@ -215,7 +225,6 @@ class MainViewModel {
                 guard let first = buses.first else { return }
                 let sk = StorageKeys.bus + "\(first.id)"
                 StorageManager.store(buses, to: .caches, as: sk)
-                delegate.refreshCell(busID: id)
             }
         }
     }
@@ -223,6 +232,7 @@ class MainViewModel {
     public func fetchedAll() {
         StorageManager.store(self.currentSeason, to: .caches, as: StorageKeys.season)
         guard let delegate = self.observer else { return }
+        delegate.refreshUI()
         delegate.showToast()
 //        StorageManager.store(self.urbanLines, to: .caches, as: StorageKeys.urbanLines)
 //        StorageManager.store(self.suburbanLines, to: .caches, as: StorageKeys.suburbanLines)

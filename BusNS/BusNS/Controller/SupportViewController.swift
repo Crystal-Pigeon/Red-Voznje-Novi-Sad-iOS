@@ -132,13 +132,13 @@ extension SupportViewController {
     private func colorAppearance() {
         self.containerNode.backgroundColor = Theme.current.color(.supportBackgroundColor)
         self.scrollNode.backgroundColor = Theme.current.color(.supportBackgroundColor)
-        self.emailButtonNode.setAttributedTitle(self.node.attributed(text: "contact@crystalpigeon.com", color: Theme.current.color(.supportContactMailColor), font: Fonts.muliLight15), for: .normal)
-        self.copyrightsTextNode.attributedText = self.node.attributed(text: "Copyrights ® Crystal Pigeon, 2019", color: Theme.current.color(.supportCopyrightsColor), font: Fonts.muliRegular13)
+        self.emailButtonNode.setAttributedTitle(self.node.attributed(text: "contact@crystalpigeon.com", color: Theme.current.color(.supportContactMailColor), font: .muliLight15), for: .normal)
+        self.copyrightsTextNode.attributedText = self.node.attributed(text: "Copyrights ® Crystal Pigeon, 2019", color: Theme.current.color(.supportCopyrightsColor), font: .muliRegular13)
     }
     
     private func appearance() {
         self.colorAppearance()
-        self.emailImageNode.image = UIImage(named: "email_icon")
+        self.emailImageNode.image = .email
         self.emailImageNode.style.preferredSize = CGSize(width: 21, height: 15)
         self.emailImageNode.alpha = 0.7
         self.emailImageNode.contentMode = .scaleAspectFill

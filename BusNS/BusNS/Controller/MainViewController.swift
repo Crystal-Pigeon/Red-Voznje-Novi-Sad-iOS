@@ -80,8 +80,8 @@ class MainViewController: ASDKViewController<ASDisplayNode> {
     }
     
     private func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .settings, landscapeImagePhone: .settings, style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: .rearrange, landscapeImagePhone: .rearrange, style: .plain, target: self, action: #selector(rearrangeButtonTapped))
     }
     
     func setupCurrentDay() {
@@ -255,7 +255,7 @@ extension MainViewController {
         self.saturdayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.sundayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
-        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: Fonts.muliRegular17)
+        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: .muliRegular17)
         self.dayButtonAppearance(dayButton: workdayButton, title: "Work day".localized())
         self.dayButtonAppearance(dayButton: saturdayButton, title: "Saturday".localized())
         self.dayButtonAppearance(dayButton: sundayButton, title: "Sunday".localized())
@@ -264,13 +264,13 @@ extension MainViewController {
         self.addButton.layer.shadowColor = Theme.current.color(.shadowColor).cgColor
         
         if Theme.current.mode == .dark {
-            self.logoImageNode.image = UIImage(named: "logo-white")
+            self.logoImageNode.image = .logoWhite
             self.logoImageNode.alpha = 0.75
-            self.addButton.setImage(UIImage(named: "plus-white"), for: .normal)
+            self.addButton.setImage(.plusWhite, for: .normal)
             self.addButton.alpha = 0.75
         } else {
-            self.logoImageNode.image = UIImage(named: "logo")
-            self.addButton.setImage(UIImage(named: "plus"), for: .normal)
+            self.logoImageNode.image = .logo
+            self.addButton.setImage(.plus, for: .normal)
         }
     }
     
@@ -308,7 +308,7 @@ extension MainViewController {
     
     private func dayButtonAppearance(dayButton: ASButtonNode, title: String) {
         dayButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
-        dayButton.setAttributedTitle(self.node.attributed(text: title, color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        dayButton.setAttributedTitle(self.node.attributed(text: title, color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
         dayButton.addTarget(self, action: #selector(dayButtonTapped(sender:)), forControlEvents: .touchUpInside)
     }
 }

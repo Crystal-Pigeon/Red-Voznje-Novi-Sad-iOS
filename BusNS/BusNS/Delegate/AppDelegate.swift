@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.titleTextAttributes = [
             .foregroundColor: Theme.current.color(.navigationTintColor),
-            .font: Fonts.muliSemiBold20
+            .font: UIFont.muliSemiBold20
         ]
     }
     

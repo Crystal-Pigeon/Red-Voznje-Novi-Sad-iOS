@@ -38,19 +38,19 @@ class SettingsCell: ASCellNode {
     }
     
     private func setupUI() {
-        self.textNode.attributedText = attributed(text: self.title.localized(), color: Theme.current.color(.settingsMainColor), font: Fonts.muliRegular15)
-        self.explenationNode.attributedText = attributed(text: self.settingsDescription.localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular12, alignment: .left)
+        self.textNode.attributedText = attributed(text: self.title.localized(), color: Theme.current.color(.settingsMainColor), font: .muliRegular15)
+        self.explenationNode.attributedText = attributed(text: self.settingsDescription.localized(), color: Theme.current.color(.settingsExplenationColor), font: .muliRegular12, alignment: .left)
         
         if selectedValue == nil {
             if Theme.current.mode == .dark {
-                self.rightDisplayNode.image = UIImage(named: "right_arrow_dark")
+                self.rightDisplayNode.image = .rightArrowDark
             } else {
-                self.rightDisplayNode.image = UIImage(named: "right_arrow_light")
+                self.rightDisplayNode.image = .rightArrowLight
             }
             self.rightDisplayNode.style.preferredSize = CGSize(width: 8, height: 14)
             self.rightDisplayNode.contentMode = .scaleAspectFit
         } else {
-            self.rightTextNode.attributedText = attributed(text: self.selectedValue!.localized(), color: Theme.current.color(.settingsExplenationColor), font: Fonts.muliRegular15)
+            self.rightTextNode.attributedText = attributed(text: self.selectedValue!.localized(), color: Theme.current.color(.settingsExplenationColor), font: .muliRegular15)
         }
         self.backgroundNode.backgroundColor =  Theme.current.color(.settingsBackgroundColor)
     }

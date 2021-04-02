@@ -119,8 +119,8 @@ extension AddLinesViewController {
         self.urbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.suburbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
         
-        self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
-        self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
+        self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
         
         self.suburbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
         self.urbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)

@@ -115,7 +115,7 @@ extension ASDKViewController {
                     self.navigationController?.navigationBar.barTintColor = Theme.current.color(.navigationBackgroundColor)
                     self.navigationController?.navigationBar.titleTextAttributes = [
                         .foregroundColor: Theme.current.color(.navigationTintColor),
-                        .font: Fonts.muliSemiBold20
+                        .font: UIFont.muliSemiBold20
                     ]
                 }
             }

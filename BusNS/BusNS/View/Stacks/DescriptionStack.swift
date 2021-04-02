@@ -24,7 +24,7 @@ class DescriptionStack: Stack {
     }
     
     func setColor() {
-        descriptionTextNode.attributedText = attributed(text: description.localized(), color: Theme.current.color(.supportTextColor), font: Fonts.muliLight15, alignment: .left)
+        descriptionTextNode.attributedText = attributed(text: description.localized(), color: Theme.current.color(.supportTextColor), font: .muliLight15, alignment: .left)
     }
     
     func getStack() -> ASStackLayoutSpec {

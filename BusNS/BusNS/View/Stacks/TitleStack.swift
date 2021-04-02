@@ -22,7 +22,7 @@ class TitleStack: Stack {
     }
     
     func setColor() {
-        self.titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: Fonts.muliSemiBold20)
+        self.titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: .muliSemiBold20)
     }
     
     func getStack() -> ASStackLayoutSpec {

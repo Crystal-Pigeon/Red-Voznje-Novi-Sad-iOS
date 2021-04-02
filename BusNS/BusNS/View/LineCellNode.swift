@@ -24,7 +24,7 @@ class LineCellNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        textNode.attributedText = self.attributed(text: line, color: color, font: Fonts.muliRegular15, alignment: .left)
+        textNode.attributedText = self.attributed(text: line, color: color, font: .muliRegular15, alignment: .left)
         let stack = ASStackLayoutSpec.vertical()
         stack.child = self.textNode
         stack.verticalAlignment = .center

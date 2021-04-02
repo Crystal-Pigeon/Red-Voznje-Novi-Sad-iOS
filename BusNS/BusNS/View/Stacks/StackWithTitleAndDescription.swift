@@ -23,8 +23,8 @@ class StackWithTitleAndDescription: Stack {
     }
     
     func setColor() {
-        titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: Fonts.muliSemiBold20)
-        descriptionTextNode.attributedText = attributed(text: description.localized(),  color: Theme.current.color(.supportTextColor), font: Fonts.muliLight15, alignment: .left)
+        titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: .muliSemiBold20)
+        descriptionTextNode.attributedText = attributed(text: description.localized(),  color: Theme.current.color(.supportTextColor), font: .muliLight15, alignment: .left)
     }
     
     func getStack() -> ASStackLayoutSpec {

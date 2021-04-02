@@ -27,6 +27,6 @@ public class Theme {
     
     //MARK: Setting colors for color identifiers
     private lazy var colorRepository: [ColorIdentifier : UIColor] = [
-        .defaultColor : Colors.black
+        .defaultColor : .black
     ]
 }

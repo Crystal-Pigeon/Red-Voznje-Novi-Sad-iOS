@@ -23,8 +23,8 @@ class HorizontalStack: Stack {
     }
     
     public func setColor() {
-        numberTextNode.attributedText = attributed(text: number, color: Theme.current.color(.supportTextColor), font: Fonts.muliLight15)
-        titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: Fonts.muliLight15)
+        numberTextNode.attributedText = attributed(text: number, color: Theme.current.color(.supportTextColor), font: .muliLight15)
+        titleTextNode.attributedText = attributed(text: title.localized(), color: Theme.current.color(.supportTextColor), font: .muliLight15)
     }
     
     public func getStack() -> ASStackLayoutSpec {

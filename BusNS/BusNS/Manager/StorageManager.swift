@@ -113,16 +113,13 @@ public class StorageManager: StorageService {
         UserDefaults.standard.set(language, forKey: StorageKeys.language)
     }
     
-    public static var isThemeAlreadyCached: Bool {
-        return UserDefaults.standard.value(forKey: StorageKeys.theme) != nil
-    }
     
     public static var isLanguageAlreadyCached: Bool {
         return UserDefaults.standard.value(forKey: StorageKeys.language) != nil
     }
     
     public static func retrieveTheme() -> String {
-        return UserDefaults.standard.value(forKey: StorageKeys.theme) as? String ?? ThemeMode.light.description
+        return UserDefaults.standard.value(forKey: StorageKeys.theme) as? String ?? ThemeMode.auto.description
     }
     
     public static func retrieveLanguage() -> String {

@@ -52,7 +52,7 @@ final class BusCellNode: ASCellNode {
     //MARK: Create stacks
     private func createTitleStack() {
         let titleText = ASTextNode()
-        titleText.attributedText = self.attributed(text: bus.name, color: Theme.current.color(.busCell_lineTextColor), font: Fonts.muliRegular15, alignment: .left)
+        titleText.attributedText = self.attributed(text: bus.name, color: Theme.current.color(.busCell_lineTextColor), font: .muliRegular15, alignment: .left)
         titleText.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(UIScreen.main.bounds.width * 0.7), ASDimensionAuto)
         titleText.pointSizeScaleFactors = [0.9,0.85,0.8,0.75,0.7,0.65,0.6,0.5]
         
@@ -79,7 +79,7 @@ final class BusCellNode: ASCellNode {
         let stack = ASStackLayoutSpec.vertical()
         
         let directionTextNode = ASTextNode()
-        directionTextNode.attributedText = self.attributed(text: text, color: Theme.current.color(.busCell_lineTextColor), font: Fonts.muliRegular12, alignment: .left)
+        directionTextNode.attributedText = self.attributed(text: text, color: Theme.current.color(.busCell_lineTextColor), font: .muliRegular12, alignment: .left)
         directionTextNode.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(separatorWidth), ASDimensionAuto)
         directionTextNode.pointSizeScaleFactors = [0.9,0.85,0.8,0.75,0.7,0.65,0.6,0.5]
         
@@ -129,12 +129,14 @@ final class BusCellNode: ASCellNode {
         for hour in text {
             let textNode = ASTextNode()
             let mut = NSMutableAttributedString()
-            if DateManager.instance.getHour() == hour.split(separator: ":")[0] {
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_currentHourColor), font: Fonts.muliSemiBold12, alignment: .left))
+            
+            if DateManager.instance.getHour() == Int(hour.split(separator: ":")[0]) {
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_currentHourColor), font: .muliSemiBold12, alignment: .left))
             } else {
-                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliSemiBold12, alignment: .left))
+                mut.append(self.attributed(text: String(hour.split(separator: ":")[0] + ":"), color: Theme.current.color(.busCell_scheduleTextColor), font: .muliSemiBold12, alignment: .left))
             }
-            mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: Fonts.muliRegular12, alignment: .left))
+            
+            mut.append(self.attributed(text: String(hour.split(separator: ":")[1]), color: Theme.current.color(.busCell_scheduleTextColor), font: .muliRegular12, alignment: .left))
             textNode.attributedText = mut
             textNodes.append(textNode)
         }
@@ -148,7 +150,7 @@ final class BusCellNode: ASCellNode {
     private func createCommentsStack() -> ASLayoutSpec {
         let commentsStack = ASStackLayoutSpec.vertical()
         let comment = ASTextNode()
-        comment.attributedText = self.attributed(text: bus.formatedExtras(), color: Theme.current.color(.busCell_extrasColor), font: Fonts.muliRegular10, alignment: .left)
+        comment.attributedText = self.attributed(text: bus.formatedExtras(), color: Theme.current.color(.busCell_extrasColor), font: .muliRegular10, alignment: .left)
         comment.style.preferredLayoutSize = ASLayoutSizeMake(ASDimensionMake(self.separatorFullWidth), ASDimensionAuto)
         commentsStack.child = comment
         return commentsStack
@@ -163,7 +165,7 @@ final class BusCellNode: ASCellNode {
         circleNode.cornerRadius = 13
         
         let numberTextNode = ASTextNode()
-        numberTextNode.attributedText = self.attributed(text: bus.number, color: Theme.current.color(.busCell_numberTextColor), font: Fonts.muliRegular10)
+        numberTextNode.attributedText = self.attributed(text: bus.number, color: Theme.current.color(.busCell_numberTextColor), font: .muliRegular10)
         
         circleNode.layoutSpecBlock = { node, constrainedSize in
             let stack = ASStackLayoutSpec.vertical()

@@ -24,8 +24,7 @@ public struct DateManager {
         return "R"
     }
     
-    public func getHour() -> String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        return String(hour)
+    public func getHour() -> Int {
+        return Calendar.current.component(.hour, from: Date())
     }
 }

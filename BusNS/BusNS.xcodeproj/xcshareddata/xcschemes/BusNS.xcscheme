@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1140"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AD81A26A237448C60097812D"
-               BuildableName = "Red Voz&#x30c;nje - Novi Sad.app"
+               BuildableName = "Red Voznje - Novi Sad.app"
                BlueprintName = "BusNS"
                ReferencedContainer = "container:BusNS.xcodeproj">
             </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD81A26A237448C60097812D"
-            BuildableName = "Red Voz&#x30c;nje - Novi Sad.app"
+            BuildableName = "Red Voznje - Novi Sad.app"
             BlueprintName = "BusNS"
             ReferencedContainer = "container:BusNS.xcodeproj">
          </BuildableReference>
@@ -78,7 +78,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD81A26A237448C60097812D"
-            BuildableName = "Red Voz&#x30c;nje - Novi Sad.app"
+            BuildableName = "Red Voznje - Novi Sad.app"
             BlueprintName = "BusNS"
             ReferencedContainer = "container:BusNS.xcodeproj">
          </BuildableReference>

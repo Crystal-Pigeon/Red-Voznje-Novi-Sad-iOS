@@ -42,25 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.titleTextAttributes = [
             .foregroundColor: Theme.current.color(.navigationTintColor),
-            .font: Fonts.muliSemiBold20
+            .font: UIFont.muliSemiBold20
         ]
     }
     
     private func setupTheme(window: UIWindow) {
-        if !StorageManager.isThemeAlreadyCached {
-            if #available(iOS 13.0, *) {
-                let theme = window.traitCollection.userInterfaceStyle
-                Theme.current = theme == .dark ? DarkTheme() : LightTheme()
-            } else {
-                Theme.current = LightTheme()
-            }
+        let theme = StorageManager.retrieveTheme()
+        if theme == ThemeMode.dark.description {
+            Theme.current = DarkTheme()
+        } else if theme == ThemeMode.light.description{
+            Theme.current = LightTheme()
         } else {
-            let theme = StorageManager.retrieveTheme()
-            if theme == ThemeMode.dark.description {
-                Theme.current = DarkTheme()
-            } else {
-                Theme.current = LightTheme()
-            }
+            let theme = UIApplication.shared.keyWindow?.traitCollection.userInterfaceStyle
+            Theme.current = theme == .dark ? DarkTheme() : LightTheme()
         }
     }
     

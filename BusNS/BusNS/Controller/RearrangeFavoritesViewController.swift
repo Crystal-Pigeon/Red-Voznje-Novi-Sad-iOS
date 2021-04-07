@@ -7,14 +7,15 @@
 //
 
 import AsyncDisplayKit
+import FirebaseAnalytics
 
-class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
+class RearrangeFavoritesViewController: ASDKViewController<ASDisplayNode> {
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
     private var tableNode = ASTableNode()
     private let rearrangeFavoritesViewModel = RearrangeFavoritesViewModel()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Rearrange".localized()
@@ -28,7 +29,17 @@ class RearrangeFavoritesViewController: ASViewController<ASDisplayNode> {
         self.containerNode.automaticallyManagesSubnodes = true
         self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
         self.layout()
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), Theme.current.mode != .auto {
+            self.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
+        }
+    }
+    
+    override func updateColor() {
+        tableNode.backgroundColor = Theme.current.color(.rearrangeFavoritesTable)
+        tableNode.view.separatorColor = rearrangeFavoritesViewModel.favorites.isEmpty ? UIColor.clear : Theme.current.color(.tableSeparatorColor)
+        self.containerNode.backgroundColor = Theme.current.color(.settingsBackgroundColor)
+        self.tableNode.reloadData()
+        if #available(iOS 13.0, *), Theme.current.mode != .auto {
             self.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
         }
     }
@@ -66,14 +77,8 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        let cellNode = ASTextCellNode()
-        cellNode.textAttributes = [
-            NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.rearrangeFavoritesLineColor)
-        ]
-        cellNode.selectionStyle = .none
-        cellNode.text = !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized()
-        
+        let cellNode = LineCellNode(line: !self.rearrangeFavoritesViewModel.favorites.isEmpty ? rearrangeFavoritesViewModel.getBusNameBy(id: rearrangeFavoritesViewModel.favorites[indexPath.row]) : "You haven't added any lines to favorites".localized(), color: Theme.current.color(.rearrangeFavoritesLineColor))
+        cellNode.style.height = ASDimensionMake(50)
         return cellNode
     }
     
@@ -90,6 +95,7 @@ extension RearrangeFavoritesViewController: ASTableDataSource, ASTableDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        Analytics.logEvent("sort_favorite_lanes", parameters: nil)
         rearrangeFavoritesViewModel.rearrange(sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
     }
 }

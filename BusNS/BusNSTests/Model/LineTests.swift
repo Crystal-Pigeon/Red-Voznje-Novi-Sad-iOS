@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BusNS
+@testable import Red_Voznje___Novi_Sad
 
 class LineTests: XCTestCase {
 

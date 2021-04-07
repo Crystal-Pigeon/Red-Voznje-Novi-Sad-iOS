@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-class AddLinesViewController: ASViewController<ASDisplayNode> {
+class AddLinesViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -20,7 +20,7 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
     private var urbanBusesTableNode = ASTableNode()
     private var suburbanBusesTableNode = ASTableNode()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Add lines".localized()
@@ -38,6 +38,11 @@ class AddLinesViewController: ASViewController<ASDisplayNode> {
         self.appearance()
         self.linesViewModel.observer = self
         self.linesViewModel.getLines()
+    }
+    
+    override func updateColor() {
+        self.colorAppearance()
+        self.refreshUI()
     }
 }
 
@@ -114,8 +119,8 @@ extension AddLinesViewController {
         self.urbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.suburbanBusesTableNode.backgroundColor = Theme.current.color(.backgroundColor)
         
-        self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
-        self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        self.suburbanBusesButton.setAttributedTitle(self.node.attributed(text: "Suburban".localized(), color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
+        self.urbanBusesButton.setAttributedTitle(self.node.attributed(text: "Urban".localized(), color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
         
         self.suburbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
         self.urbanBusesTableNode.view.separatorColor = Theme.current.color(.tableSeparatorColor)
@@ -149,25 +154,21 @@ extension AddLinesViewController: ASTableDataSource, ASTableDelegate {
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         
-        let cellNode = ASTextCellNode()
-        cellNode.textAttributes = [
-            NSAttributedString.Key.font: Fonts.muliRegular15,
-            NSAttributedString.Key.foregroundColor: Theme.current.color(.addLinesLineColor)
-        ]
-        cellNode.selectionStyle = .none
-        
         if tableNode == self.urbanBusesTableNode {
-            cellNode.text = linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name
+            let cellNode = LineCellNode(line: linesViewModel.urbanLines[indexPath.row].number + "  " + linesViewModel.urbanLines[indexPath.row].name, color: Theme.current.color(.addLinesLineColor))
             if linesViewModel.favorites.contains(linesViewModel.urbanLines[indexPath.row].id) {
-                 cellNode.accessoryType = .checkmark
+                cellNode.accessoryType = .checkmark
             }
+            cellNode.style.height = ASDimensionMake(50)
+            return cellNode
         } else {
-            cellNode.text = linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name
+            let cellNode = LineCellNode(line: linesViewModel.suburbanLines[indexPath.row].number + "  " + linesViewModel.suburbanLines[indexPath.row].name, color: Theme.current.color(.addLinesLineColor))
             if linesViewModel.favorites.contains(linesViewModel.suburbanLines[indexPath.row].id) {
-                 cellNode.accessoryType = .checkmark
+                cellNode.accessoryType = .checkmark
             }
+            cellNode.style.height = ASDimensionMake(50)
+            return cellNode
         }
-        return cellNode
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {

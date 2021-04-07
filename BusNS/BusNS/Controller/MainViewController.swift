@@ -7,8 +7,10 @@
 //
 
 import AsyncDisplayKit
+import Toast_Swift
+import FirebaseAnalytics
 
-class MainViewController: ASViewController<ASDisplayNode> {
+class MainViewController: ASDKViewController<ASDisplayNode> {
     
     //MARK: UI Properties
     private let containerNode: ASDisplayNode
@@ -25,7 +27,7 @@ class MainViewController: ASViewController<ASDisplayNode> {
     private let scrollNode = ASScrollNode()
     private var mainViewModel = MainViewModel()
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.title = "Red Vožnje".localized()
@@ -61,6 +63,11 @@ class MainViewController: ASViewController<ASDisplayNode> {
         self.refreshUI()
     }
     
+    override func updateColor() {
+        self.colorAppearance()
+        self.refreshUI()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.mainViewModel.resetLastCount()
@@ -73,8 +80,8 @@ class MainViewController: ASViewController<ASDisplayNode> {
     }
     
     private func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings_icon"), landscapeImagePhone: UIImage(named: "settings_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "rearrange_icon"), landscapeImagePhone: UIImage(named: "rearrange_icon"), style: .plain, target: self, action: #selector(rearrangeButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .settings, landscapeImagePhone: .settings, style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: .rearrange, landscapeImagePhone: .rearrange, style: .plain, target: self, action: #selector(rearrangeButtonTapped))
     }
     
     func setupCurrentDay() {
@@ -136,6 +143,7 @@ extension MainViewController {
             
             let actionSheet = UIAlertController(title: busName, message: "Are you sure you want remove the line?".localized(), preferredStyle: .actionSheet)
             let actionDelete = UIAlertAction(title: "Remove".localized(), style: .destructive) { (action) in
+                Analytics.logEvent("delete_lane_on_long_press", parameters: ["lane_number": busID])
                 self.mainViewModel.favorites.remove(at: indexPath.row)
                 self.workDayBusesCollectionNode.deleteItems(at: [indexPath])
                 self.saturdayBusesCollectionNode.deleteItems(at: [indexPath])
@@ -154,9 +162,11 @@ extension MainViewController {
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
                 popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
             }
-            if #available(iOS 13.0, *) {
+            if #available(iOS 13.0, *), Theme.current.mode != .auto {
                 actionSheet.view.overrideUserInterfaceStyle = Theme.current.mode == .dark ? .dark : .light
             }
+            
+            Haptic.shared.pulse()
             present(actionSheet, animated: true, completion: nil)
         }
     }
@@ -245,7 +255,7 @@ extension MainViewController {
         self.saturdayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.sundayBusesCollectionNode.backgroundColor = Theme.current.color(.backgroundColor)
         self.separatorNode.backgroundColor = Theme.current.color(.dayIndicatorColor)
-        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: Fonts.muliRegular17)
+        self.messageLabelNode.attributedText = self.node.attributed(text: "Click the \"+\" button to add buses".localized(), color: Theme.current.color(.mainScreenTextColor), font: .muliRegular17)
         self.dayButtonAppearance(dayButton: workdayButton, title: "Work day".localized())
         self.dayButtonAppearance(dayButton: saturdayButton, title: "Saturday".localized())
         self.dayButtonAppearance(dayButton: sundayButton, title: "Sunday".localized())
@@ -254,13 +264,13 @@ extension MainViewController {
         self.addButton.layer.shadowColor = Theme.current.color(.shadowColor).cgColor
         
         if Theme.current.mode == .dark {
-            self.logoImageNode.image = UIImage(named: "logo-white")
+            self.logoImageNode.image = .logoWhite
             self.logoImageNode.alpha = 0.75
-            self.addButton.setImage(UIImage(named: "plus-white"), for: .normal)
+            self.addButton.setImage(.plusWhite, for: .normal)
             self.addButton.alpha = 0.75
         } else {
-            self.logoImageNode.image = UIImage(named: "logo")
-            self.addButton.setImage(UIImage(named: "plus"), for: .normal)
+            self.logoImageNode.image = .logo
+            self.addButton.setImage(.plus, for: .normal)
         }
     }
     
@@ -298,7 +308,7 @@ extension MainViewController {
     
     private func dayButtonAppearance(dayButton: ASButtonNode, title: String) {
         dayButton.backgroundColor = Theme.current.color(.navigationBackgroundColor)
-        dayButton.setAttributedTitle(self.node.attributed(text: title, color: Theme.current.color(.navigationTintColor), font: Fonts.muliRegular15), for: .normal)
+        dayButton.setAttributedTitle(self.node.attributed(text: title, color: Theme.current.color(.navigationTintColor), font: .muliRegular15), for: .normal)
         dayButton.addTarget(self, action: #selector(dayButtonTapped(sender:)), forControlEvents: .touchUpInside)
     }
 }
@@ -330,6 +340,7 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCellNode {
+            Analytics.logEvent("collapse_schedule", parameters: nil)
             cell.isOpened = !cell.isOpened
         }
     }
@@ -337,22 +348,15 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
 
 //MARK: Observer
 extension MainViewController: MainObserver {
+    func showToast() {        
+        guard let nav = self.navigationController else { return }
+        nav.topViewController?.view.makeToast("Everything is up to date".localized())
+    }
+    
     func refreshUI() {
         self.workDayBusesCollectionNode.reloadData()
         self.saturdayBusesCollectionNode.reloadData()
         self.sundayBusesCollectionNode.reloadData()
-    }
-    
-    func refreshCell(busID: String) {
-        if let wdIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.workDayBusesCollectionNode.reloadItems(at: [IndexPath(row: wdIndex, section: 0)])
-        }
-        if let satIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.saturdayBusesCollectionNode.reloadItems(at: [IndexPath(row: satIndex, section: 0)])
-        }
-        if let sunIndex = self.mainViewModel.favorites.firstIndex(of: busID) {
-            self.sundayBusesCollectionNode.reloadItems(at: [IndexPath(row: sunIndex, section: 0)])
-        }
     }
     
     func showError(message: String) {

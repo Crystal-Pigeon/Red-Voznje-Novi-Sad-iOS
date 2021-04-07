@@ -35,7 +35,7 @@ final class EmptyBusCellNode: ASCellNode {
         imageLayer.backgroundColor = UIColor.clear.cgColor
         imageLayer.bounds = CGRect(x: containerView.bounds.midX - 21, y: containerView.bounds.midY - 20, width: 42, height: 40)
         imageLayer.position = CGPoint(x: containerView.bounds.midX ,y: containerView.bounds.midY)
-        imageLayer.contents = Theme.current.mode == .dark ? UIImage(named: "logo-white")?.cgImage : UIImage(named: "logo")?.cgImage
+        imageLayer.contents = Theme.current.mode == .dark ? UIImage.logoWhite.cgImage : UIImage.logo.cgImage
         imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
         
         containerView.layer.addSublayer(imageLayer)

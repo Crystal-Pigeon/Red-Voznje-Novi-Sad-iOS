@@ -8,14 +8,16 @@
 
 import AsyncDisplayKit
 
-class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
+class ActivityLoaderViewController: ASDKViewController<ASDisplayNode> {
     
     private let containerNode: ASDisplayNode
+    private let textLayer = CATextLayer()
+    
     public var isOnScreen: Bool {
         return self.isViewLoaded && view.window != nil
     }
     
-    init() {
+    override init() {
         self.containerNode = ASDisplayNode()
         super.init(node: containerNode)
         self.containerNode.backgroundColor = UIColor.black.withAlphaComponent(0.25)
@@ -32,15 +34,14 @@ class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
         imageLayer.backgroundColor = UIColor.clear.cgColor
         imageLayer.bounds = CGRect(x: UIScreen.main.bounds.midX - 42, y: UIScreen.main.bounds.midY - 40, width: 84, height: 80)
         imageLayer.position = CGPoint(x: UIScreen.main.bounds.midX ,y: UIScreen.main.bounds.midY)
-        imageLayer.contents = UIImage(named: "logo-white")?.cgImage
+        imageLayer.contents = UIImage.logoWhite.cgImage
         imageLayer.add(AnimationManager.shared.animatePulsatingLayer(), forKey: nil)
         
-        let textLayer = CATextLayer()
         textLayer.backgroundColor = UIColor.clear.cgColor
         textLayer.frame = CGRect(x: UIScreen.main.bounds.midX - 75, y: UIScreen.main.bounds.midY + 60, width: 150, height: 20)
         textLayer.string = "Loading lines...".localized()
         textLayer.fontSize = 14
-        textLayer.font = Fonts.muliRegular10
+        textLayer.font = UIFont.muliRegular10
         textLayer.foregroundColor = Theme.current.color(.animationTextColor).cgColor
         textLayer.alignmentMode = .center
         textLayer.contentsScale = UIScreen.main.scale
@@ -48,6 +49,10 @@ class ActivityLoaderViewController: ASViewController<ASDisplayNode> {
         containerView.layer.addSublayer(imageLayer)
         containerView.layer.addSublayer(textLayer)
         self.view.addSubview(containerView)
+    }
+    
+    override func updateColor() {
+        textLayer.foregroundColor = Theme.current.color(.animationTextColor).cgColor
     }
     
     public func stop() {

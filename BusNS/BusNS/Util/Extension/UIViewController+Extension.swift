@@ -3,6 +3,8 @@ import MBProgressHUD
 import MaterialComponents.MaterialSnackbar
 import AsyncDisplayKit
 
+var isAlertPresented: Bool = false
+
 //MARK: - System components
 extension UIViewController {
     var tabBarHeight: CGFloat {
@@ -42,20 +44,23 @@ extension UIViewController {
 }
 
 //MARK: - Alerts
-extension UIViewController {
-    private var duration: DispatchTime { return DispatchTime.now() + 2 }
-    
-    func showErrorAlert(message: String, completion: @escaping () -> ()) {
-        let alert = UIAlertController(title: "error".localized(), message: message.localized(), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ok".localized(), style: .destructive, handler: { (action) in
-            completion()
+extension UIViewController {    
+    func showErrorAlert(message: String, completion: (() -> ())? = nil) {
+        if isAlertPresented { return }
+        let alert = UIAlertController(title: "Error".localized(), message: message.localized(), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok".localized(), style: .default, handler: { (action) in
+            completion?()
+            isAlertPresented = false
         }))
         self.present(alert, animated: true, completion: nil)
+        isAlertPresented = true
     }
     
-    func showChooseAlert(title: String, message: String, cancel: String, option: String, completion: @escaping () -> ()) {
+    func showChooseAlert(title: String, message: String, cancel: String, option: String, completion: @escaping () -> (), cancelCompletion: (() -> ())? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: cancel, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: cancel, style: .cancel, handler: { (action) in
+            cancelCompletion?()
+        }))
         alert.addAction(UIAlertAction(title: option, style: .default, handler: { (action) in
             completion()
         }))

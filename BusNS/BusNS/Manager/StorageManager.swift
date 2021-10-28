@@ -104,25 +104,4 @@ public class StorageManager: StorageService {
         let url = getURL(for: directory).appendingPathComponent(fileName, isDirectory: false)
         return FileManager.default.fileExists(atPath: url.path)
     }
-    
-    public static func cache(theme: String) {
-        UserDefaults.standard.set(theme, forKey: StorageKeys.theme)
-    }
-    
-    public static func cache(language: String) {
-        UserDefaults.standard.set(language, forKey: StorageKeys.language)
-    }
-    
-    
-    public static var isLanguageAlreadyCached: Bool {
-        return UserDefaults.standard.value(forKey: StorageKeys.language) != nil
-    }
-    
-    public static func retrieveTheme() -> String {
-        return UserDefaults.standard.value(forKey: StorageKeys.theme) as? String ?? ThemeMode.auto.description
-    }
-    
-    public static func retrieveLanguage() -> String {
-        return UserDefaults.standard.value(forKey: StorageKeys.language) as? String ?? "en"
-    }
 }

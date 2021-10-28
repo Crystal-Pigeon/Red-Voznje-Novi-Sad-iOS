@@ -6,6 +6,7 @@
   Copyright © 2019 Crystal Pigeon. All rights reserved.
 */
 
+"Error" = "Greška";
 "No internet connection" = "Nema internet konekcije";
 "Ok" = "U redu";
 "Add lines" = "Dodaj linije";
@@ -51,9 +52,14 @@
 "Loading lines..." = "Učitavaju se linije...";
 "System" = "Sistemska";
 "Everything is up to date" = "Prikazan je najnoviji raspored";
+
 "new_season_title" = "Novi raspored";
-"new_season_message" = "Da li želite da ažurirate red vožnje?";
+"new_season_message" = "Da li sigurno želiš da ažuriraš red vožnje?\nPotrajaće par sekundi.";
 "new_season_action" = "Ažuriraj";
+
+"pull_refresh_title" = "Osveži raspored";
+"pull_refresh_message" = "Da li sigurno želiš da osvežiš red vožnje?\nPotrajaće par sekundi.";
+"pull_refresh_action" = "Osveži";
 
 //HELP
 "Home screen" = "Početni ekran";

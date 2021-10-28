@@ -10,13 +10,7 @@ import Foundation
 
 extension Bundle {
     public static func localizedBundle() -> Bundle! {
-        var appLang = "en"
-        if StorageManager.isLanguageAlreadyCached {
-            appLang = StorageManager.retrieveLanguage()
-        } else {
-            appLang = Locale.current.languageCode ?? "en"
-        }
-        
+        let appLang = Locale.current.languageCode ?? "en"
         let path = Bundle.main.path(forResource: appLang, ofType: "lproj")
         return Bundle(path: path!)
     }

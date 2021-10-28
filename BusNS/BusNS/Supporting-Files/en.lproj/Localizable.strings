@@ -6,6 +6,7 @@
   Copyright © 2019 Crystal Pigeon. All rights reserved.
 */
 
+"Error" = "Error";
 "No internet connection" = "No internet connection";
 "Ok" = "Ok";
 "Add lines" = "Add lines";
@@ -49,9 +50,14 @@
 "Loading lines..." =  "Loading lines...";
 "System" = "System";
 "Everything is up to date" = "Everything is up to date";
+
 "new_season_title" = "New schedule";
-"new_season_message" = "Do you want to update the schedule?";
+"new_season_message" = "Are you sure you want to update the schedule?\nIt will take a few seconds.";
 "new_season_action" = "Update";
+
+"pull_refresh_title" = "Refresh schedule";
+"pull_refresh_message" = "Are you sure you want to refresh the schedule?\nIt will take a few seconds.";
+"pull_refresh_action" = "Refresh";
 
 
 //HELP

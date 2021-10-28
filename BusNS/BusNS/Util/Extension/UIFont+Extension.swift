@@ -20,6 +20,7 @@ extension UIFont {
     //MARK: Bold
     public static var muliSemiBold12:           UIFont { return UIFont(name: "Muli-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12) }
     public static var muliSemiBold13:           UIFont { return UIFont(name: "Muli-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13) }
+    public static var muliSemiBold15:           UIFont { return UIFont(name: "Muli-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15) }
     public static var muliSemiBold20:           UIFont { return UIFont(name: "Muli-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20) }
     
     //MARK: Light

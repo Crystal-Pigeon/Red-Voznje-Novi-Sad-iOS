@@ -21,6 +21,14 @@ struct Bus: Codable {
     let schedule: [String: [String]]?
     let extras: String
     
+    var fullName: String {
+        number + " " + name
+    }
+    
+    var isOneWay: Bool {
+        return lineA == nil
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case number = "broj"

@@ -68,6 +68,73 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
+  - MaterialComponents/AnimationTiming (124.1.1)
+  - MaterialComponents/Availability (124.1.1)
+  - MaterialComponents/Buttons (124.1.1):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Elevation (124.1.1):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (124.1.1):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/OverlayWindow (124.1.1):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Application (124.1.1)
+  - MaterialComponents/private/Color (124.1.1):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (124.1.1):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (124.1.1)
+  - MaterialComponents/private/Overlay (124.1.1)
+  - MaterialComponents/Ripple (124.1.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (124.1.1)
+  - MaterialComponents/ShadowLayer (124.1.1):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (124.1.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.1.1):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Snackbar (124.1.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/Buttons
+    - MaterialComponents/Elevation
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (124.1.1):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MBProgressHUD (1.2.0)
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.1)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
     - nanopb/encode (= 2.30907.0)
@@ -115,6 +182,8 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/Crashlytics
+  - MaterialComponents/Snackbar
+  - MBProgressHUD
   - Texture
   - Toast-Swift
 
@@ -130,6 +199,10 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - MaterialComponents
+    - MBProgressHUD
+    - MDFInternationalization
+    - MDFTextAccessibility
     - nanopb
     - PINCache
     - PINOperation
@@ -149,6 +222,10 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 120eec8803fe65a4a7475fb3d3d59a61d0e1a866
   GoogleDataTransport: 8b0e733ea77c9218778e5a9e34ba9508b8328939
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
@@ -157,6 +234,6 @@ SPEC CHECKSUMS:
   Texture: 2f109e937850d94d1d07232041c9c7313ccddb81
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 9647650c51b87edbc2f8eef43b36c6843c3e9475
+PODFILE CHECKSUM: eeda0efe22d6035ce1c4f2eca06b85fcda7061df
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

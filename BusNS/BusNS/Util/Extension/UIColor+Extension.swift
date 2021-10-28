@@ -35,3 +35,12 @@ extension UIColor {
     public static var mediumDark: UIColor { return UIColor(named: "mediumDark") ?? UIColor.systemBlue }
     public static var lightDark: UIColor { return UIColor(named: "lightDark") ?? UIColor.systemBlue }
 }
+
+extension UIColor {
+    public static var primary: UIColor { return UIColor(named: "primary")! }
+    public static var secondary: UIColor { return UIColor(named: "secondary")! }
+    public static var background: UIColor { return UIColor(named: "background")! }
+    public static var primaryText: UIColor { return UIColor(named: "primaryText")! }
+    public static var secondaryText: UIColor { return UIColor(named: "secondaryText")! }
+    public static var cardBackground: UIColor { return UIColor(named: "cardBackground")! }
+}

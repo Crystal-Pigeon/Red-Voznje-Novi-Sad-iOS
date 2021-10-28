@@ -8,13 +8,8 @@
 
 import AsyncDisplayKit
 
-fileprivate var activityLoader = ActivityLoaderViewController()
-
 extension ASDKViewController {
-    override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+
     @objc func showAlert(title: String, message: String, duration: Double) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if #available(iOS 13.0, *), Theme.current.mode != .auto {
@@ -34,14 +29,11 @@ extension ASDKViewController {
     }
     
     @objc func showActivityIndicator() {
-        if activityLoader.isOnScreen { return }
-        activityLoader = ActivityLoaderViewController()
-        activityLoader.modalPresentationStyle = .overFullScreen
-        self.present(activityLoader, animated: false, completion: nil)
+        
     }
     
     @objc func removeActivityIndicator() {
-        activityLoader.stop()
+        
     }
     
     @objc func showPicker(with title: String, delegate: UIPickerViewDelegate, dataSource: UIPickerViewDataSource, selectedRow: Int = 0) {
@@ -96,33 +88,8 @@ extension ASDKViewController {
 }
 
 // MARK: - Auto Theme
-extension ASDKViewController {
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        let theme = StorageManager.retrieveTheme()
-        if theme == ThemeMode.auto.description {
-            if  #available(iOS 13.0, *) {
-                if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-                    if traitCollection.userInterfaceStyle == .dark {
-                        Theme.current = DarkTheme()
-                    }
-                    else {
-                        Theme.current = LightTheme()
-                    }
-                    self.updateColor()
-                    self.navigationController?.navigationBar.tintColor = Theme.current.color(.navigationTintColor)
-                    self.navigationController?.navigationBar.barTintColor = Theme.current.color(.navigationBackgroundColor)
-                    self.navigationController?.navigationBar.titleTextAttributes = [
-                        .foregroundColor: Theme.current.color(.navigationTintColor),
-                        .font: UIFont.muliSemiBold20
-                    ]
-                }
-            }
-        }
-    }
-    
+extension ASDKViewController {    
     @objc func updateColor() {
-        preconditionFailure("This method must be overridden")
+        print("This method must be overridden")
     }
 }

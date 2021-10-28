@@ -13,6 +13,10 @@ struct Line: Codable {
     let number: String
     let name: String
     
+    var fullName: String {
+        number + " " + name
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case number = "broj"

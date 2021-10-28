@@ -329,17 +329,17 @@ extension MainViewController: ASCollectionDataSource, ASCollectionDelegate {
         if StorageManager.fileExists(path, in: .caches) {
             let buses = StorageManager.retrieve(path, from: .caches, as: [Bus].self)
             if let bus = buses.first(where: { $0.day == self.mainViewModel.tagsDict[collectionNode.view.tag]} )  {
-                return BusCellNode(bus: bus)
+                return BusCell(bus: bus)
             }
             let bus = buses[0]
             let newBus = Bus(id: bus.id, number: bus.number, name: bus.name, lineA: nil, lineB: nil, line: "There is no schedule".localized(), day: self.mainViewModel.tagsDict[collectionNode.view.tag]!, scheduleA: nil, scheduleB: nil, schedule: nil, extras: "")
-            return BusCellNode(bus: newBus)
+            return BusCell(bus: newBus)
         }
         return EmptyBusCellNode()
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCellNode {
+        if let cell = collectionNode.nodeForItem(at: indexPath) as? BusCell {
             Analytics.logEvent("collapse_schedule", parameters: nil)
             cell.isOpened = !cell.isOpened
         }

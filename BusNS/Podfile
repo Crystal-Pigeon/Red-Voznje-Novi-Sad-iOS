@@ -11,7 +11,9 @@ target 'BusNS' do
   pod 'Alamofire', :inhibit_warnings => true
   pod 'Firebase/Analytics', :inhibit_warnings => true
   pod 'Firebase/Crashlytics', :inhibit_warnings => true
-  pod 'Toast-Swift'
+  pod 'Toast-Swift', :inhibit_warnings => true
+  pod 'MBProgressHUD', :inhibit_warnings => true
+  pod 'MaterialComponents/Snackbar', :inhibit_warnings => true
   
   target 'BusNSTests' do
     inherit! :search_paths

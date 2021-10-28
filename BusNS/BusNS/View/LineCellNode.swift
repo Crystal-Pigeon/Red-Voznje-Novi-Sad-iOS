@@ -29,7 +29,8 @@ class LineCellNode: ASCellNode {
         stack.child = self.textNode
         stack.verticalAlignment = .center
         stack.horizontalAlignment = .left
-        let insents = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15), child: stack)
+        stack.style.width = ASDimensionMake("50%")
+        let insents = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), child: stack)
         return insents
     }
 }

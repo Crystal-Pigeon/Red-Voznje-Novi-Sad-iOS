@@ -1,0 +1,71 @@
+/* 
+  Localizable.strings
+  BusNS
+
+  Created by Marko Popić on 11/7/19.
+  Copyright © 2019 Crystal Pigeon. All rights reserved.
+*/
+
+"No internet connection" = "No internet connection";
+"Ok" = "Ok";
+"Add lines" = "Add lines";
+"Urban" = "Urban";
+"Suburban" = "Suburban";
+"Problem with server" = "Problem with server";
+"Red Vožnje - Novi Sad" = "Red Vožnje - Novi Sad";
+"Work day" = "Work day";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+"Click the \"+\" button to add buses" = "Click the \"+\" button to add buses";
+"There is no schedule" = "There is no schedule";
+"Are you sure you want remove the line?" = "Are you sure you want remove the line?";
+"Remove" = "Remove";
+"Cancel" = "Cancel";
+"Done" = "Done";
+"Support" = "Support";
+"Help" = "Help";
+"Contact" = "Contact";
+"Settings screen" = "Settings screen";
+"On the settings screen you can change:" = "On the settings screen you can change:";
+"Language" = "Language";
+"Language text" = "Clicking on language opens a dialog that allows you to select the language in which the content will be displayed.";
+"Theme" = "Theme";
+"Theme text" = "Clicking on theme opens a dialog that allows you to choose whether the application will be displayed with a dark or a light theme.";
+"Settings" = "Settings";
+"English" = "English";
+"Dark Theme" = "Dark Theme";
+"Dark" = "Dark";
+"Light" = "Light";
+"Change the language in the application" = "Change the language in the application";
+"Change the theme in the application" = "Change the theme in the application";
+"Open the support window" = "Open the support window";
+"Serbian" = "Serbian";
+"Light Theme" = "Light Theme";
+"Choose language" = "Choose language";
+"Choose theme" = "Choose theme";
+"Rearrange" = "Rearrange";
+"Try again" = "Try again";
+"You haven't added any lines to favorites" = "You haven't added any lines to favorites";
+"Loading lines..." =  "Loading lines...";
+"System" = "System";
+"Everything is up to date" = "Everything is up to date";
+"new_season_title" = "New schedule";
+"new_season_message" = "Do you want to update the schedule?";
+"new_season_action" = "Update";
+
+
+//HELP
+"Home screen" = "Home screen";
+"Home screen text" = "1. Home screen\n\nWhen you open the app for the first time you will be presented with the home screen that doesn’t have any lines. If you want to add new lines to the home screen you need to click on the + button that will lead you to the add lines screen. In case you’ve opened the app before, the lines you’ve chosen the previous time you used it will be presented on the home screen for the current day of the week. The ability to change the schedule depending on the day of the week can be done by clicking on the desired day or by scrolling left-right. For every line displayed on the home screen it is shown the schedule for the previous, current and next hour, and in the absence of any of the three, the next three hours are added. By clicking on a collapsed card, it expands and shows the schedule for the whole day, while clicking again the card is collapsed to the nearest 3 hours. If you desire to remove one of the lines, you can do so by long pressing the schedule to activate an option that offers you to delete the line from the home screen.";
+
+"Add lines screen" = "Add lines screen";
+"Add lines screen text" = "\n\n2. Add lines screen\n\nWhen you open the add lines screen you will be shown urban lines. Switching between urban and suburban lines can be done by clicking on the tabs or by scrolling left-right. By clicking on one of the lines, it is being selected and added to the main screen, while clicking on already selected line it is being unselected and removed from the home screen.";
+
+"Rearrange favorites screen" = "Rearrange favorites screen";
+"Rearrange screen text" = "\n\n3. Rearrange favorites screen\n\nThis screen contains all the lines you've previously added to your home screen as your favorites, and on which you can rearrange them as you see fit.";
+
+"Availability" = "Availability";
+"Lines availability text" = "We wanted to let you know that the app also works in offline mode. What this means is that once all of the data is downloaded, you will be able to access desired bus schedules at times of need, even when you don't have internet connection.";
+
+"Update" = "Update";
+"Update app text" = "The app is updated every time the driving season changes.";

@@ -30,14 +30,4 @@ extension Date {
         }
         return 0
     }
-    
-    static var dayOfWeek: String {
-        let weekday = Calendar.current.component(.weekday, from: Date())
-        if weekday == 1 {
-            return "N"
-        } else if weekday == 7 {
-            return "S"
-        }
-        return "R"
-    }
 }

@@ -9,11 +9,11 @@
 import UIKit
 
 extension UIImage {
-    public static var logo:                                 UIImage { return UIImage(named: "logo")! }
-    public static var gearshape: UIImage { if #available(iOS 13.0, *) {
-        return UIImage(systemName: "gearshape.fill")!
+    public static var logo: UIImage { return UIImage(named: "logo")! }
+    public static var settings: UIImage { if #available(iOS 13.0, *) {
+        return UIImage(systemName: "questionmark.circle")!
     } else {
-        return UIImage(named: "settings_icon")!
+        return UIImage(named: "help")!
     }}
     
     public static var arrange: UIImage { if #available(iOS 13.0, *) {

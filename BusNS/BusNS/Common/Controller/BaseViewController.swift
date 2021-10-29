@@ -101,9 +101,6 @@ class ScrollViewController: ASDKViewController<ASDisplayNode> {
         if #available(iOS 13, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             self.node.backgroundColor = .background
             self.setupUI()
-//            let nav = self.navigationController?.navigationBar.frame.height ?? 0
-//            let status: CGFloat = self.statusBarHeight
-//            scrollNode.view.contentInset.bottom = -nav - status
         }
     }
 }

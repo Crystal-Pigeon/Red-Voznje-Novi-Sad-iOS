@@ -74,4 +74,9 @@
 "Lines availability text" = "We wanted to let you know that the app also works in offline mode. What this means is that once all of the data is downloaded, you will be able to access desired bus schedules at times of need, even when you don't have internet connection.";
 
 "Update" = "Update";
-"Update app text" = "The app is updated every time the driving season changes.";
+"Update app text" = "The app is updated every time the driving season changes. In case you are not completely sure whether the displayed schedule is updated, you can manually refresh it by dragging the home screen from top to bottom.";
+
+"Theme and language" = "Theme and language";
+"Theme text" = "Changing the theme is automatic and changes along with the theme on the mobile device.";
+"Change language" = "You can open settings ";
+"Here" = "here.";

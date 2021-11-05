@@ -75,4 +75,9 @@
 "Lines availability text" = "Kada je u pitanju dostupnost, aplikacija radi i u režimu rada bez interneta. To znači da ćete nakon preuzimanja svih podataka biti u mogućnosti da pristupite željenim rasporedima autobusa u bilo kom momentu, čak i ukoliko niste povezani na internet.";
 
 "Update" = "Ažuriranje";
-"Update app text" = "Ažuriranje aplikacije vrši se svaki put kada se promeni sezona vožnji.";
+"Update app text" = "Ažuriranje aplikacije vrši se automatski svaki put kada se promeni sezona vožnji. U slučaju da niste u potpunosti sigurni da li je prikazani raspored ažuriran, možete ga ručno osvežiti povlačenjem početnog ekrana od gore ka dole.";
+
+"Theme and language" = "Tema i jezik";
+"Theme text" = "Promena teme je automatska i menja se zajedno sa temom na mobilnom uredjaju.";
+"Change language" = "Ovde možete da otvorite ";
+"Here" = "podešavanja.";

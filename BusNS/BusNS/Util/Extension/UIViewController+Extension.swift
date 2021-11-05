@@ -67,7 +67,7 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showActionSheet(with title: String? = nil, message: String? = nil, actions: [UIAlertAction]) {
+    func showActionSheet(with title: String? = nil, message: String? = nil, actions: [UIAlertAction], frame: CGRect = CGRect()) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
@@ -76,6 +76,10 @@ extension UIViewController {
             alert.addAction(action)
         }
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alert.popoverPresentationController?.sourceRect = frame
+            alert.popoverPresentationController?.sourceView = self.view
+        }
         self.present(alert, animated: true, completion: nil)
     }
 }

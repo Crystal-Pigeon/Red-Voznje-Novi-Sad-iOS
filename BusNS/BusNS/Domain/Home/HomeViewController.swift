@@ -46,7 +46,7 @@ class HomeViewController: PagerViewController {
 extension HomeViewController {
     override func setupData() {
         super.setupData()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .gearshape, style: .plain, target: self, action: #selector(settingsButtonClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .settings, style: .plain, target: self, action: #selector(settingsButtonClicked))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: .arrange, style: .plain, target: self, action: #selector(arrangeButtonClicked))
         self.addButton.addTarget(self, action: #selector(addButtonClicked), forControlEvents: .touchUpInside)
         DownloadManager.shared.addObserver(self)

@@ -45,12 +45,11 @@ class HomeDataViewController: PagerChildViewController {
         if sender.state != .began { return }
         let touchPoint = sender.location(in: self.collectionNode.view)
         guard let indexPath = self.collectionNode.view.indexPathForItem(at: touchPoint) else { return }
-        let busID = self.data[indexPath.row].id
-        let busName = self.data[indexPath.row].name
+        let bus = self.data[indexPath.row]
         
         Haptic.shared.pulse()
         let actionDelete = UIAlertAction(title: "Remove".localized(), style: .destructive) { (action) in
-            Analytics.logEvent("delete_lane_on_long_press", parameters: ["lane_number": busID])
+            Analytics.logEvent("delete_lane_on_long_press", parameters: ["lane_number": bus.id])
             
             //Local delete
             self.data.remove(at: indexPath.row)
@@ -58,7 +57,7 @@ class HomeDataViewController: PagerChildViewController {
             self.reloadBackgroundView()
             
             //Delete in database
-            DatabaseManager.shared.removeFavorite(id: busID)
+            DatabaseManager.shared.removeFavorite(id: bus.id)
             
             //Reload all tabs in container
             if let controller = self.containerViewController as? HomeViewController {
@@ -66,7 +65,7 @@ class HomeDataViewController: PagerChildViewController {
             }
         }
         
-        self.showActionSheet(with: busID + " " + busName, message: "Are you sure you want remove the line?".localized(), actions: [actionDelete])
+        self.showActionSheet(with: bus.fullName, message: "Are you sure you want remove the line?".localized(), actions: [actionDelete], frame: CGRect(x: touchPoint.x, y: touchPoint.y, width: 0, height: 0))
     }
 }
 

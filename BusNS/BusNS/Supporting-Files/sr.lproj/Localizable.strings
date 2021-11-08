@@ -78,6 +78,6 @@
 "Update app text" = "Ažuriranje aplikacije vrši se automatski svaki put kada se promeni sezona vožnji. U slučaju da niste u potpunosti sigurni da li je prikazani raspored ažuriran, možete ga ručno osvežiti povlačenjem početnog ekrana od gore ka dole.";
 
 "Theme and language" = "Tema i jezik";
-"Theme text" = "Promena teme je automatska i menja se zajedno sa temom na mobilnom uredjaju.";
+"Theme text" = "Promena teme je automatska i menja se zajedno sa temom na mobilnom uredjaju.\n\nPromenu jezika moguće je izvršiti u podešavanjima same aplikacije u sekciji Izabrani jezik.";
 "Change language" = "Ovde možete da otvorite ";
 "Here" = "podešavanja.";

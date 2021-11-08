@@ -77,6 +77,6 @@
 "Update app text" = "The app is updated every time the driving season changes. In case you are not completely sure whether the displayed schedule is updated, you can manually refresh it by dragging the home screen from top to bottom.";
 
 "Theme and language" = "Theme and language";
-"Theme text" = "Changing the theme is automatic and changes along with the theme on the mobile device.";
+"Theme text" = "Changing the theme is automatic and changes along with the theme on the mobile device.\n\nYou can change the language in the application's settings in the Preferred language section.";
 "Change language" = "You can open settings ";
 "Here" = "here.";
